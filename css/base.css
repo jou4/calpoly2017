@@ -9,12 +9,17 @@ body {
   padding: 40px 15px;
 }
 .header {
-  background: url(header_bg_01.jpg) no-repeat center 0;
+  background: url(header_bg_02.png) repeat-x center 0;
   background-size: 100% 100%;
 }
 .header .navbar-brand {
   color: #FFFFFF;
   font-weight: bold;
+}
+.navbar-brand {
+  background: url(header_logo_150x50.png) no-repeat center 0;
+  height: 50px;
+  width: 150px;
 }
 #navbar li a {
   color: #FFFFFF;
@@ -25,7 +30,7 @@ body {
   bottom: 0;
   /* Set the fixed height of the footer here */
   height: 40px;
-  background-color: #333333;
+  background-color: #533628;
 }
 .footer .text-muted {
   margin: 12px 0;
