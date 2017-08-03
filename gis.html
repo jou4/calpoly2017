@@ -96,8 +96,7 @@
     }
 
     function clickEventFunc(event) {
-      // see http://getbootstrap.com/javascript/#modals-usage
-      $('#detailModal').modal({})
+      alert(event.latLng.toString());
     }
     
     </script>
@@ -108,21 +107,20 @@
 
   <!-- Google map -->
 
-  <!-- modal see http://getbootstrap.com/javascript/#modals-usage -->
-  <div id="detailModal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Water Quality Detail</h4>
-        </div>
-        <div class="modal-body">
-          <p>One fine body&hellip;</p>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+<script>
+var xhr = null; // 使える場合はMicrosoft.XMLHTTP, 使えない場合はXMLHttpRequest
+try { xhr = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) { xhr = new XMLHttpRequest(); }
 
+var path = "kojo_data.csv"; // 読み込む外部ファイル
+xhr.open("GET", path, true);
+xhr.onreadystatechange = function(){
+    if(xhr.readyState === 4) {
+        var data = xhr.responseText; // 外部ファイルの内容
+        console.log(data);
+    }
+};
+xhr.send();
+</script>
 
   <footer class="footer">
       <div class="text-muted">
