@@ -82,22 +82,3 @@ body {
   height: 21px;
   display: block;
 }
-body {
-  margin: 50px;
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
-  background: #f2fbff;
-}
-em {
-  font-style: italic;
-}
-h1 {
-  font-size: 24px;
-  margin-bottom: 25px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-h2 {
-  font-size: 16px;
-  margin-bottom: 15px;
-}
