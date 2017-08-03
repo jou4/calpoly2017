@@ -7,9 +7,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Food Traceability System</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -54,13 +51,51 @@
     <div class="starter-template">
 
       <!-- GIS -->
-      <h1>GIS</h1>
+      <h1>工場排水視える化</h1>
       <div>
       </div>
       <!-- /GIS -->
 
     </div><!-- /Contents -->
   </div><!-- /.container -->
+
+  <!-- Google map -->
+  <!-->
+    <div id="map" style="width:620px; height:400px"></div>
+  <-->
+    <div id="map"></div>
+    
+    <script type="text/javascript">
+    function initMap() {
+      var opts = {
+        zoom: 13,
+        center: new google.maps.LatLng(35.538480, 139.739544)
+      };
+      var map = new google.maps.Map(document.getElementById("map"), opts);
+      
+      var markerPos1 = {lat: 35.537551, lng: 139.722299};
+      var markerPos2 = {lat: 35.534196, lng: 139.768202};
+      
+      var marker1 = new google.maps.Marker({
+          position: markerPos1,
+          map: map
+      });
+
+      var marker2 = new google.maps.Marker({
+          position: markerPos2,
+          map: map
+      });
+    }
+    </script>
+
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6IztSK0mli3zgnKGfSzWUSoc9tMguLnY&callback=initMap">
+    </script>
+
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6IztSK0mli3zgnKGfSzWUSoc9tMguLnY&libraries=geometry">
+    </script>  
+  <!-- Google map -->
 
   <footer class="footer">
       <div class="text-muted">
