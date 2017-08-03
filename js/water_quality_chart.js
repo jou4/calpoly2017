@@ -1,4 +1,4 @@
-//var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var config = {
   type: 'line',
   data: {
@@ -20,12 +20,10 @@ var config = {
   },
   options: {
       responsive: true,
-      
-      // チャート名称を表示したい場合
-      //title: {
-      //    display: true,
-      //    text:'水質５段階チャート'
-      //},
+      title:{
+          display:true,
+          text:'Chart.js Line Chart'
+      },
       tooltips: {
           mode: 'index',
           intersect: false,
@@ -38,22 +36,15 @@ var config = {
           xAxes: [{
               display: true,
               scaleLabel: {
-                  // 横軸の単位は非表示とする
-                  display: false,
-                  labelString: "月"
+                  display: true,
+                  labelString: 'Month'
               }
           }],
           yAxes: [{
               display: true,
               scaleLabel: {
-                  // 一旦非表示。「水質認証」を縦表示に出来ていない。
-                  display: false,
-                  labelString: "水質認証"
-              },
-              ticks: {
-                  suggestedMin: 1,
-                  suggestedMax: 5,
-                  stepSize: 1
+                  display: true,
+                  labelString: 'Value'
               }
           }]
       },

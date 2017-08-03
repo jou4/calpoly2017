@@ -90,6 +90,14 @@
           map: map
       });
 
+      var kmlSrc = 'data/W05-08_13_Tokyo.kml';
+
+      var kmlLayer = new google.maps.KmlLayer(kmlSrc, {
+          suppressInfoWindows: true,
+          preserveViewport: false,
+          map: map
+        });
+
       // clickイベントを取得するListenerを追加
       google.maps.event.addListener(marker2, 'click', clickEventFunc);
       
