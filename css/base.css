@@ -1,7 +1,35 @@
+html {
+  position: relative;
+}
 body {
   padding-top: 50px;
+  margin-bottom: 60px;
 }
 .starter-template {
   padding: 40px 15px;
+}
+.header {
+  background: url(header_bg_01.jpg) no-repeat center 0;
+  background-size: 100% 100%;
+}
+.header .navbar-brand {
+  color: #FFFFFF;
+  font-weight: bold;
+}
+#navbar li a {
+  color: #FFFFFF;
+}
+.footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  background-color: #333333;
+}
+.footer .text-muted {
+  margin: 12px 0;
   text-align: center;
+  color: #ffffff;
+  font-size: 80%;
 }
