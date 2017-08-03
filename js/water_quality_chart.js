@@ -2,14 +2,14 @@
 var config = {
   type: 'line',
   data: {
-      labels: ["４月", "５月", "６月", "７月", "８月"],
+      labels: ["４月", "５月", "６月", "７月", "８月", "９月"],
       datasets: [
           {
               label: "水質",
               backgroundColor: window.chartColors.red,
               borderColor: window.chartColors.red,
               data: [
-                  1,2,2,5,4
+                  1,2,2,5,4,3
               ],
               // 塗り潰しはしない
               fill: false,
@@ -38,7 +38,7 @@ var config = {
           xAxes: [{
               display: true,
               scaleLabel: {
-                  //横軸の単位は非表示とする
+                  // 横軸の単位は非表示とする
                   display: false,
                   labelString: "月"
               }
@@ -46,7 +46,8 @@ var config = {
           yAxes: [{
               display: true,
               scaleLabel: {
-                  display: true,
+                  // 一旦非表示。「水質認証」を縦表示に出来ていない。
+                  display: false,
                   labelString: "水質認証"
               },
               ticks: {
