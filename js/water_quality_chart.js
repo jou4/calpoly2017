@@ -1,44 +1,31 @@
-var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+//var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var config = {
   type: 'line',
   data: {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
-      datasets: [{
-          label: "My First dataset",
-          backgroundColor: window.chartColors.red,
-          borderColor: window.chartColors.red,
-          data: [
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor()
-          ],
-          fill: false,
-      }, {
-          label: "My Second dataset",
-          fill: false,
-          backgroundColor: window.chartColors.blue,
-          borderColor: window.chartColors.blue,
-          data: [
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor()
-          ],
-      }]
+      labels: ["４月", "５月", "６月", "７月", "８月", "９月"],
+      datasets: [
+          {
+              label: "水質",
+              backgroundColor: window.chartColors.red,
+              borderColor: window.chartColors.red,
+              data: [
+                  1,2,2,5,4,3
+              ],
+              // 塗り潰しはしない
+              fill: false,
+              // 曲線は用いない
+              lineTension: 0
+          }
+      ]
   },
   options: {
       responsive: true,
-      title:{
-          display:true,
-          text:'Chart.js Line Chart'
-      },
+      
+      // チャート名称を表示したい場合
+      //title: {
+      //    display: true,
+      //    text:'水質５段階チャート'
+      //},
       tooltips: {
           mode: 'index',
           intersect: false,
@@ -51,15 +38,22 @@ var config = {
           xAxes: [{
               display: true,
               scaleLabel: {
-                  display: true,
-                  labelString: 'Month'
+                  // 横軸の単位は非表示とする
+                  display: false,
+                  labelString: "月"
               }
           }],
           yAxes: [{
               display: true,
               scaleLabel: {
-                  display: true,
-                  labelString: 'Value'
+                  // 一旦非表示。「水質認証」を縦表示に出来ていない。
+                  display: false,
+                  labelString: "水質認証"
+              },
+              ticks: {
+                  suggestedMin: 1,
+                  suggestedMax: 5,
+                  stepSize: 1
               }
           }]
       }
