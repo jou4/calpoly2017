@@ -2,36 +2,21 @@ var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "A
 var config = {
   type: 'line',
   data: {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
-      datasets: [{
-          label: "My First dataset",
-          backgroundColor: window.chartColors.red,
-          borderColor: window.chartColors.red,
-          data: [
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor()
-          ],
-          fill: false,
-      }, {
-          label: "My Second dataset",
-          fill: false,
-          backgroundColor: window.chartColors.blue,
-          borderColor: window.chartColors.blue,
-          data: [
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor(),
-              randomScalingFactor()
-          ],
-      }]
+      labels: ["４月", "５月", "６月", "７月", "８月", "９月"],
+      datasets: [
+          {
+              label: "水質",
+              backgroundColor: window.chartColors.blue,
+              borderColor: window.chartColors.blue,
+              data: [
+                  1,2,2,4,5,3
+              ],
+              // 塗り潰しはしない
+              fill: false,
+              // 曲線は用いない
+              lineTension: 0
+          }
+      ]
   },
   options: {
       responsive: true,
@@ -62,6 +47,9 @@ var config = {
                   labelString: 'Value'
               }
           }]
+      },
+      legend: {
+            display: false
       }
   }
 };
