@@ -6,10 +6,10 @@ var config = {
       datasets: [
           {
               label: "水質",
-              backgroundColor: window.chartColors.red,
-              borderColor: window.chartColors.red,
+              backgroundColor: window.chartColors.blue,
+              borderColor: window.chartColors.blue,
               data: [
-                  1,2,2,5,4,3
+                  1,2,2,4,5,3
               ],
               // 塗り潰しはしない
               fill: false,
@@ -56,6 +56,9 @@ var config = {
                   stepSize: 1
               }
           }]
+      },
+      legend: {
+            display: false
       }
   }
 };
