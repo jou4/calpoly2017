@@ -30,7 +30,7 @@
   <body>
 
   <nav class="header navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
+    <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
@@ -55,46 +55,51 @@
     <!-- Contents -->
     <div class="starter-template">
 
-  <!-- grid -->
-      <div class="row">
-           <div class="col-xs-6 col-lg-6">
-              <p><Center><font size="4">生産者</font></Center></p>
+      <!-- Summary -->
+      <!-- <h1>Summary Example</h1> -->
+      <div>
+        <table>
+          <tr>
+            <td rowspan="2">
+              <p><Center>生産者</Center></p>
               <p><Center><img src="images/Producer.jpg" width="30%" height="30%" alt="生産者の顔写真が載っています"></Center></p>
-              <p><Center><font size="4">Koichiro Isshiki, PhD.</font></Center></p>
-           </div>
-           <div class="col-xs-6 col-lg-6">
-                <div class="row">
-                     <div class="col-xs-12 col-lg-12">
-                          <br></br>
-                          <p><font size="4">生産地: Mission Viejo, CA</font></p>
-                          <p><font size="4">収穫日: 2017年8月3日</font></p>
-                     </div>
-                          <div class="row">
-                               <div class="col-xs-2 col-lg-2"><img src="images/water.jpeg"  width="50" height="30" alt="水の画像が載っています"></div>
-                               <div class="col-xs-10 col-lg-10 ">
-                                    <div class="star-rating">
-                                        <div class="star-rating-front" style="width: 80%">★★★★★</div>
-                                        <div class="star-rating-back">★★★★★</div>
-                                    </div>
-                               </div>
-                          </div>
-                          <div class="row">
-                               <div class="col-xs-2 col-lg-2"><img src="images/soil.jpeg" width="50" height="30" alt="土の画像が載っています"></div>
-                               <div class="col-xs-10 col-lg-10" >
-                                     <div class="star-rating">
-                                        <div class="star-rating-front" style="width: 72%">★★★★★</div>
-                                        <div class="star-rating-back">★★★★★</div>
-                                    </div>
-                                </div>
-                          </div>
-                </div>
-           </div>
+              <p><Center>Koichiro Isshiki, PhD.</Center></p>
+            </td>
+            <td nowrap align = "left">
+              <p>生産地: Mission Viejo, CA</p>
+              <p>収穫日: 2017年8月3日</p>
+            </td>
+          </tr>
+          <!-- Odera and Mizoguchi Zone -->
+          <tr>
+              <td width="500">
+                 <table>
+                        <tr>
+                            <td width="60"  align="left">
+                                     <!--<img src="images/water.jpeg" width="10%" height="10%" alt="水の画像が載っています">-->
+                                     <a href="http://jou4.dip.jp/calpoly/detail.html"><img src="images/water.jpeg"  width="100%" height="10%" alt="水の画像が載っています"></a>
+                            </td>
+                            <th width="150"  align="left">
+                                     <div class="star-ratings-sprite"><span style="width:80%" class="star-ratings-sprite-rating"></span></div> 
+                            </th>
+                        </tr>
+                        <tr>
+                             <td width="60"  align="left">
+                                  <p><img src="images/soil.jpeg" width="100%" height="10%" alt="土の画像が載っています"></p>
+                             </td>
+            
+                             <th width="150"  align="left"> <div class="star-ratings-sprite"><span style="width:80%" class="star-ratings-sprite-rating"></span></div> </th>
+                        </tr>
+                 </table>
+              </td>
+          </tr>    
+        </table>
       </div>
-</div>
       <!-- /Summary -->
 
     </div><!-- /Contents -->
   </div><!-- /.container -->
+
   <footer class="footer">
       <div class="text-muted">
         <div>Copyright (R) 2017 Kurita Water Industries Ltd. All rights reserved</div>
