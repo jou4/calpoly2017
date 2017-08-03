@@ -107,6 +107,21 @@
 
   <!-- Google map -->
 
+<script>
+var xhr = null; // 使える場合はMicrosoft.XMLHTTP, 使えない場合はXMLHttpRequest
+try { xhr = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) { xhr = new XMLHttpRequest(); }
+
+var path = "kojo_data.csv"; // 読み込む外部ファイル
+xhr.open("GET", path, true);
+xhr.onreadystatechange = function(){
+    if(xhr.readyState === 4) {
+        var data = xhr.responseText; // 外部ファイルの内容
+        console.log(data);
+    }
+};
+xhr.send();
+</script>
+
   <footer class="footer">
       <div class="text-muted">
         <div>Copyright (R) 2017 Kurita Water Industries Ltd. All rights reserved</div>
