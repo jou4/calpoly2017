@@ -51,19 +51,17 @@
     <div class="starter-template">
 
       <!-- GIS -->
-      <h1>工場排水視える化</h1>
-      <div>
-      </div>
+      <h1>水質視える化</h1>
+      <div id="map" style="width:100%; height:400px"></div>
       <!-- /GIS -->
 
     </div><!-- /Contents -->
   </div><!-- /.container -->
 
   <!-- Google map -->
-  <!-->
+  <!--
     <div id="map" style="width:620px; height:400px"></div>
-  <-->
-    <div id="map"></div>
+  -->
     
     <script type="text/javascript">
     function initMap() {
@@ -76,25 +74,37 @@
       var markerPos1 = {lat: 35.537551, lng: 139.722299};
       var markerPos2 = {lat: 35.534196, lng: 139.768202};
       
+      var icon1 = 'images/drop1.png';
+      
       var marker1 = new google.maps.Marker({
-          position: markerPos1,
-          map: map
-      });
+          position: markerPos1,
+          icon: icon1,
+          map: map
+      });
+
+      var icon5 = 'images/drop5.png';
 
       var marker2 = new google.maps.Marker({
-          position: markerPos2,
-          map: map
-      });
+          position: markerPos2,
+          icon: icon5,
+          map: map
+      });
+
+      // clickイベントを取得するListenerを追加
+      google.maps.event.addListener(marker2, 'click', clickEventFunc);
+      
     }
+
+    function clickEventFunc(event) {
+      alert(event.latLng.toString());
+    }
+    
     </script>
 
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6IztSK0mli3zgnKGfSzWUSoc9tMguLnY&callback=initMap">
     </script>
 
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6IztSK0mli3zgnKGfSzWUSoc9tMguLnY&libraries=geometry">
-    </script>  
   <!-- Google map -->
 
   <footer class="footer">

@@ -11,3 +11,8 @@ git add *
 git commit -m "Some comment here.."  
 git push -u origin master  
 
+## 誤ったコミットを戻す
+git log  
+git revert <COMMIT ID>  
+git push -u origin master  
+
