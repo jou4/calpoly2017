@@ -7,6 +7,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Tores</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -24,7 +27,7 @@
   </head>
   <body>
 
-  <nav class="header navbar navbar-inverse navbar-fixed-top">
+  <nav class="header navbar navbar-inverse navbar-fixed-top" style="background: url(css/header_bg_02.png) repeat-x center 0;">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -33,13 +36,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html"></a>
+        <a class="navbar-brand" href="index.html" style="background: url(css/header_logo_150x50.png) no-repeat center 0; height: 50px; width: 150px;"></a>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li><a href="index.html">Home</a></li>
+          <li class="active"><a href="index.html">Home</a></li>
           <li><a href="detail.html">Chart</a></li>
-          <li class="active"><a href="gis.html">GIS</a></li>
+          <li><a href="gis.html">GIS</a></li>
           <li><a href="http://www.kurita.co.jp/">About us</a></li>
         </ul>
       </div><!--/.nav-collapse -->
@@ -50,52 +53,15 @@
     <!-- Contents -->
     <div class="starter-template">
 
-      <!-- GIS -->
-      <h1>工場排水視える化</h1>
+      <!-- Summary -->
+      <h1>Summary Example</h1>
       <div>
+        <p>Producer: Dr.Isshiki, from Mission Viejo</p>
       </div>
-      <!-- /GIS -->
+      <!-- /Summary -->
 
     </div><!-- /Contents -->
   </div><!-- /.container -->
-
-  <!-- Google map -->
-  <!-->
-    <div id="map" style="width:620px; height:400px"></div>
-  <-->
-    <div id="map"></div>
-    
-    <script type="text/javascript">
-    function initMap() {
-      var opts = {
-        zoom: 13,
-        center: new google.maps.LatLng(35.538480, 139.739544)
-      };
-      var map = new google.maps.Map(document.getElementById("map"), opts);
-      
-      var markerPos1 = {lat: 35.537551, lng: 139.722299};
-      var markerPos2 = {lat: 35.534196, lng: 139.768202};
-      
-      var marker1 = new google.maps.Marker({
-          position: markerPos1,
-          map: map
-      });
-
-      var marker2 = new google.maps.Marker({
-          position: markerPos2,
-          map: map
-      });
-    }
-    </script>
-
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6IztSK0mli3zgnKGfSzWUSoc9tMguLnY&callback=initMap">
-    </script>
-
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6IztSK0mli3zgnKGfSzWUSoc9tMguLnY&libraries=geometry">
-    </script>  
-  <!-- Google map -->
 
   <footer class="footer">
       <div class="text-muted">
