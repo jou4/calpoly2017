@@ -79,16 +79,16 @@
       var marker1 = new google.maps.Marker({
           position: markerPos1,
           icon: icon1,
-          map: map
-      });
+          map: map
+      });
 
       var icon5 = 'images/drop5.png';
 
       var marker2 = new google.maps.Marker({
-          position: markerPos2,
+          position: markerPos2,
           icon: icon5,
-          map: map
-      });
+          map: map
+      });
 
       var kmlSrc = 'data/W05-08_13_Tokyo.kml';
 
@@ -104,8 +104,8 @@
     }
 
     function clickEventFunc(event) {
-      <!-- alert(event.latLng.toString()); -->
-      <!-- showModalDialog( "http://www.kurita.co.jp/" ); -->
+      // see http://getbootstrap.com/javascript/#modals-usage
+      $('#detailModal').modal({})
     }
     
     </script>
@@ -115,6 +115,22 @@
     </script>
 
   <!-- Google map -->
+
+  <!-- modal see http://getbootstrap.com/javascript/#modals-usage -->
+  <div id="detailModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Water Quality Detail</h4>
+        </div>
+        <div class="modal-body">
+          <p>One fine body&hellip;</p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
 
   <footer class="footer">
       <div class="text-muted">
