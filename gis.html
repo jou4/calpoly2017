@@ -25,7 +25,7 @@
   <body>
 
   <nav class="header navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+    <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
@@ -95,19 +95,19 @@
 /*
       var kmlSrc_Tokyo = 'http://jou4.dip.jp/calpoly/data/W05-08_13_Tokyo.kml';
 
-      var kmlLayer1 = new google.maps.KmlLayer(kmlSrc_Tokyo, {
-          suppressInfoWindows: true,
-          preserveViewport: false,
-          map: map
-        });
+      var kmlLayer1 = new google.maps.KmlLayer(kmlSrc_Tokyo, {
+          suppressInfoWindows: true,
+          preserveViewport: false,
+          map: map
+      });
 
       var kmlSrc_Kanagawa = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa.kml';
 
-      var kmlLayer = new google.maps.KmlLayer(kmlSrc_Kanagawa, {
-          suppressInfoWindows: true,
-          preserveViewport: false,
-          map: map
-        });
+      var kmlLayer = new google.maps.KmlLayer(kmlSrc_Kanagawa, {
+          suppressInfoWindows: true,
+          preserveViewport: false,
+          map: map
+      });
 */
       // clickイベントを取得するListenerを追加
       google.maps.event.addListener(marker2, 'click', clickEventFunc);
