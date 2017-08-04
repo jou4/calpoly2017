@@ -64,12 +64,15 @@
   -->
     
     <script type="text/javascript">
+    
+    var map;
+    
     function initMap() {
       var opts = {
         zoom: 13,
         center: new google.maps.LatLng(35.538480, 139.739544)
       };
-      var map = new google.maps.Map(document.getElementById("map"), opts);
+      map = new google.maps.Map(document.getElementById("map"), opts);
       
       var markerPos1 = {lat: 35.537551, lng: 139.722299};
       var markerPos2 = {lat: 35.534196, lng: 139.768202};
@@ -89,22 +92,66 @@
           icon: icon5,
           map: map
       });
+/*
+      var kmlSrc_Tokyo = 'http://jou4.dip.jp/calpoly/data/W05-08_13_Tokyo.kml';
 
-      var kmlSrc = 'data/W05-08_13_Tokyo.kml';
-
-      var kmlLayer = new google.maps.KmlLayer(kmlSrc, {
+      var kmlLayer1 = new google.maps.KmlLayer(kmlSrc_Tokyo, {
           suppressInfoWindows: true,
           preserveViewport: false,
           map: map
         });
 
+      var kmlSrc_Kanagawa = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa.kml';
+
+      var kmlLayer = new google.maps.KmlLayer(kmlSrc_Kanagawa, {
+          suppressInfoWindows: true,
+          preserveViewport: false,
+          map: map
+        });
+*/
       // clickイベントを取得するListenerを追加
       google.maps.event.addListener(marker2, 'click', clickEventFunc);
       
     }
 
     function clickEventFunc(event) {
-      alert(event.latLng.toString());
+      
+      ReadCsv();
+      // see http://getbootstrap.com/javascript/#modals-usage 
+      $('#detailModal').modal({}) 
+    }
+    
+    function ReadCsv() {
+        var xhr = null; // 使える場合はMicrosoft.XMLHTTP, 使えない場合はXMLHttpRequest
+        try { xhr = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) { xhr = new XMLHttpRequest(); }
+
+        var path = "kojo_data.csv"; // 読み込む外部ファイル
+        xhr.open("GET", path, true);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4) {
+                var data = xhr.responseText; // 外部ファイルの内容
+                
+                var result = [];
+                var tmp = data.split("\n");
+                for (var i=0;i<tmp.length;i++)
+                {
+                    result.push( tmp[i].split(',') );
+                    
+                    var markerPos = {lat: parseFloat( result[i][2] ), lng: parseFloat( result[i][3] ) };
+                
+      			    var marker = new google.maps.Marker({
+          				position: markerPos,
+				        //icon: icon1,
+			          map: map
+			      });     
+                }
+                
+           
+                
+                console.log(result);
+            }
+        };
+        xhr.send();    
     }
     
     </script>
@@ -115,6 +162,7 @@
 
   <!-- Google map -->
 
+<!--
 <script>
 var xhr = null; // 使える場合はMicrosoft.XMLHTTP, 使えない場合はXMLHttpRequest
 try { xhr = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) { xhr = new XMLHttpRequest(); }
@@ -129,6 +177,22 @@ xhr.onreadystatechange = function(){
 };
 xhr.send();
 </script>
+-->
+
+<!-- modal see http://getbootstrap.com/javascript/#modals-usage --> 
+<div id="detailModal" class="modal fade" tabindex="-1" role="dialog"> 
+    <div class="modal-dialog" role="document"> 
+      <div class="modal-content"> 
+        <div class="modal-header"> 
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+          <h4 class="modal-title">Water Quality Detail</h4> 
+        </div> 
+        <div class="modal-body"> 
+          <p>One fine body&hellip;</p> 
+        </div> 
+      </div><!-- /.modal-content --> 
+    </div><!-- /.modal-dialog --> 
+  </div><!-- /.modal --> 
 
   <footer class="footer">
       <div class="text-muted">
