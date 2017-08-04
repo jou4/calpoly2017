@@ -2,7 +2,7 @@
 var config = {
   type: 'line',
   data: {
-      labels: ["４月", "５月", "６月", "７月", "８月", "９月"],
+      labels: ["３月", "４月", "５月", "６月", "７月", "８月"],
       datasets: [
           {
               label: "水質",
@@ -57,12 +57,13 @@ var config = {
                   
                   // ☆に変換
                   callback: function(value, index, values) {
-                      var star = "☆";
+                      var star = "★";
                       for (var i = 1; i < value; ++i) {
-                          star = star + "☆"; 
+                          star = star + "★"; 
                       }
                       return star;
-                  }
+                  },
+                  fontColor:  '#F3D51A' 
               }
           }]
       },
