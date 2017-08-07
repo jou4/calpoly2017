@@ -1,18 +1,20 @@
+// Const of Index for CSV Row Data
+var ID = 0;
+var PLANT = 1;
+var LAT = 2;
+var LNG = 3;
+var WATER_QUALITY = 4;
+
+// Const of Path for image files
+var icon1 = 'images/drop1.png';
+var icon2 = 'images/drop2.png';
+var icon3 = 'images/drop3.png';
+var icon4 = 'images/drop4.png';
+var icon5 = 'images/drop5.png';
+
+var activeInfoWindow;
+
 function initMap() {
-
-    // Const of Index for CSV Row Data
-    var ID = 0;
-    var PLANT = 1;
-    var LAT = 2;
-    var LNG = 3;
-    var WATER_QUALITY = 4;
-
-    // Const of Path for image files
-    var icon1 = 'images/drop1.png';
-    var icon2 = 'images/drop2.png';
-    var icon3 = 'images/drop3.png';
-    var icon4 = 'images/drop4.png';
-    var icon5 = 'images/drop5.png';
 
     // Options for Google Map
     var opts = {
@@ -23,9 +25,34 @@ function initMap() {
     // Google Map Instance
     var map = new google.maps.Map(document.getElementById("map"), opts);
 
+   var kmlSrc = 'http://jou4.dip.jp/calpoly/data/W05-08_13_Tokyo_Tamagawa.kml';
+   //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_tamagawa.kml';
+   //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
+   var kmlLayer = new google.maps.KmlLayer(kmlSrc, {
+       suppressInfoWindows: true,
+       preserveViewport: false,
+       map: map
+       });
+
+   var kmlSrc2 = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_Tsurumigawa.kml';
+   var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
+       suppressInfoWindows: true,
+       preserveViewport: false,
+       map: map
+       });
+
     // read csv, then initialize map
     readCsv();
 
+/*
+   var kmlSrc2 = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_tamagawa.kml';
+   //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
+   var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
+       suppressInfoWindows: true,
+       preserveViewport: false,
+       map: map
+       });
+*/
     function showMarker(rowData){
 
         var markerPos = { lat: parseFloat( rowData[LAT] ), lng: parseFloat( rowData[LNG] ) };
@@ -73,13 +100,21 @@ function initMap() {
 
         // open info window when click marker
         marker.addListener('click', function() {
+            if(activeInfoWindow){
+                activeInfoWindow.close();
+                activeInfoWindow = null;
+            }
             // see https://developers.google.com/maps/documentation/javascript/infowindows?hl=ja
             infoWindow.open(map, marker);
+            activeInfoWindow = infoWindow;
         });
 
         // close info window when click map
         map.addListener('click', function() {
-            infoWindow.close();
+            if(activeInfoWindow){
+                activeInfoWindow.close();
+                activeInfoWindow = null;
+            }
         });
     }
 
@@ -108,8 +143,95 @@ function initMap() {
 var csvData = {};
 
 function showDetailPopUp(id) {
+    var rowData = csvData[id];
+    console.log(rowData);
+
+    // TODO set detail info
+    $("#plant_name").text(rowData[PLANT]);
+    // make chart
+    makeChart(rowData);
+    // show popup
     // see http://getbootstrap.com/javascript/#modals-usage 
     $('#detailModal').modal({});
-    console.log(csvData[id]);
+}
+
+function makeChart(rowData) {
+    var config = {
+        type: 'line',
+        data: {
+            labels: ["３月", "４月", "５月", "６月", "７月", "８月"],
+            datasets: [
+                {
+                    label: "水質",
+                    backgroundColor: window.chartColors.blue,
+                    borderColor: window.chartColors.blue,
+                    data: [
+                        1,2,2,4,5,rowData[WATER_QUALITY]
+                    ],
+                    // 塗り潰しはしない
+                    fill: false,
+                    // 曲線は用いない
+                    lineTension: 0
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+
+            // チャート名称を表示したい場合
+            //title: {
+            //    display: true,
+            //    text:'排水水質認証グラフ'
+            //},
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        // 横軸の単位は非表示とする
+                        display: false,
+                        labelString: "月"
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: false,
+                    },
+                    ticks: {
+                        suggestedMin: 0,
+                        suggestedMax: 5,
+                        stepSize: 1,
+
+                        // 水マークに変換
+                        callback: function(value, index, values) {
+                            //var waterMark = "\u3042";
+                            var waterMark = "\u1F64F";
+
+                            for (var i = 1; i < value; ++i) {
+                                waterMark = waterMark + "\u1F64F"; 
+                            }
+                            return waterMark;
+                        },
+                        // 黄色に設定
+                        fontColor:  '#F3D51A'
+                    }
+                }]
+            },
+            // 凡例の非表示
+            legend: {
+                display: false
+            }
+        }
+    };
+    var ctx = document.getElementById("canvas").getContext("2d");
+    window.myLine = new Chart(ctx, config);
 }
 
