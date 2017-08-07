@@ -11,3 +11,9 @@ git add *
 git commit -m "Some comment here.."  
 git push -u origin master  
 
+## 作業状況を確認する
+git status  
+
+## ローカルの変更を取り消す
+git checkout <filename>  
+
