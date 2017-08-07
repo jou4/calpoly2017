@@ -1060,7 +1060,7 @@
   </Placemark>
   <Placemark>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
-	<ExtendedData><SchemaData schemaUrl="#W05_08_14_Kanagawa">
+	<ExtendedData><SchemaData schemaUrl="#W05_08_13_Tokyo">
 		<SimpleData name="RIC">8303050001</SimpleData>
 		<SimpleData name="WSC">830305</SimpleData>
 		<SimpleData name="DUS">?</SimpleData>
