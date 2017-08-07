@@ -29,9 +29,16 @@ function initMap() {
    //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_tamagawa.kml';
    //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
    var kmlLayer = new google.maps.KmlLayer(kmlSrc, {
-       suppressInfoWindows: true,
-       preserveViewport: false,
-       map: map
+       suppressInfoWindows: true,
+       preserveViewport: false,
+       map: map
+       });
+
+   var kmlSrc2 = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_Tsurumigawa.kml';
+   var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
+       suppressInfoWindows: true,
+       preserveViewport: false,
+       map: map
        });
 
     // read csv, then initialize map
@@ -41,9 +48,9 @@ function initMap() {
    var kmlSrc2 = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_tamagawa.kml';
    //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
    var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
-       suppressInfoWindows: true,
-       preserveViewport: false,
-       map: map
+       suppressInfoWindows: true,
+       preserveViewport: false,
+       map: map
        });
 */
     function showMarker(rowData){
