@@ -19,8 +19,11 @@
 font-size: 2vh;
 }
 .photo1{
-width: 30%;
-height: 30%;
+background-position: center center;
+background-repeat: no-repeat;
+background-size: 20%;
+position: relative;
+min-width: 60px;
 }
 .photo2{
 width: 3em;
