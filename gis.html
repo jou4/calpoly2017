@@ -4,16 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- The above 3 meta tags *must* come first in the head; an
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/base.css">y other head content must come *after* these tags -->
     <title>Tores</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="css/base.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -66,43 +66,35 @@
     <script type="text/javascript">
     
     var map;
-    
+
+
+
     function initMap() {
+    	
       var opts = {
         zoom: 13,
         center: new google.maps.LatLng(35.538480, 139.739544)
       };
       map = new google.maps.Map(document.getElementById("map"), opts);
       
-      var markerPos1 = {lat: 35.537551, lng: 139.722299};
-      var markerPos2 = {lat: 35.534196, lng: 139.768202};
       
-      var icon1 = 'images/drop1.png';
+      ReadCsv();
+
       
-      var marker1 = new google.maps.Marker({
-          position: markerPos1,
-          icon: icon1,
-          map: map
-      });
+		
+			        
 
-      var icon5 = 'images/drop5.png';
+			          google.maps.event.addListener(marker, 'click', clickEventFunc);
+      
 
-      var marker2 = new google.maps.Marker({
-          position: markerPos2,
-          icon: icon5,
-          map: map
-      });
 /*
       var kmlSrc_Tokyo = 'http://jou4.dip.jp/calpoly/data/W05-08_13_Tokyo.kml';
-
       var kmlLayer1 = new google.maps.KmlLayer(kmlSrc_Tokyo, {
           suppressInfoWindows: true,
           preserveViewport: false,
           map: map
       });
-
       var kmlSrc_Kanagawa = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa.kml';
-
       var kmlLayer = new google.maps.KmlLayer(kmlSrc_Kanagawa, {
           suppressInfoWindows: true,
           preserveViewport: false,
@@ -110,13 +102,12 @@
       });
 */
       // clickイベントを取得するListenerを追加
-      google.maps.event.addListener(marker2, 'click', clickEventFunc);
-      
+    
+    
     }
-
     function clickEventFunc(event) {
-      
       ReadCsv();
+      
       // see http://getbootstrap.com/javascript/#modals-usage 
       $('#detailModal').modal({}) 
     }
@@ -124,7 +115,6 @@
     function ReadCsv() {
         var xhr = null; // 使える場合はMicrosoft.XMLHTTP, 使えない場合はXMLHttpRequest
         try { xhr = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) { xhr = new XMLHttpRequest(); }
-
         var path = "kojo_data.csv"; // 読み込む外部ファイル
         xhr.open("GET", path, true);
         xhr.onreadystatechange = function(){
@@ -138,22 +128,59 @@
                     result.push( tmp[i].split(',') );
                     
                     var markerPos = {lat: parseFloat( result[i][2] ), lng: parseFloat( result[i][3] ) };
+                      
+                
+
+
+                  var icon1 = 'images/drop1.png';
+                  var icon2 = 'images/drop2.png';
+                  var icon3 = 'images/drop3.png';
+                  var icon4 = 'images/drop4.png';
+                  var icon5 = 'images/drop5.png';
+
+
+
+                    if (result[i][4]==1){
+                    icon = icon1;
+                    }
+                    else if (result[i][4]==2){
+                    icon = icon2;
+                    }
+                    else if (result[i][4]==3){
+                    icon = icon3;
+                    }
+                    else if (result[i][4]==4){
+                    icon = icon4;
+                    }
+                    else if(result[i][4]==5){
+                    icon = icon5;
+                    }
+
                 
       			    var marker = new google.maps.Marker({
           				position: markerPos,
+          				icon: icon,
 				        //icon: icon1,
 			          map: map
-			      });     
+
+ 
+
+			        });    
+
+ 
+
                 }
                 
-           
+      			     
                 
                 console.log(result);
             }
+      			     
+
         };
         xhr.send();    
     }
-    
+   
     </script>
 
     <script async defer
@@ -166,7 +193,6 @@
 <script>
 var xhr = null; // 使える場合はMicrosoft.XMLHTTP, 使えない場合はXMLHttpRequest
 try { xhr = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) { xhr = new XMLHttpRequest(); }
-
 var path = "kojo_data.csv"; // 読み込む外部ファイル
 xhr.open("GET", path, true);
 xhr.onreadystatechange = function(){
