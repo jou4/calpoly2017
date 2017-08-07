@@ -16,15 +16,15 @@
   color: #ccc;
 }
 .txt1{
-font-size: 150%;
+font-size: 2vh;
 }
 .photo1{
 width: 30%;
 height: 30%;
 }
 .photo2{
-width: 300%;
-height: 350%;
+width: 3em;
+height : 3em;
 }
 .title_font{
 font-size: 120%;
