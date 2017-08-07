@@ -70,21 +70,24 @@
 
 
     function initMap() {
-    	
-      var opts = {
+	
+    var opts = {
         zoom: 13,
         center: new google.maps.LatLng(35.538480, 139.739544)
-      };
-      map = new google.maps.Map(document.getElementById("map"), opts);
+    };
+    map = new google.maps.Map(document.getElementById("map"), opts);
       
       
-      ReadCsv();
+    ReadCsv();
 
-      
+    var kmlSrc_Tokyo_Tamagawa = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
+    var kmlLayer1 = new google.maps.KmlLayer(kmlSrc_Tokyo_Tamagawa, {
+        suppressInfoWindows: true,
+        preserveViewport: false,
+        map: map
+    });
 		
-			        
-
-			          google.maps.event.addListener(marker, 'click', clickEventFunc);
+    google.maps.event.addListener(marker, 'click', clickEventFunc);
       
 
 /*
