@@ -19,7 +19,11 @@
 font-size: 1.3vw;
 }
 .photo1{
-width: 3vw;
-height: 3.5vh;
+width: 30%;
+height: 30%;
+}
+.photo2{
+width: 300%;
+height: 350%;
 }
  
