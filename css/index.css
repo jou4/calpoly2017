@@ -2,7 +2,7 @@
   position: relative;
   width: 5em;
   height: 1em;
-  font-size: 200%;
+  font-size: 3.5vh;
 
 }
 .star-rating-front {
@@ -24,7 +24,7 @@ height: 30%;
 }
 .photo2{
 width:auto;
-height : 3em;
+height : 4vh;
 }
 .title_font{
 color: #404040;
