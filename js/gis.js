@@ -121,11 +121,13 @@ function showDetailPopUp(id) {
     var rowData = csvData[id];
     console.log(rowData);
 
-    // set detail info
+    // TODO set detail info
     $("#plant_name").text(rowData[PLANT]);
+    // make chart
+    makeChart(rowData);
+    // show popup
     // see http://getbootstrap.com/javascript/#modals-usage 
     $('#detailModal').modal({});
-    makeChart(rowData);
 }
 
 function makeChart(rowData) {
