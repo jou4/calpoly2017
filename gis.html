@@ -4,16 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; an
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="css/base.css">y other head content must come *after* these tags -->
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Tores</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/base.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,214 +27,69 @@
   </head>
   <body>
 
-  <nav class="header navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html"></a>
+    <nav class="header navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html"></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="detail.html">Chart</a></li>
+            <li class="active"><a href="gis.html">GIS</a></li>
+            <li><a href="http://www.kurita.co.jp/">About us</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="detail.html">Chart</a></li>
-          <li class="active"><a href="gis.html">GIS</a></li>
-          <li><a href="http://www.kurita.co.jp/">About us</a></li>
-        </ul>
-      </div><!--/.nav-collapse -->
-    </div>
-  </nav>
+    </nav>
 
-  <div class="container">
-    <!-- Contents -->
-    <div class="starter-template">
+    <div class="container">
+      <!-- Contents -->
+      <div class="starter-template">
 
-      <!-- GIS -->
-      <h1 id="title">水質視える化</h1>
-      <div id="map" style="width:100%; height:400px"></div>
-      <!-- /GIS -->
+        <!-- GIS -->
+        <h1 id="title">水質視える化</h1>
+        <div id="map" style="width:100%; height:400px"></div>
+        <!-- /GIS -->
 
-    </div><!-- /Contents -->
-  </div><!-- /.container -->
+      </div><!-- /Contents -->
+    </div><!-- /.container -->
 
-  <!-- Google map -->
-  <!--
-    <div id="map" style="width:620px; height:400px"></div>
-  -->
-    
-    <script type="text/javascript">
-    
-    var map;
+    <!-- modal see http://getbootstrap.com/javascript/#modals-usage --> 
+    <div id="detailModal" class="modal fade" tabindex="-1" role="dialog"> 
+      <div class="modal-dialog" role="document"> 
+        <div class="modal-content"> 
+          <div class="modal-header"> 
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+            <h4 class="modal-title">Water Quality Detail</h4> 
+          </div> 
+          <div class="modal-body"> 
+            <p>One fine body&hellip;</p> 
+          </div> 
+        </div><!-- /.modal-content --> 
+      </div><!-- /.modal-dialog --> 
+    </div><!-- /.modal --> 
 
-
-
-    function initMap() {
-	
-    var opts = {
-        zoom: 13,
-        center: new google.maps.LatLng(35.538480, 139.739544)
-    };
-    map = new google.maps.Map(document.getElementById("map"), opts);
-      
-      
-    ReadCsv();
-
-    var kmlSrc_Tokyo_Tamagawa = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
-    var kmlLayer1 = new google.maps.KmlLayer(kmlSrc_Tokyo_Tamagawa, {
-        suppressInfoWindows: true,
-        preserveViewport: false,
-        map: map
-    });
-		
-    google.maps.event.addListener(marker, 'click', clickEventFunc);
-      
-
-/*
-      var kmlSrc_Tokyo = 'http://jou4.dip.jp/calpoly/data/W05-08_13_Tokyo.kml';
-      var kmlLayer1 = new google.maps.KmlLayer(kmlSrc_Tokyo, {
-          suppressInfoWindows: true,
-          preserveViewport: false,
-          map: map
-      });
-      var kmlSrc_Kanagawa = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa.kml';
-      var kmlLayer = new google.maps.KmlLayer(kmlSrc_Kanagawa, {
-          suppressInfoWindows: true,
-          preserveViewport: false,
-          map: map
-      });
-*/
-      // clickイベントを取得するListenerを追加
-    
-    
-    }
-    function clickEventFunc(event) {
-      ReadCsv();
-      
-      // see http://getbootstrap.com/javascript/#modals-usage 
-      $('#detailModal').modal({}) 
-    }
-    
-    function ReadCsv() {
-        var xhr = null; // 使える場合はMicrosoft.XMLHTTP, 使えない場合はXMLHttpRequest
-        try { xhr = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) { xhr = new XMLHttpRequest(); }
-        var path = "kojo_data.csv"; // 読み込む外部ファイル
-        xhr.open("GET", path, true);
-        xhr.onreadystatechange = function(){
-            if(xhr.readyState === 4) {
-                var data = xhr.responseText; // 外部ファイルの内容
-                
-                var result = [];
-                var tmp = data.split("\n");
-                for (var i=0;i<tmp.length;i++)
-                {
-                    result.push( tmp[i].split(',') );
-                    
-                    var markerPos = {lat: parseFloat( result[i][2] ), lng: parseFloat( result[i][3] ) };
-                      
-                
-
-
-                  var icon1 = 'images/drop1.png';
-                  var icon2 = 'images/drop2.png';
-                  var icon3 = 'images/drop3.png';
-                  var icon4 = 'images/drop4.png';
-                  var icon5 = 'images/drop5.png';
-
-
-
-                    if (result[i][4]==1){
-                    icon = icon1;
-                    }
-                    else if (result[i][4]==2){
-                    icon = icon2;
-                    }
-                    else if (result[i][4]==3){
-                    icon = icon3;
-                    }
-                    else if (result[i][4]==4){
-                    icon = icon4;
-                    }
-                    else if(result[i][4]==5){
-                    icon = icon5;
-                    }
-
-                
-      			    var marker = new google.maps.Marker({
-          				position: markerPos,
-          				icon: icon,
-				        //icon: icon1,
-			          map: map
-
- 
-
-			        });    
-
- 
-
-                }
-                
-      			     
-                
-                console.log(result);
-            }
-      			     
-
-        };
-        xhr.send();    
-    }
-   
-    </script>
-
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6IztSK0mli3zgnKGfSzWUSoc9tMguLnY&callback=initMap">
-    </script>
-
-  <!-- Google map -->
-
-<!--
-<script>
-var xhr = null; // 使える場合はMicrosoft.XMLHTTP, 使えない場合はXMLHttpRequest
-try { xhr = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) { xhr = new XMLHttpRequest(); }
-var path = "kojo_data.csv"; // 読み込む外部ファイル
-xhr.open("GET", path, true);
-xhr.onreadystatechange = function(){
-    if(xhr.readyState === 4) {
-        var data = xhr.responseText; // 外部ファイルの内容
-        console.log(data);
-    }
-};
-xhr.send();
-</script>
--->
-
-<!-- modal see http://getbootstrap.com/javascript/#modals-usage --> 
-<div id="detailModal" class="modal fade" tabindex="-1" role="dialog"> 
-    <div class="modal-dialog" role="document"> 
-      <div class="modal-content"> 
-        <div class="modal-header"> 
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
-          <h4 class="modal-title">Water Quality Detail</h4> 
-        </div> 
-        <div class="modal-body"> 
-          <p>One fine body&hellip;</p> 
-        </div> 
-      </div><!-- /.modal-content --> 
-    </div><!-- /.modal-dialog --> 
-  </div><!-- /.modal --> 
-
-  <footer class="footer">
+    <footer class="footer">
       <div class="text-muted">
         <div>Copyright (R) 2017 Kurita Water Industries Ltd. All rights reserved</div>
       </div>
-  </footer>
+    </footer>
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- GIS, Google Map -->
+    <script src="js/gis.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6IztSK0mli3zgnKGfSzWUSoc9tMguLnY&callback=initMap"></script>
+
   </body>
 </html>
