@@ -23,7 +23,8 @@ background-position: center center;
 background-repeat: no-repeat;
 background-size: 20%;
 position: relative;
-min-width: 60px;
+width:auto;
+height : 30vh;
 }
 .photo2{
 width:auto;
