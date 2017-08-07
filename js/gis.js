@@ -25,9 +25,27 @@ function initMap() {
     // Google Map Instance
     var map = new google.maps.Map(document.getElementById("map"), opts);
 
+   var kmlSrc = 'http://jou4.dip.jp/calpoly/data/W05-08_13_Tokyo_Tamagawa.kml';
+   //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_tamagawa.kml';
+   //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
+   var kmlLayer = new google.maps.KmlLayer(kmlSrc, {
+       suppressInfoWindows: true,
+       preserveViewport: false,
+       map: map
+       });
+
     // read csv, then initialize map
     readCsv();
 
+/*
+   var kmlSrc2 = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_tamagawa.kml';
+   //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
+   var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
+       suppressInfoWindows: true,
+       preserveViewport: false,
+       map: map
+       });
+*/
     function showMarker(rowData){
 
         var markerPos = { lat: parseFloat( rowData[LAT] ), lng: parseFloat( rowData[LNG] ) };
