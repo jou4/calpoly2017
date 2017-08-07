@@ -62,8 +62,9 @@ function initMap() {
 
         // make contents html in info window
         var $canvas = $("<div/>");
+        var $moreInfoLink = $("<a/>").attr("href", "javascript: showDetailPopUp('" + rowData[ID] + "');").text("more..");
         $canvas.append( $("<div/>").text(rowData[PLANT]) );
-        $canvas.append( $("<div/>").append($("<a/>").text("more..")) );
+        $canvas.append( $("<div/>").append($moreInfoLink) );
 
         // make info window
         var infoWindow = new google.maps.InfoWindow({
@@ -74,8 +75,11 @@ function initMap() {
         marker.addListener('click', function() {
             // see https://developers.google.com/maps/documentation/javascript/infowindows?hl=ja
             infoWindow.open(map, marker);
-            // see http://getbootstrap.com/javascript/#modals-usage 
-            // $('#detailModal').modal({}) 
+        });
+
+        // close info window when click map
+        map.addListener('click', function() {
+            infoWindow.close();
         });
     }
 
@@ -90,12 +94,22 @@ function initMap() {
                 var tmp = data.split("\n");
                 for (var i=0; i < tmp.length; i++){
                     if(tmp[i]){
-                        showMarker(tmp[i].split(','));
+                        var rowData = tmp[i].split(',');
+                        csvData[rowData[ID]] = rowData;
+                        showMarker(rowData);
                     }
                 }
             }
         };
-        xhr.send();    
+        xhr.send();
     }
+}
+
+var csvData = {};
+
+function showDetailPopUp(id) {
+    // see http://getbootstrap.com/javascript/#modals-usage 
+    $('#detailModal').modal({});
+    console.log(csvData[id]);
 }
 
