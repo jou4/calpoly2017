@@ -26,4 +26,9 @@ height: 30%;
 width: 3em;
 height : 3em;
 }
- 
+.title_font{
+font-size: 120%;
+color: #404040;
+font-weight: bold;
+}
+
