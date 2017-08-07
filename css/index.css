@@ -2,7 +2,7 @@
   position: relative;
   width: 5em;
   height: 1em;
-  font-size: 30px;
+  font-size: 2vw;
 
 }
 .star-rating-front {
@@ -15,3 +15,15 @@
 .star-rating-back {
   color: #ccc;
 }
+.txt1{
+font-size: 1.3vw;
+}
+.photo1{
+width: 9vw;
+height: 18vh;
+}
+.photo2{
+width: 3vw;
+height: 4vh;
+}
+ 
