@@ -12,6 +12,8 @@ var icon3 = 'images/drop3.png';
 var icon4 = 'images/drop4.png';
 var icon5 = 'images/drop5.png';
 
+var activeInfoWindow;
+
 function initMap() {
 
     // Options for Google Map
@@ -73,13 +75,21 @@ function initMap() {
 
         // open info window when click marker
         marker.addListener('click', function() {
+            if(activeInfoWindow){
+                activeInfoWindow.close();
+                activeInfoWindow = null;
+            }
             // see https://developers.google.com/maps/documentation/javascript/infowindows?hl=ja
             infoWindow.open(map, marker);
+            activeInfoWindow = infoWindow;
         });
 
         // close info window when click map
         map.addListener('click', function() {
-            infoWindow.close();
+            if(activeInfoWindow){
+                activeInfoWindow.close();
+                activeInfoWindow = null;
+            }
         });
     }
 
