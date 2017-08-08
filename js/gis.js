@@ -37,16 +37,16 @@ function initMap() {
     // Google Map Instance
     var map = new google.maps.Map(document.getElementById("map"), opts);
 
-    var kmlSrc = 'http://jou4.dip.jp/calpoly/data/W05-08_13_Tokyo_Tamagawa.kml';
-    //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_tamagawa.kml';
-    //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
+    var kmlSrc = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/W05-08_13_Tokyo_Tamagawa.kml');
+    //var kmlSrc = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_tamagawa.kml');
+    //var kmlSrc = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Tamagawa.kml');
     var kmlLayer = new google.maps.KmlLayer(kmlSrc, {
         suppressInfoWindows: true,
         preserveViewport: false,
         map: map
     });
 
-    var kmlSrc2 = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_Tsurumigawa.kml';
+    var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_Tsurumigawa2.kml');
     var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
         suppressInfoWindows: true,
         preserveViewport: false,
@@ -195,6 +195,10 @@ function initMap() {
         };
         xhr.send();
     }
+}
+
+function addTimeStampToUrl(url){
+    return url + "?" + new Date().getTime();
 }
 
 var csvData = {};
