@@ -251,14 +251,7 @@ function makeChart(rowData) {
                     backgroundColor: window.chartColors.red,
                     borderColor: window.chartColors.red,
                     data: [0.5,0.5,0.5,0.5,0.5,0.5],
-                    // 塗り潰しはしない
-                    fill: false,
-                    // 曲線は用いない
-                    lineTension: 0,
-                    // ポイントの点は表示しない
-                    pointRadius: 0,
-                    // ポイントの点はマウスイベントに反応しない
-                    pointHitRadius: 0
+                    fill: false
                 }
             ]
         },
