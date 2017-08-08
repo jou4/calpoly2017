@@ -27,8 +27,7 @@ var config = {
       //    text:'水質５段階チャート'
       //},
       tooltips: {
-          mode: 'index',
-          intersect: false,
+          enabled: false 
       },
       hover: {
           mode: 'nearest',
@@ -55,7 +54,7 @@ var config = {
                   suggestedMax: 5,
                   stepSize: 1,
                   
-                  // ☆に変換
+                  // ★に変換
                   callback: function(value, index, values) {
                       var star = "★";
                       for (var i = 1; i < value; ++i) {
@@ -63,6 +62,7 @@ var config = {
                       }
                       return star;
                   },
+                  // 黄色に変更
                   fontColor:  '#F3D51A' 
               }
           }]

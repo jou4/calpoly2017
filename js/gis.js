@@ -167,7 +167,7 @@ function makeChart(rowData) {
                     backgroundColor: window.chartColors.blue,
                     borderColor: window.chartColors.blue,
                     data: [
-                        1,2,2,4,5,rowData[WATER_QUALITY]
+                        1,0,2,3,2,rowData[WATER_QUALITY]
                     ],
                     // 塗り潰しはしない
                     fill: false,
@@ -185,8 +185,7 @@ function makeChart(rowData) {
             //    text:'排水水質認証グラフ'
             //},
             tooltips: {
-                mode: 'index',
-                intersect: false,
+                enabled: false 
             },
             hover: {
                 mode: 'nearest',
@@ -207,22 +206,22 @@ function makeChart(rowData) {
                         display: false,
                     },
                     ticks: {
+                        //0～3の4段階を想定
                         suggestedMin: 0,
-                        suggestedMax: 5,
+                        suggestedMax: 3,
                         stepSize: 1,
-
-                        // 水マークに変換
-                        callback: function(value, index, values) {
-                            //var waterMark = "\u3042";
-                            var waterMark = "\u1F64F";
-
-                            for (var i = 1; i < value; ++i) {
-                                waterMark = waterMark + "\u1F64F"; 
-                            }
-                            return waterMark;
-                        },
-                        // 黄色に設定
-                        fontColor:  '#F3D51A'
+//水マークに変換すると文字化けするので、一旦数値表示とする
+//                        // 水マークに変換
+//                        callback: function(value, index, values) {
+//                            var waterMark = "\u1F64F";
+//
+//                            for (var i = 1; i < value; ++i) {
+//                                waterMark = waterMark + "\u1F64F"; 
+//                            }
+//                            return waterMark;
+//                        },
+//                        // 黄色に設定
+//                        fontColor:  '#F3D51A'
                     }
                 }]
             },
