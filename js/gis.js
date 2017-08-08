@@ -221,7 +221,7 @@ function showDetailPopUp(id) {
     $("#plant_tel").text(rowData[TEL]);
     $("#plant_river").text(rowData[RIVER]);
     $("#plant_impact").text(rowData[IMPACT]);
-    $("#plant_amount").text(rowData[AMOUNT].toString().replace(/(\d)(?=(\d\d\d)+$)/g , ‘$1,’) + "㎥/日");
+    $("#plant_amount").text(rowData[AMOUNT] + "㎥/日");
     // make chart
     makeChart(rowData);
     // show popup
