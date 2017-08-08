@@ -253,9 +253,12 @@ function showDetailPopUp(id) {
     $("#plant_tel").text(rowData[TEL]);
     $("#plant_river").text(rowData[RIVER]);
     $("#plant_impact").text(rowData[IMPACT]);
-    $("#plant_amount").text((rowData[AMOUNT].replace(/^(-?\d+)(\d{3})/, "$1,$2")) + "㎥/日");
+    $("#plant_amount").text((rowData[AMOUNT].replace(/^(-?\d+)(\d{3})/, "$1,$2")) + "?/日");
     // make chart
-    makeChart(rowData);
+    // bugfix: https://github.com/chartjs/Chart.js/issues/4622
+    setTimeout(function(){
+      makeChart(rowData);
+    }, 200);
     // show popup
     // see http://getbootstrap.com/javascript/#modals-usage 
     $('#detailModal').modal({});
