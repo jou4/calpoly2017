@@ -4,13 +4,25 @@ var PLANT = 1;
 var LAT = 2;
 var LNG = 3;
 var WATER_QUALITY = 4;
+var INDUSTRY = 5;
+var TEL = 6;
+var RIVER = 7;
+var IMPACT = 8;
+var AMOUNT = 9;
 
 // Const of Path for image files
-var icon1 = 'images/drop1.png';
-var icon2 = 'images/drop2.png';
-var icon3 = 'images/drop3.png';
-var icon4 = 'images/drop4.png';
-var icon5 = 'images/drop5.png';
+var icon_0a = 'images/Ldrop0.png';
+var icon_0b = 'images/Mdrop0.png';
+var icon_0c = 'images/Sdrop0.png';
+var icon_1a = 'images/Ldrop1.png';
+var icon_1b = 'images/Mdrop1.png';
+var icon_1c = 'images/Sdrop1.png';
+var icon_2a = 'images/Ldrop32.png';
+var icon_2b = 'images/Mdrop32.png';
+var icon_2c = 'images/Sdrop32.png';
+var icon_3a = 'images/Ldrop54.png';
+var icon_3b = 'images/Mdrop54.png';
+var icon_3c = 'images/Sdrop54.png';
 
 var activeInfoWindow;
 
@@ -25,58 +37,102 @@ function initMap() {
     // Google Map Instance
     var map = new google.maps.Map(document.getElementById("map"), opts);
 
-   var kmlSrc = 'http://jou4.dip.jp/calpoly/data/W05-08_13_Tokyo_Tamagawa.kml';
-   //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_tamagawa.kml';
-   //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
-   var kmlLayer = new google.maps.KmlLayer(kmlSrc, {
-       suppressInfoWindows: true,
-       preserveViewport: false,
-       map: map
-       });
+    var kmlSrc = 'http://jou4.dip.jp/calpoly/data/W05-08_13_Tokyo_Tamagawa.kml';
+    //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_tamagawa.kml';
+    //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
+    var kmlLayer = new google.maps.KmlLayer(kmlSrc, {
+        suppressInfoWindows: true,
+        preserveViewport: false,
+        map: map
+    });
 
-   var kmlSrc2 = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_Tsurumigawa.kml';
-   var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
-       suppressInfoWindows: true,
-       preserveViewport: false,
-       map: map
-       });
+    var kmlSrc2 = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_Tsurumigawa.kml';
+    var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
+        suppressInfoWindows: true,
+        preserveViewport: false,
+        map: map
+    });
 
     // read csv, then initialize map
     readCsv();
 
-/*
+    /*
    var kmlSrc2 = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_tamagawa.kml';
-   //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
+    //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
    var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
        suppressInfoWindows: true,
        preserveViewport: false,
        map: map
        });
-*/
+       */
     function showMarker(rowData){
 
         var markerPos = { lat: parseFloat( rowData[LAT] ), lng: parseFloat( rowData[LNG] ) };
 
         var icon;
-        switch(parseInt(rowData[WATER_QUALITY])){
-            case 1:
-                icon = icon1;
+        switch(rowData[IMPACT]){
+            case "A":
+                switch(parseInt(rowData[WATER_QUALITY])){
+                    case 0:
+                        icon = icon_0a;
+                        break;
+                    case 1:
+                        icon = icon_1a;
+                        break;
+                    case 2:
+                        icon = icon_2a;
+                        break;
+                    case 3:
+                        icon = icon_3a;
+                        break;
+                    default:
+                        console.log("unexpected WATER_QUALITY: " + rowData[WATER_QUALITY]);
+                        icon = icon_0a;
+                        break;
+                }
                 break;
-            case 2:
-                icon = icon2;
+            case "B":
+                switch(parseInt(rowData[WATER_QUALITY])){
+                    case 0:
+                        icon = icon_0b;
+                        break;
+                    case 1:
+                        icon = icon_1b;
+                        break;
+                    case 2:
+                        icon = icon_2b;
+                        break;
+                    case 3:
+                        icon = icon_3b;
+                        break;
+                    default:
+                        console.log("unexpected WATER_QUALITY: " + rowData[WATER_QUALITY]);
+                        icon = icon_0b;
+                        break;
+                }
                 break;
-            case 3:
-                icon = icon3;
-                break;
-            case 4:
-                icon = icon4;
-                break;
-            case 5:
-                icon = icon5;
+            case "C":
+                switch(parseInt(rowData[WATER_QUALITY])){
+                    case 0:
+                        icon = icon_0c;
+                        break;
+                    case 1:
+                        icon = icon_1c;
+                        break;
+                    case 2:
+                        icon = icon_2c;
+                        break;
+                    case 3:
+                        icon = icon_3c;
+                        break;
+                    default:
+                        console.log("unexpected WATER_QUALITY: " + rowData[WATER_QUALITY]);
+                        icon = icon_0c;
+                        break;
+                }
                 break;
             default:
-                console.log("unexpected WATER_QUALITY: " + rowData[WATER_QUALITY]);
-                icon = icon1
+                console.log("unexpected IMPACT: " + rowData[IMPACT]);
                 break;
         }
 
@@ -146,8 +202,13 @@ function showDetailPopUp(id) {
     var rowData = csvData[id];
     console.log(rowData);
 
-    // TODO set detail info
+    // set detail info
     $("#plant_name").text(rowData[PLANT]);
+    $("#plant_industry").text(rowData[INDUSTRY]);
+    $("#plant_tel").text(rowData[TEL]);
+    $("#plant_river").text(rowData[RIVER]);
+    $("#plant_impact").text(rowData[IMPACT]);
+    $("#plant_amount").text(rowData[AMOUNT]);
     // make chart
     makeChart(rowData);
     // show popup
@@ -209,18 +270,18 @@ function makeChart(rowData) {
                         suggestedMin: 0,
                         suggestedMax: 3,
                         stepSize: 1,
-//水マークに変換すると文字化けするので、一旦数値表示とする
-//                        // 水マークに変換
-//                        callback: function(value, index, values) {
-//                            var waterMark = "\u1F64F";
-//
-//                            for (var i = 1; i < value; ++i) {
-//                                waterMark = waterMark + "\u1F64F"; 
-//                            }
-//                            return waterMark;
-//                        },
-//                        // 黄色に設定
-//                        fontColor:  '#F3D51A'
+                        //水マークに変換すると文字化けするので、一旦数値表示とする
+                        //                        // 水マークに変換
+                        //                        callback: function(value, index, values) {
+                        //                            var waterMark = "\u1F64F";
+                        //
+                        //                            for (var i = 1; i < value; ++i) {
+                        //                                waterMark = waterMark + "\u1F64F"; 
+                        //                            }
+                        //                            return waterMark;
+                        //                        },
+                        //                        // 黄色に設定
+                        //                        fontColor:  '#F3D51A'
                     }
                 }]
             },
