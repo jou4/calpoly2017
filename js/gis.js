@@ -1,4 +1,4 @@
-// Const of Index for CSV Row Data
+﻿// Const of Index for CSV Row Data
 var ID = 0;
 var PLANT = 1;
 var LAT = 2;
@@ -23,6 +23,7 @@ var icon_2c = 'images/Sdrop32.png';
 var icon_3a = 'images/Ldrop54.png';
 var icon_3b = 'images/Mdrop54.png';
 var icon_3c = 'images/Sdrop54.png';
+var icon_q = 'images/question.png';
 
 var activeInfoWindow;
 
@@ -140,6 +141,9 @@ function initMap() {
                         break;
                 }
                 break;
+            case "Q":
+                icon = icon_q;
+                break;
             default:
                 console.log("unexpected IMPACT: " + rowData[IMPACT]);
                 break;
@@ -156,8 +160,9 @@ function initMap() {
         var $canvas = $("<div/>");
         var $moreInfoLink = $("<a/>").attr("href", "javascript: showDetailPopUp('" + rowData[ID] + "');").text("more..");
         $canvas.append( $("<div/>").text(rowData[PLANT]) );
-        $canvas.append( $("<div/>").append($moreInfoLink) );
-
+        if(rowData[IMPACT] != 'Q'){
+                    $canvas.append( $("<div/>").append($moreInfoLink) );
+        }
         // make info window
         var infoWindow = new google.maps.InfoWindow({
             content: $canvas.html()
