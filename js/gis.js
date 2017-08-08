@@ -246,6 +246,12 @@ function makeChart(rowData) {
                     fill: false,
                     // 曲線は用いない
                     lineTension: 0
+                }, {
+                    label: "境界線",
+                    backgroundColor: window.chartColors.red,
+                    borderColor: window.chartColors.red,
+                    data: [0.5,0.5,0.5,0.5,0.5,0.5],
+                    fill: false
                 }
             ]
         },
