@@ -74,6 +74,9 @@ function initMap() {
 
     // ズーム
     map.setZoom(13);
+    
+    // クリック地点に河川名表示
+	showRiverName();
 
     function showMarker(rowData){
 
@@ -208,6 +211,35 @@ function initMap() {
         };
         xhr.send();
     }
+    
+    function showRiverName() {
+    	var latlng = new google.maps.LatLng(35.514580, 139.613447);
+		var iwopts = {
+			content: 'Hello',
+			positon: latlng
+		};
+        var infoWindow = new google.maps.InfoWindow(iwopts);
+
+        // open info window when click marker
+        google.maps.event.addListener(kmlLayer2, 'click',function() {
+            if(activeInfoWindow){
+                activeInfoWindow.close();
+                activeInfoWindow = null;
+            }
+            
+            // see https://developers.google.com/maps/documentation/javascript/infowindows?hl=ja
+            infoWindow.open(map);
+            activeInfoWindow = infoWindow;
+        });
+        
+        // close info window when click map
+        map.addListener('click', function() {
+            if(activeInfoWindow){
+                activeInfoWindow.close();
+                activeInfoWindow = null;
+            }
+        });
+    }
 }
 
 function addTimeStampToUrl(url){
@@ -226,9 +258,12 @@ function showDetailPopUp(id) {
     $("#plant_tel").text(rowData[TEL]);
     $("#plant_river").text(rowData[RIVER]);
     $("#plant_impact").text(rowData[IMPACT]);
-    $("#plant_amount").text(rowData[AMOUNT]);
+    $("#plant_amount").text((rowData[AMOUNT].replace(/^(-?\d+)(\d{3})/, "$1,$2")) + "?/日");
     // make chart
-    makeChart(rowData);
+    // bugfix: https://github.com/chartjs/Chart.js/issues/4622
+    setTimeout(function(){
+      makeChart(rowData);
+    }, 200);
     // show popup
     // see http://getbootstrap.com/javascript/#modals-usage 
     $('#detailModal').modal({});
