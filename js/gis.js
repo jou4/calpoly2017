@@ -37,35 +37,43 @@ function initMap() {
     // Google Map Instance
     var map = new google.maps.Map(document.getElementById("map"), opts);
 
-    var kmlSrc = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/W05-08_13_Tokyo_Tamagawa.kml');
-    //var kmlSrc = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_tamagawa.kml');
-    //var kmlSrc = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Tamagawa.kml');
+    var kmlSrc = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Tamagawa.kml');
     var kmlLayer = new google.maps.KmlLayer(kmlSrc, {
         suppressInfoWindows: true,
-        preserveViewport: false,
+        preserveViewport: true,
         map: map
     });
 
-    var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_Tsurumigawa.kml');
+    var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Tsurumigawa.kml');
     var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
         suppressInfoWindows: true,
-        preserveViewport: false,
+        preserveViewport: true,
+        map: map
+    });
+
+    var kmlSrc3 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Onda+Nara.kml');
+    var kmlLayer3 = new google.maps.KmlLayer(kmlSrc3, {
+        suppressInfoWindows: true,
+        preserveViewport: true,
+        map: map
+    });
+
+    var kmlSrc4 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Toriyama+Sunada.kml');
+    var kmlLayer4 = new google.maps.KmlLayer(kmlSrc4, {
+        suppressInfoWindows: true,
+        preserveViewport: true,
         map: map
     });
 
     // read csv, then initialize map
     readCsv();
 
-    /*
-   var kmlSrc2 = 'http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_tamagawa.kml';
-    //var kmlSrc = 'http://jou4.dip.jp/calpoly/data/Tamagawa.kml';
-   var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
-       suppressInfoWindows: true,
-       preserveViewport: false,
-       strokeColor: "#00FF00",
-       map: map
-       });
-       */
+    // 中心の移動
+    map.panTo(new google.maps.LatLng(35.514580, 139.613447));
+
+    // ズーム
+    map.setZoom(13);
+
     function showMarker(rowData){
 
         var markerPos = { lat: parseFloat( rowData[LAT] ), lng: parseFloat( rowData[LNG] ) };
