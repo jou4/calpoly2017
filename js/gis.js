@@ -253,7 +253,7 @@ function showDetailPopUp(id) {
     $("#plant_tel").text(rowData[TEL]);
     $("#plant_river").text(rowData[RIVER]);
     $("#plant_impact").text(rowData[IMPACT]);
-    $("#plant_amount").text(rowData[AMOUNT]);
+    $("#plant_amount").text((rowData[AMOUNT].replace(/^(-?\d+)(\d{3})/, "$1,$2")) + "㎥/日");
     // make chart
     makeChart(rowData);
     // show popup
@@ -283,7 +283,14 @@ function makeChart(rowData) {
                     backgroundColor: window.chartColors.red,
                     borderColor: window.chartColors.red,
                     data: [0.5,0.5,0.5,0.5,0.5,0.5],
-                    fill: false
+                    // 塗り潰しはしない
+                    fill: false,
+                    // 曲線は用いない
+                    lineTension: 0,
+                    // ポイントの点は表示しない
+                    pointRadius: 0,
+                    // ポイントの点はマウスイベントに反応しない
+                    pointHitRadius: 0
                 }
             ]
         },
