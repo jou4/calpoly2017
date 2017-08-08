@@ -62,6 +62,7 @@ function initMap() {
    var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
        suppressInfoWindows: true,
        preserveViewport: false,
+       strokeColor: "#00FF00",
        map: map
        });
        */
