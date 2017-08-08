@@ -258,7 +258,7 @@ function showDetailPopUp(id) {
     $("#plant_tel").text(rowData[TEL]);
     $("#plant_river").text(rowData[RIVER]);
     $("#plant_impact").text(rowData[IMPACT]);
-    $("#plant_amount").text((rowData[AMOUNT].replace(/^(-?\d+)(\d{3})/, "$1,$2")) + "?/日");
+    $("#plant_amount").text((rowData[AMOUNT].replace(/^(-?\d+)(\d{3})/, "$1,$2")) + "\u33a5/日");
     // make chart
     // bugfix: https://github.com/chartjs/Chart.js/issues/4622
     setTimeout(function(){
@@ -291,7 +291,9 @@ function makeChart(rowData) {
                     backgroundColor: window.chartColors.red,
                     borderColor: window.chartColors.red,
                     data: [0.5,0.5,0.5,0.5,0.5,0.5],
-                    fill: false
+                    fill: false,
+                    pointRadius : 0,
+                    pointHitRadius : 0
                 }
             ]
         },
