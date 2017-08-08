@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<kml xmlns="http://www.opengis.net/kml/2.2">
+<kml xmlns="http://earth.google.com/kml/2.1">
 <Document id="root_doc">
 <Schema name="W05_08_14_Kanagawa" id="W05_08_14_Kanagawa">
 	<SimpleField name="RIC" type="string"></SimpleField>
@@ -69,8 +69,7 @@
     </Style>
 
   <Placemark>
-	<Style><LineStyle><color>ff00ff00</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
-	<styleUrl>#greenLine</styleUrl>
+	<styleUrl>#blueLine</styleUrl>
 	<ExtendedData><SchemaData schemaUrl="#W05_08_14_Kanagawa">
 		<SimpleData name="RIC">8303060001</SimpleData>
 		<SimpleData name="WSC">830306</SimpleData>
