@@ -184,8 +184,7 @@ function makeChart(rowData) {
             //    text:'排水水質認証グラフ'
             //},
             tooltips: {
-                mode: 'index',
-                intersect: false,
+                enabled: false 
             },
             hover: {
                 mode: 'nearest',
