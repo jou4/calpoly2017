@@ -70,7 +70,7 @@
 
   <Placemark>
 	<Style><LineStyle><color>ff00ff00</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
-	<styleUrl>#blueLine</styleUrl>
+	<styleUrl>#greenLine</styleUrl>
 	<ExtendedData><SchemaData schemaUrl="#W05_08_14_Kanagawa">
 		<SimpleData name="RIC">8303060001</SimpleData>
 		<SimpleData name="WSC">830306</SimpleData>
