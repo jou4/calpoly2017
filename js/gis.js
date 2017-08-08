@@ -46,7 +46,7 @@ function initMap() {
         map: map
     });
 
-    var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_Tsurumigawa2.kml');
+    var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/W05-08_14_Kanagawa_Tsurumigawa.kml');
     var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
         suppressInfoWindows: true,
         preserveViewport: false,
