@@ -1,4 +1,4 @@
-// Const of Index for CSV Row Data
+﻿// Const of Index for CSV Row Data
 var ID = 0;
 var PLANT = 1;
 var LAT = 2;
@@ -23,6 +23,7 @@ var icon_2c = 'images/Sdrop32.png';
 var icon_3a = 'images/Ldrop54.png';
 var icon_3b = 'images/Mdrop54.png';
 var icon_3c = 'images/Sdrop54.png';
+var icon_q = 'images/question.png';
 
 var activeInfoWindow;
 
@@ -143,6 +144,9 @@ function initMap() {
                         break;
                 }
                 break;
+            case "Q":
+                icon = icon_q;
+                break;
             default:
                 console.log("unexpected IMPACT: " + rowData[IMPACT]);
                 break;
@@ -159,8 +163,9 @@ function initMap() {
         var $canvas = $("<div/>");
         var $moreInfoLink = $("<a/>").attr("href", "javascript: showDetailPopUp('" + rowData[ID] + "');").text("more..");
         $canvas.append( $("<div/>").text(rowData[PLANT]) );
-        $canvas.append( $("<div/>").append($moreInfoLink) );
-
+        if(rowData[IMPACT] != 'Q'){
+                    $canvas.append( $("<div/>").append($moreInfoLink) );
+        }
         // make info window
         var infoWindow = new google.maps.InfoWindow({
             content: $canvas.html()
@@ -253,7 +258,7 @@ function showDetailPopUp(id) {
     $("#plant_tel").text(rowData[TEL]);
     $("#plant_river").text(rowData[RIVER]);
     $("#plant_impact").text(rowData[IMPACT]);
-    $("#plant_amount").text((rowData[AMOUNT].replace(/^(-?\d+)(\d{3})/, "$1,$2")) + "?/日");
+    $("#plant_amount").text((rowData[AMOUNT].replace(/^(-?\d+)(\d{3})/, "$1,$2")) + "\u33a5/日");
     // make chart
     // bugfix: https://github.com/chartjs/Chart.js/issues/4622
     setTimeout(function(){
@@ -286,7 +291,9 @@ function makeChart(rowData) {
                     backgroundColor: window.chartColors.red,
                     borderColor: window.chartColors.red,
                     data: [0.5,0.5,0.5,0.5,0.5,0.5],
-                    fill: false
+                    fill: false,
+                    pointRadius : 0,
+                    pointHitRadius : 0
                 }
             ]
         },
