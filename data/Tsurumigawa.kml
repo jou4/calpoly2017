@@ -32,7 +32,7 @@
       <LineString><coordinates>139.4760309443,35.580828809 139.476389722,35.5807552777 139.4768019446,35.5807280556 139.4771344446,35.5807361113 139.4775483981,35.5807744249</coordinates></LineString>
   </Placemark>
   <Placemark>
-	<Style><LineStyle><color>ffff0000</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<Style><LineStyle><color>ffffff00</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#W05_08_14_Kanagawa">
 		<SimpleData name="RIC">8303060001</SimpleData>
 		<SimpleData name="WSC">830306</SimpleData>
@@ -45,7 +45,7 @@
       <LineString><coordinates>139.5021800168,35.5775194408 139.5026344443,35.5774333335 139.5032538891,35.5772977777 139.5043383336,35.5770472221 139.5045858334,35.5770233335 139.5048400002,35.5769730555</coordinates></LineString>
   </Placemark>
   <Placemark>
-	<Style><LineStyle><color>ffff0000</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#W05_08_14_Kanagawa">
 		<SimpleData name="RIC">8303060001</SimpleData>
 		<SimpleData name="WSC">830306</SimpleData>
