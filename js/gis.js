@@ -43,14 +43,14 @@ function initMap() {
         preserveViewport: true,
         map: map
     });
-
+/*
     var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Tsurumigawa.kml');
     var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
         suppressInfoWindows: true,
         preserveViewport: true,
         map: map
     });
-
+*/
     var kmlSrc3 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Onda+Nara.kml');
     var kmlLayer3 = new google.maps.KmlLayer(kmlSrc3, {
         suppressInfoWindows: true,
@@ -65,6 +65,20 @@ function initMap() {
         map: map
     });
 
+    var kmlSrc5 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Tsurumigawa_color.kml');
+    var kmlLayer5 = new google.maps.KmlLayer(kmlSrc5, {
+        suppressInfoWindows: true,
+        preserveViewport: true,
+        map: map
+    });
+
+    var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Tsurumigawa.kml');
+    var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
+        suppressInfoWindows: true,
+        preserveViewport: true,
+        map: map
+    });
+
     // read csv, then initialize map
     readCsv();
 
@@ -74,8 +88,8 @@ function initMap() {
     // ズーム
     map.setZoom(13);
     
-    // クリック地点に河川名表示
-	showRiverName();
+    // クリック地点に河川名表示（未完成）
+	//showRiverName();
 
     function showMarker(rowData){
 
@@ -208,19 +222,21 @@ function initMap() {
     }
     
     function showRiverName() {
-    	var latlng = new google.maps.LatLng(35.514580, 139.613447);
-		var iwopts = {
-			content: 'Hello',
-			positon: latlng
-		};
-        var infoWindow = new google.maps.InfoWindow(iwopts);
+    	//var latlng = new google.maps.LatLng(35.514580, 139.613447);
+
 
         // open info window when click marker
-        google.maps.event.addListener(kmlLayer2, 'click',function() {
+        google.maps.event.addListener(kmlLayer2, 'click',function(latlng) {
             if(activeInfoWindow){
                 activeInfoWindow.close();
                 activeInfoWindow = null;
             }
+            
+			var iwopts = {
+				content: 'Hello',
+				positon: latlng
+			};
+        	var infoWindow = new google.maps.InfoWindow(iwopts);
             
             // see https://developers.google.com/maps/documentation/javascript/infowindows?hl=ja
             infoWindow.open(map);
