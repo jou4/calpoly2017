@@ -18,6 +18,10 @@
 
     <link rel="stylesheet" href="css/base.css">
 
+    <!-- Icons for iPhone & Android to Your Website -->
+    <link href="http://jou4.dip.jp/calpoly/water_vision/images/apple-icon-120x120.png" rel="apple-touch-icon" />
+    <link href="http://jou4.dip.jp/calpoly/water_vision/images/android-icon-144x144.png" rel="icon" size="144x144" />
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -91,438 +95,252 @@
               <canvas id="canvas"></canvas>
             </div><!-- /Chart -->
 
-            <!-- Table -->
-            <h1>詳細排水水質</h1>
-            <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>項目名</th>
-                    <th colspan="6">測定値</th>
-                    <th>単位</th>
-                  </tr>
-                  <tr>
-                    <th></th>
-                    <th>３月</th>
-                    <th>４月</th>
-                    <th>５月</th>
-                    <th>６月</th>
-                    <th>７月</th>
-                    <th>８月</th>
-                    <th></th>
-                  </tr>
 
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><b>生活環境項目</b></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>　pH（最大値）</td>
-                    <td>7.3</td>
-                    <td>7.4</td>
-                    <td>7.4</td>
-                    <td>7.6</td>
-                    <td>7.6</td>
-                    <td>7.3</td>
-                    <td>－</td>
-                  </tr>
-                  <tr>
-                    <td>　pH（最小値）</td>
-                    <td>7.1</td>
-                    <td>7.1</td>
-                    <td>7</td>
-                    <td>7</td>
-                    <td>7</td>
-                    <td>6.9</td>
-                    <td>－</td>
-                  </tr>
-                  <tr>
-                    <td>　DO</td>
-                    <td>7</td>
-                    <td>6.2</td>
-                    <td>6.8</td>
-                    <td>6.7</td>
-                    <td>7</td>
-                    <td>6.6</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　BOD</td>
-                    <td>4</td>
-                    <td>4.8</td>
-                    <td>4</td>
-                    <td>3.6</td>
-                    <td>3.3</td>
-                    <td>3.3</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　BOD（75%値）</td>
-                    <td>4.8</td>
-                    <td>5.3</td>
-                    <td>5</td>
-                    <td>3.5</td>
-                    <td>4.7</td>
-                    <td>4.1</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　COD</td>
-                    <td>－</td>
-                    <td>6.4</td>
-                    <td>6</td>
-                    <td>5.8</td>
-                    <td>5.5</td>
-                    <td>6</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　COD（75%値）</td>
-                    <td>－</td>
-                    <td>7.6</td>
-                    <td>6.1</td>
-                    <td>6.5</td>
-                    <td>6.4</td>
-                    <td>6.6</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　SS</td>
-                    <td>9</td>
-                    <td>14</td>
-                    <td>13</td>
-                    <td>9</td>
-                    <td>10</td>
-                    <td>8</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　大腸菌群数</td>
-                    <td>9</td>
-                    <td>－</td>
-                    <td>－</td>
-                    <td>－</td>
-                    <td>－</td>
-                    <td>36000</td>
-                    <td>MPN/100mL</td>
-                  </tr>
-                  <tr>
-                    <td>　n-ﾍｷｻﾝ抽出物質</td>
-                    <td>－</td>
-                    <td>－</td>
-                    <td>－</td>
-                    <td>－</td>
-                    <td>－</td>
-                    <td>－</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　全亜鉛</td>
-                    <td>0.016</td>
-                    <td>0.021</td>
-                    <td>0.02</td>
-                    <td>0.02</td>
-                    <td>－</td>
-                    <td>0.023</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td><b>健康項目</b></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>　ｶﾄﾞﾐｳﾑ（平均値）</td>
-                    <td>&lt;0.001</td>
-                    <td>&lt;0.001</td>
-                    <td>&lt;0.0003</td>
-                    <td>&lt;0.001</td>
-                    <td>&lt;0.0003</td>
-                    <td>&lt;0.0003</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　全ｼｱﾝ（最大値）</td>
-                    <td>&lt;0.1</td>
-                    <td>&lt;0.1</td>
-                    <td>&lt;0.1</td>
-                    <td>&lt;0.1</td>
-                    <td>&lt;0.1</td>
-                    <td>&lt;0.1</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　鉛（平均値）</td>
-                    <td>&lt;0.002</td>
-                    <td>0.0021</td>
-                    <td>0.002</td>
-                    <td>0.002</td>
-                    <td>0.002</td>
-                    <td>0.002</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　六価ｸﾛﾑ（平均値）</td>
-                    <td>&lt;0.01</td>
-                    <td>&lt;0.01</td>
-                    <td>&lt;0.01</td>
-                    <td>&lt;0.01</td>
-                    <td>&lt;0.01</td>
-                    <td>&lt;0.01</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　砒素（平均値）</td>
-                    <td>&lt;0.005</td>
-                    <td>&lt;0.005</td>
-                    <td>&lt;0.005</td>
-                    <td>&lt;0.005</td>
-                    <td>&lt;0.005</td>
-                    <td>&lt;0.005</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　総水銀（最大値）</td>
-                    <td>&lt;0.0005</td>
-                    <td>&lt;0.0005</td>
-                    <td>&lt;0.0005</td>
-                    <td>&lt;0.0005</td>
-                    <td>&lt;0.0005</td>
-                    <td>&lt;0.0005</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　ｱﾙｷﾙ水銀（最大値）</td>
-                    <td>－</td>
-                    <td>－</td>
-                    <td>－</td>
-                    <td>－</td>
-                    <td>－</td>
-                    <td>－</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　PCB（最大値）</td>
-                    <td>&lt;0.0005</td>
-                    <td>－</td>
-                    <td>&lt;0.0005</td>
-                    <td>－</td>
-                    <td>&lt;0.0005</td>
-                    <td>－</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　ｼﾞｸﾛﾛﾒﾀﾝ（平均値）</td>
-                    <td>&lt;0.0002</td>
-                    <td>0.0004</td>
-                    <td>0.0002</td>
-                    <td>0.00023</td>
-                    <td>0.00033</td>
-                    <td>0.0002</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　四塩化炭素（平均値）</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　1,2-ｼﾞｸﾛﾛｴﾀﾝ（平均値）</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　1,1-ｼﾞｸﾛﾛｴﾁﾚﾝ（平均値）</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　ｼｽ-1,2-ｼﾞｸﾛﾛｴﾁﾚﾝ（平均値）</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　1,1,1-ﾄﾘｸﾛﾛｴﾀﾝ（平均値）</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　1,1,2-ﾄﾘｸﾛﾛｴﾀﾝ（平均値）</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　ﾄﾘｸﾛﾛｴﾁﾚﾝ（平均値）</td>
-                    <td>&lt;0.001</td>
-                    <td>&lt;0.001</td>
-                    <td>&lt;0.001</td>
-                    <td>&lt;0.001</td>
-                    <td>&lt;0.001</td>
-                    <td>&lt;0.001</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　ﾃﾄﾗｸﾛﾛｴﾁﾚﾝ（平均値）</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　1,3-ｼﾞｸﾛﾛﾌﾟﾛﾍﾟﾝ（平均値）</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　ﾁｳﾗﾑ（平均値）</td>
-                    <td>&lt;0.0006</td>
-                    <td>&lt;0.0006</td>
-                    <td>&lt;0.0006</td>
-                    <td>&lt;0.0006</td>
-                    <td>&lt;0.0006</td>
-                    <td>&lt;0.0006</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　ｼﾏｼﾞﾝ（平均値）</td>
-                    <td>&lt;0.0003</td>
-                    <td>&lt;0.0003</td>
-                    <td>&lt;0.0003</td>
-                    <td>&lt;0.0003</td>
-                    <td>&lt;0.0003</td>
-                    <td>&lt;0.0003</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　ﾁｵﾍﾞﾝｶﾙﾌﾞ（平均値）</td>
-                    <td>&lt;0.0003</td>
-                    <td>&lt;0.0003</td>
-                    <td>&lt;0.0003</td>
-                    <td>&lt;0.0003</td>
-                    <td>&lt;0.0003</td>
-                    <td>&lt;0.0003</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　ﾍﾞﾝｾﾞﾝ（平均値）</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>&lt;0.0002</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　ｾﾚﾝ（平均値）</td>
-                    <td>&lt;0.002</td>
-                    <td>&lt;0.002</td>
-                    <td>&lt;0.002</td>
-                    <td>&lt;0.002</td>
-                    <td>&lt;0.002</td>
-                    <td>&lt;0.002</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　硝酸性窒素及び亜硝酸性窒素（平均値）</td>
-                    <td>5.4</td>
-                    <td>5.1</td>
-                    <td>6.3</td>
-                    <td>6.9</td>
-                    <td>5.7</td>
-                    <td>7</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　ふっ素（平均値）</td>
-                    <td>0.06</td>
-                    <td>0.065</td>
-                    <td>0.067</td>
-                    <td>0.092</td>
-                    <td>0.062</td>
-                    <td>0.07</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　ほう素（平均値）</td>
-                    <td>0.07</td>
-                    <td>0.07</td>
-                    <td>0.062</td>
-                    <td>0.065</td>
-                    <td>0.052</td>
-                    <td>0.067</td>
-                    <td>mg/L</td>
-                  </tr>
-                  <tr>
-                    <td>　1,4-ｼﾞｵｷｻﾝ（平均値）</td>
-                    <td>&lt;0.005</td>
-                    <td>&lt;0.005</td>
-                    <td>&lt;0.005</td>
-                    <td>&lt;0.005</td>
-                    <td>&lt;0.005</td>
-                    <td>&lt;0.005</td>
-                    <td>mg/L</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div><!-- /Table -->
+
+
+
+
+        <!-- Table -->
+        <h1>詳細排水水質</h1>
+        <div class="table-responsive">
+          <button id="prev" class="btn btn-primary btn-lg">　前　月　</button>
+          <button id="next" class="btn btn-primary btn-lg" >　次　月　</button>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th><font size="4"><span id="valueA"></span>月</font></th>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr>
+                <th width="50%">項目名</th>
+                <th width="30%" colspan="1">測定値</th>
+                <th width="20%">単位</th>
+              </tr>
+            </thead>
+
+
+            <tr>
+              <td>一般項目</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <td>　水素ｲｵﾝ濃度（pH）</td>
+            <td id="valueB"></td>
+            <td>pH</td>
+            </tr>
+            <tr>
+              <td>　生物化学的酸素要求量</td>
+              <td id="valueC"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　化学的酸素要求量</td>
+              <td id="valueD"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　浮遊物質量</td>
+              <td id="valueE"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　n-ﾍｷｻﾝ抽出物質</br>　(鉱油類含有量)</td>
+            <td id="valueF"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　n-ﾍｷｻﾝ抽出物質</br>　(動植物油脂類含有量)</td>
+              <td id="valueG"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ﾌｪﾉｰﾙ類含有量</td>
+              <td id="valueH"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　銅含有量</td>
+            <td id="valueI"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　亜鉛含有量</td>
+              <td id="valueJ"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　溶解性鉄含有量</td>
+              <td id="valueK"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　溶解性ﾏﾝｶﾞﾝ含有量</td>
+              <td id="valueL"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ｸﾛﾑ含有量</td>
+              <td id="valueM"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　大腸菌群数</td>
+              <td id="valueN"></td>
+              <td>個/cm3</td>
+            </tr>
+            <tr>
+              <td>　窒素含有量</td>
+              <td id="valueO"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　りん含有量</td>
+              <td id="valueP"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>有害物質に係る基準</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>　ｶﾄﾞﾐｳﾑ及びその化合物</td>
+              <td id="valueQ"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ｼｱﾝ化合物</td>
+              <td id="valueR"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　有機燐化合物</td>
+              <td id="valueS"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　鉛及びその化合物</td>
+            <td id="valueT"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　六価ｸﾛﾑ化合物</td>
+              <td id="valueU"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　砒素及びその化合物</td>
+              <td id="valueV"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　水銀及びｱﾙｷﾙ水銀</br>　その他の水銀化合物</td>
+            <td id="valueW"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ﾎﾟﾘ塩化ﾋﾞﾌｪﾆﾙ</td>
+              <td id="valueX"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ﾄﾘｸﾛﾛｴﾁﾚﾝ</td>
+              <td id="valueY"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　ﾃﾄﾗｸﾛﾛｴﾁﾚﾝ</td>
+            <td id="valueZ"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ｼﾞｸﾛﾛﾒﾀﾝ</td>
+              <td id="valueAA"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　四塩化炭素</td>
+              <td id="valueAB"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　1,2-ｼﾞｸﾛﾛｴﾀﾝ</td>
+              <td id="valueAC"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　1,1-ｼﾞｸﾛﾛｴﾁﾚﾝ</td>
+            <td id="valueAD"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ｼｽ-1,2-ｼﾞｸﾛﾛｴﾁﾚﾝ</td>
+              <td id="valueAE"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　1,1,1-ﾄﾘｸﾛﾛｴﾀﾝ</td>
+              <td id="valueAF"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　1,1,2-ﾄﾘｸﾛﾛｴﾀﾝ</td>
+            <td id="valueAG"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　1,3-ｼﾞｸﾛﾛﾌﾟﾛﾍﾟﾝ</td>
+              <td id="valueAH"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ﾁｳﾗﾑ</td>
+              <td id="valueAI"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　ｼﾏｼﾞﾝ</td>
+            <td id="valueAJ"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ﾁｵﾍﾞﾝｶﾙﾌﾞ</td>
+              <td id="valueAK"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ﾍﾞﾝｾﾞﾝ</td>
+              <td id="valueAL"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　ｾﾚﾝ及びその化合物</td>
+            <td id="valueAM"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ほう素及びその化合物</td>
+              <td id="valueAN"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ふっ素及びその化合物</td>
+              <td id="valueAO"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　ｱﾝﾓﾆｱ、ｱﾝﾓﾆｳﾑ化合物</br>　亜硝酸化合物及び</br>　硝酸化合物</td>
+            <td id="valueAP"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　1,4-ｼﾞｵｷｻﾝ</td>
+              <td id="valueAQ"></td>
+              <td>mg/L</td>
+            </tr>
+          </table>
+        </div>
+
+      </div><!-- /Contents -->
+    </div><!-- /.container -->
 
 
           </div> 
         </div><!-- /.modal-content --> 
       </div><!-- /.modal-dialog --> 
     </div><!-- /.modal --> 
+
 
     <footer class="footer">
       <div class="text-muted">
@@ -534,10 +352,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
     <!-- Chart -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" crossorigin="anonymous"></script>
+
+    <!-- Chart -->
+    <script src="js/chart_utils.js"></script>
+    <script src="js/water_quality_chart.js"></script>
+    <script src="css/detail.js"></script>
     <script src="js/chart_utils.js"></script>
 
     <!-- GIS, Google Map -->

@@ -9,6 +9,7 @@ var TEL = 6;
 var RIVER = 7;
 var IMPACT = 8;
 var AMOUNT = 9;
+var KMLIDX = 1;
 
 // Const of Path for image files
 var icon_0a = 'images/Ldrop0.png';
@@ -24,6 +25,8 @@ var icon_3a = 'images/Ldrop54.png';
 var icon_3b = 'images/Mdrop54.png';
 var icon_3c = 'images/Sdrop54.png';
 var icon_q = 'images/question.png';
+var icon_dot_red = 'images/Dot_red.png';
+var icon_dot_blue = 'images/Dot_blue.png';
 
 var activeInfoWindow;
 
@@ -44,6 +47,7 @@ function initMap() {
     preserveViewport: true,
     map: map
   });
+  showRiverName(KMLIDX++, kmlLayer);
   
   var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa.kml');
   var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
@@ -51,13 +55,15 @@ function initMap() {
     preserveViewport: true,
     map: map
   });
-    
+  showRiverName(KMLIDX++, kmlLayer2);
+
   var kmlSrc3 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Onda+Nara.kml');
   var kmlLayer3 = new google.maps.KmlLayer(kmlSrc3, {
     suppressInfoWindows: true,
     preserveViewport: true,
     map: map
   });
+  showRiverName(KMLIDX++, kmlLayer3);
 
   var kmlSrc4 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Toriyama+Sunada.kml');
   var kmlLayer4 = new google.maps.KmlLayer(kmlSrc4, {
@@ -65,6 +71,15 @@ function initMap() {
     preserveViewport: true,
     map: map
   });
+  showRiverName(KMLIDX++, kmlLayer4);
+
+  var kmlSrc5 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Kanagawa_Branch.kml');
+  var kmlLayer5 = new google.maps.KmlLayer(kmlSrc5, {
+    suppressInfoWindows: true,
+    preserveViewport: true,
+    map: map
+  });
+  showRiverName(KMLIDX++, kmlLayer5);
 
   // read csv, then initialize map
   readCsv();
@@ -83,8 +98,8 @@ function initMap() {
     }
   });
 
-  // クリック地点に河川名表示（未完成）
-  showRiverName();
+  // 河川にドットをプロット
+  showMarkerDot(map);
 
   function showMarker(rowData){
 
@@ -213,9 +228,9 @@ function initMap() {
     xhr.send();
   }//function readCsv()
 
-  function showRiverName() {
+  function showRiverName(KmlLayerID, varKmlLayer) {
     // open info window when click marker
-    google.maps.event.addListener(kmlLayer2, 'click', function(event) {
+    google.maps.event.addListener(varKmlLayer, 'click', function(event) {
       var latlng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
 
       if(activeInfoWindow){
@@ -224,8 +239,7 @@ function initMap() {
       }
 
       var iwopts = {
-        //暫定で鶴見川2固定値。後で川の数ループに変更
-        content: riverName("2"),
+        content: riverName(KmlLayerID),
         position: latlng
       };
       var infoWindow = new google.maps.InfoWindow(iwopts);
@@ -248,22 +262,73 @@ function riverName(Layer){
 
   var riverName = "";
 
-  switch(Layer.substr(-1)){
+  switch(Layer.toString().substr(-1)){
+    case "1":
+      riverName = "多摩川"
+      break;
     case "2":
       riverName = "鶴見川"
       break;
     case "3":
-      riverName = "XX川"
+      riverName = "恩田川・奈良川"
       break;
     case "4":
-      riverName = "yy川"
+      riverName = "鳥山川・砂田川"
       break;
+    case "5":
+      riverName = "神奈川県内支流"
+      break;      
     default:
-      riverName = "ｚｚ川"
+      riverName = "Unknown River"
       break;
   }//switch
   return riverName;
 }//function riverName
+
+function showMarkerDot(map){
+    // 各河川地点にドットをプロット
+    var blue = 1;
+    var red = 2;
+    var plotDotPosition = [
+        ['①',35.5384458954,139.6559523974,blue],
+        ['②',35.5338976404,139.6290194931,red],
+        ['③',35.53311924  ,139.6186833599,red],
+        ['④',35.5149987256,139.6186494782,blue],
+        ['⑤',35.5162735672,139.6035429168,blue],
+      //⑥は非表示とする
+      //['⑥',35.5151338347,139.5931227935],
+        ['⑦',35.5139353947,139.5918986139,red],
+        ['⑧',35.5117791666,139.5639822225,red],
+        ['⑨',35.5145827779,139.5510591668,blue]
+    ];
+    
+    for (var i = 0; i < plotDotPosition.length; i++) {
+        var positionDetail = plotDotPosition[i];
+        var markerPos = { lat: parseFloat(positionDetail[1]), lng: parseFloat(positionDetail[2]) };
+        var icon;
+        if(blue == positionDetail[3]){
+            icon = icon_dot_blue;
+        } else {
+            icon = icon_dot_red;
+        }
+        plotDot(markerPos, icon, map);
+    }
+}
+
+function plotDot(markerPos, icon, map){
+    // make marker
+    var marker = new google.maps.Marker({
+        position: markerPos,
+        //icon: icon,
+        icon: new google.maps.MarkerImage(
+            icon,
+            new google.maps.Size(15, 15),
+            new google.maps.Point(0, 0),
+            new google.maps.Point(8, 8)
+            ),
+        map: map
+    });
+}
 
 function addTimeStampToUrl(url){
   return url + "?" + new Date().getTime();
@@ -356,17 +421,17 @@ function makeChart(rowData) {
             suggestedMax: 3,
             stepSize: 1,
             //水マークに変換すると文字化けするので、一旦数値表示とする
-            //                        // 水マークに変換
-            //                        callback: function(value, index, values) {
-            //                            var waterMark = "\u1F64F";
+            //// 水マークに変換
+            //callback: function(value, index, values) {
+            //    var waterMark = "\u1F64F";
             //
-            //                            for (var i = 1; i < value; ++i) {
-            //                                waterMark = waterMark + "\u1F64F"; 
-            //                            }
-            //                            return waterMark;
-            //                        },
-            //                        // 黄色に設定
-            //                        fontColor:  '#F3D51A'
+            //    for (var i = 1; i < value; ++i) {
+            //        waterMark = waterMark + "\u1F64F"; 
+            //    }
+            //    return waterMark;
+            //},
+            //// 黄色に設定
+            //fontColor:  '#F3D51A'
           }
         }]
       },
