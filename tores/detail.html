@@ -27,280 +27,270 @@
   </head>
   <body>
 
-  <nav class="header navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html"></a>
+    <nav class="header navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html"></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Home</a></li>
+            <li class="active"><a href="detail.html">Chart</a></li>
+            <li><a href="http://www.kurita.co.jp/">About us</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="index.html">Home</a></li>
-          <li class="active"><a href="detail.html">Chart</a></li>
-          <li><a href="http://www.kurita.co.jp/">About us</a></li>
-        </ul>
-      </div><!--/.nav-collapse -->
-    </div>
-  </nav>
+    </nav>
 
-  <div class="container">
-    <!-- Contents -->
-    <div class="starter-template">
+    <div class="container">
+      <!-- Contents -->
+      <div class="starter-template">
 
-      <!-- Chart -->
-      <h1>水質認証グラフ</h1>
-      <div style="width:100%;">
+        <!-- Chart -->
+        <h1>水質認証グラフ</h1>
+        <div style="width:100%;">
           <canvas id="canvas"></canvas>
-      </div><!-- /Chart -->
+        </div><!-- /Chart -->
 
-      <!-- Table -->
-      <h1>詳細 水質情報</h1>
-      <div class="table-responsive">
-      <button id="prev" class="btn btn-primary btn-lg">　前　月　</button>
-      <button id="next" class="btn btn-primary btn-lg" >　次　月　</button>
-      <table class="table table-striped">
-       <thead>
+        <!-- Table -->
+        <h1>詳細 水質情報</h1>
+        <div class="table-responsive">
+          <button id="prev" class="btn btn-primary btn-lg">　前　月　</button>
+          <button id="next" class="btn btn-primary btn-lg" >　次　月　</button>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th><font size="4"><span id="valueA"></span>月</font></th>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr>
+                <th width="50%">項目名</th>
+                <th width="30%" colspan="1">測定値</th>
+                <th width="20%">単位</th>
+              </tr>
+            </thead>
+
             <tr>
-              <th><font size="4"><span id="valueA"></span>月</font></th>
-              <th></th>
-              <th></th>
+              <td>生活環境項目</td>
+              <td></td>
+              <td></td>
             </tr>
             <tr>
-              <th width="50%">項目名</th>
-              <th width="30%" colspan="1">測定値</th>
-              <th width="20%">単位</th>
+              <td>　pH(最大値)</td>
+              <td id="valueB"></td>
+              <td>mg/L</td>
             </tr>
-       </thead>
-        
-        <tr>
-          <td>生活環境項目</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>　pH(最大値)</td>
-          <td id="valueB"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　pH(最小値)</td>
-          <td id="valueC"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　DO</td>
-          <td id="valueD"></td>
-          <td>mg/L</td>
-        </tr>
-          <td>　BOD</td>
-          <td id="valueE"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　BOD(75%値)</td>
-          <td id="valueF"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　SS</td>
-          <td id="valueG"></td>
-          <td>mg/L</td>
-        </tr>
-          <td>　大腸菌群数</td>
-          <td id="valueH"></td>
-          <td>MPN/100mL</td>
-        </tr>
-        <tr>
-          <td>　n-ﾍｷｻﾝ抽出物質</td>
-          <td id="valueI"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　全亜鉛</td>
-          <td id="valueJ"></td>
-          <td>mg/L</td>
-        </tr>
-          <td>　全窒素</td>
-          <td id="valueK"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　全燐</td>
-          <td id="valueL"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>有害27項目</td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>　ｶﾄﾞﾐｳﾑ(平均値)</td>
-          <td id="valueM"></td>
-          <td>mg/L</td>
-        </tr>
-          <td>　全ｼｱﾝ(最大値)</td>
-          <td id="valueN"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　鉛(平均値)</td>
-          <td id="valueO"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　六価ｸﾛﾑ(平均値)</td>
-          <td id="valueP"></td>
-          <td>mg/L</td>
-        </tr>
-          <td>　砒素(平均値)</td>
-          <td id="valueQ"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　総水銀(最大値)</td>
-          <td id="valueR"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　ｱﾙｷﾙ水銀(最大値)</td>
-          <td id="valueS"></td>
-          <td>mg/L</td>
-        </tr>
-          <td>　PCB(最大値)</td>
-          <td id="valueT"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　ｼﾞｸﾛﾛﾒﾀﾝ(平均値)</td>
-          <td id="valueU"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　四塩化炭素(平均値)</td>
-          <td id="valueV"></td>
-          <td>mg/L</td>
-        </tr>
-          <td>　1,2-ｼﾞｸﾛﾛｴﾀﾝ(平均値)</td>
-          <td id="valueW"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　1,1-ｼﾞｸﾛﾛｴﾁﾚﾝ(平均値)</td>
-          <td id="valueX"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　ｼｽ-1,2-ｼﾞｸﾛﾛｴﾁﾚﾝ(平均値)</td>
-          <td id="valueY"></td>
-          <td>mg/L</td>
-        </tr>
-          <td>　1,1,1-ﾄﾘｸﾛﾛｴﾀﾝ(平均値)</td>
-          <td id="valueZ"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　1,1,2-ﾄﾘｸﾛﾛｴﾀﾝ(平均値)</td>
-          <td id="valueAA"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　ﾄﾘｸﾛﾛｴﾁﾚﾝ(平均値)</td>
-          <td id="valueAB"></td>
-          <td>mg/L</td>
-        </tr>
-          <td>　ﾃﾄﾗｸﾛﾛｴﾁﾚﾝ(平均値)</td>
-          <td id="valueAC"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　1,3-ｼﾞｸﾛﾛﾌﾟﾛﾍﾟﾝ(平均値)</td>
-          <td id="valueAD"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　ﾁｳﾗﾑ(平均値)</td>
-          <td id="valueAE"></td>
-          <td>mg/L</td>
-        </tr>
-          <tr>
-          <td>　ｼﾏｼﾞﾝ(平均値)</td>
-          <td id="valueAF"></td>
-          <td>mg/L</td>
-        </tr>
-          <td>　ﾁｵﾍﾞﾝｶﾙﾌﾞ(平均値)</td>
-          <td id="valueAG"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　ﾍﾞﾝｾﾞﾝ(平均値)</td>
-          <td id="valueAH"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　ｾﾚﾝ(平均値)</td>
-          <td id="valueAI"></td>
-          <td>mg/L</td>
-        </tr>
-          <td>　硝酸性窒素及び</br>　亜硝酸性窒素(平均値)</td>
-          <td id="valueAJ"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　ふっ素(平均値)</td>
-          <td id="valueAK"></td>
-          <td>mg/L</td>
-        </tr>
-        <tr>
-          <td>　ほう素(平均値)</td>
-          <td id="valueAL"></td>
-          <td>mg/L</td>
-        </tr>
-          <tr>
-          <td>　1,4-ｼﾞｵｷｻﾝ(平均値)</td>
-          <td id="valueAM"></td>
-          <td>mg/L</td>
-        </tr>
-      </table>
-    </div>
+            <tr>
+              <td>　pH(最小値)</td>
+              <td id="valueC"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　DO</td>
+              <td id="valueD"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　BOD</td>
+            <td id="valueE"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　BOD(75%値)</td>
+              <td id="valueF"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　SS</td>
+              <td id="valueG"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　大腸菌群数</td>
+            <td id="valueH"></td>
+            <td>MPN/100mL</td>
+            </tr>
+            <tr>
+              <td>　n-ﾍｷｻﾝ抽出物質</td>
+              <td id="valueI"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　全亜鉛</td>
+              <td id="valueJ"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　全窒素</td>
+            <td id="valueK"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　全燐</td>
+              <td id="valueL"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>有害27項目</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>　ｶﾄﾞﾐｳﾑ(平均値)</td>
+              <td id="valueM"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　全ｼｱﾝ(最大値)</td>
+            <td id="valueN"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　鉛(平均値)</td>
+              <td id="valueO"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　六価ｸﾛﾑ(平均値)</td>
+              <td id="valueP"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　砒素(平均値)</td>
+            <td id="valueQ"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　総水銀(最大値)</td>
+              <td id="valueR"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ｱﾙｷﾙ水銀(最大値)</td>
+              <td id="valueS"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　PCB(最大値)</td>
+            <td id="valueT"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ｼﾞｸﾛﾛﾒﾀﾝ(平均値)</td>
+              <td id="valueU"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　四塩化炭素(平均値)</td>
+              <td id="valueV"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　1,2-ｼﾞｸﾛﾛｴﾀﾝ(平均値)</td>
+            <td id="valueW"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　1,1-ｼﾞｸﾛﾛｴﾁﾚﾝ(平均値)</td>
+              <td id="valueX"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ｼｽ-1,2-ｼﾞｸﾛﾛｴﾁﾚﾝ(平均値)</td>
+              <td id="valueY"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　1,1,1-ﾄﾘｸﾛﾛｴﾀﾝ(平均値)</td>
+            <td id="valueZ"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　1,1,2-ﾄﾘｸﾛﾛｴﾀﾝ(平均値)</td>
+              <td id="valueAA"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ﾄﾘｸﾛﾛｴﾁﾚﾝ(平均値)</td>
+              <td id="valueAB"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　ﾃﾄﾗｸﾛﾛｴﾁﾚﾝ(平均値)</td>
+            <td id="valueAC"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　1,3-ｼﾞｸﾛﾛﾌﾟﾛﾍﾟﾝ(平均値)</td>
+              <td id="valueAD"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ﾁｳﾗﾑ(平均値)</td>
+              <td id="valueAE"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ｼﾏｼﾞﾝ(平均値)</td>
+              <td id="valueAF"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　ﾁｵﾍﾞﾝｶﾙﾌﾞ(平均値)</td>
+            <td id="valueAG"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ﾍﾞﾝｾﾞﾝ(平均値)</td>
+              <td id="valueAH"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ｾﾚﾝ(平均値)</td>
+              <td id="valueAI"></td>
+              <td>mg/L</td>
+            </tr>
+            <td>　硝酸性窒素及び</br>　亜硝酸性窒素(平均値)</td>
+            <td id="valueAJ"></td>
+            <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ふっ素(平均値)</td>
+              <td id="valueAK"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　ほう素(平均値)</td>
+              <td id="valueAL"></td>
+              <td>mg/L</td>
+            </tr>
+            <tr>
+              <td>　1,4-ｼﾞｵｷｻﾝ(平均値)</td>
+              <td id="valueAM"></td>
+              <td>mg/L</td>
+            </tr>
+          </table>
+        </div>
 
+      </div><!-- /Contents -->
+    </div><!-- /.container -->
 
+    <footer class="footer">
+      <div class="text-muted">
+        <div>Copyright (R) 2017 Kurita Water Industries Ltd. All rights reserved</div>
+      </div>
+    </footer>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Chart -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" crossorigin="anonymous"></script>
+
+
+    <!-- Chart Example -->
+    <script src="js/chart_utils.js"></script>
+    <script src="js/water_quality_chart.js"></script>
 
     <script src="css/detail.js"></script>
-
-
-
-    </div><!-- /Contents -->
-  </div><!-- /.container -->
-
-  <footer class="footer">
-      <div class="text-muted">
-        <div>Copyright (R) 2017 Kurita Water Industries Ltd. All rights reserved</div>
-      </div>
-  </footer>
-
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <!-- Chart -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" crossorigin="anonymous"></script>
-
-
-  <!-- Chart Example -->
-  <script src="js/chart_utils.js"></script>
-  <script src="js/water_quality_chart.js"></script>
-
   </body>
 </html>
