@@ -9,6 +9,7 @@ var TEL = 6;
 var RIVER = 7;
 var IMPACT = 8;
 var AMOUNT = 9;
+var KMLIDX = 1;
 
 // Const of Path for image files
 var icon_0a = 'images/Ldrop0.png';
@@ -46,6 +47,7 @@ function initMap() {
     preserveViewport: true,
     map: map
   });
+  showRiverName(KMLIDX++, kmlLayer);
   
   var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa.kml');
   var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
@@ -53,6 +55,7 @@ function initMap() {
     preserveViewport: true,
     map: map
   });
+  showRiverName(KMLIDX++, kmlLayer2);
 
   var kmlSrc3 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Onda+Nara.kml');
   var kmlLayer3 = new google.maps.KmlLayer(kmlSrc3, {
@@ -60,6 +63,7 @@ function initMap() {
     preserveViewport: true,
     map: map
   });
+  showRiverName(KMLIDX++, kmlLayer3);
 
   var kmlSrc4 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Toriyama+Sunada.kml');
   var kmlLayer4 = new google.maps.KmlLayer(kmlSrc4, {
@@ -67,13 +71,15 @@ function initMap() {
     preserveViewport: true,
     map: map
   });
-  
+  showRiverName(KMLIDX++, kmlLayer4);
+
   var kmlSrc5 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Kanagawa_Branch.kml');
   var kmlLayer5 = new google.maps.KmlLayer(kmlSrc5, {
     suppressInfoWindows: true,
     preserveViewport: true,
     map: map
   });
+  showRiverName(KMLIDX++, kmlLayer5);
 
   // read csv, then initialize map
   readCsv();
@@ -92,9 +98,6 @@ function initMap() {
     }
   });
 
-  // クリック地点に河川名表示（未完成）
-  //showRiverName();
-  
   // 河川にドットをプロット
   showMarkerDot(map);
 
@@ -202,7 +205,7 @@ function initMap() {
       activeInfoWindow = infoWindow;
     });
 
-  }
+  }//function showMarker(rowData)
 
   function readCsv() {
     var xhr = null; // 使える場合はMicrosoft.XMLHTTP, 使えない場合はXMLHttpRequest
@@ -223,32 +226,64 @@ function initMap() {
       }
     };
     xhr.send();
-  }
+  }//function readCsv()
 
-  function showRiverName() {
-    //var latlng = new google.maps.LatLng(35.514580, 139.613447);
-
-
+  function showRiverName(KmlLayerID, varKmlLayer) {
     // open info window when click marker
-    google.maps.event.addListener(kmlLayer2, 'click',function(latlng) {
+    google.maps.event.addListener(varKmlLayer, 'click', function(event) {
+      var latlng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+
       if(activeInfoWindow){
         activeInfoWindow.close();
         activeInfoWindow = null;
       }
 
       var iwopts = {
-        content: 'Hello',
-        positon: latlng
+        content: riverName(KmlLayerID),
+        position: latlng
       };
       var infoWindow = new google.maps.InfoWindow(iwopts);
 
-      // see https://developers.google.com/maps/documentation/javascript/infowindows?hl=ja
       infoWindow.open(map);
       activeInfoWindow = infoWindow;
-    });
 
-  }
-}
+      // Positioning
+      map.panTo(latlng);
+      
+    });//addListener
+    
+  }//function showRiverName()
+
+}//function initMap()
+
+
+
+function riverName(Layer){
+
+  var riverName = "";
+
+  switch(Layer.toString().substr(-1)){
+    case "1":
+      riverName = "多摩川"
+      break;
+    case "2":
+      riverName = "鶴見川"
+      break;
+    case "3":
+      riverName = "恩田川・奈良川"
+      break;
+    case "4":
+      riverName = "鳥山川・砂田川"
+      break;
+    case "5":
+      riverName = "神奈川県内支流"
+      break;      
+    default:
+      riverName = "Unknown River"
+      break;
+  }//switch
+  return riverName;
+}//function riverName
 
 function showMarkerDot(map){
     // 各河川地点にドットをプロット
@@ -321,6 +356,7 @@ function showDetailPopUp(id) {
   // see http://getbootstrap.com/javascript/#modals-usage 
   $('#detailModal').modal({});
 }
+
 
 function makeChart(rowData) {
   var config = {
