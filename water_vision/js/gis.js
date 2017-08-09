@@ -284,7 +284,13 @@ function plotDot(markerPos, icon, map){
     // make marker
     var marker = new google.maps.Marker({
         position: markerPos,
-        icon: icon,
+        //icon: icon,
+        icon: new google.maps.MarkerImage(
+            icon,
+            new google.maps.Size(26, 25),
+            new google.maps.Point(0, 0),
+            new google.maps.Point(13, 13)
+            ),
         map: map
     });
 }
