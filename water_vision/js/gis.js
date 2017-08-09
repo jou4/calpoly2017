@@ -24,6 +24,8 @@ var icon_3a = 'images/Ldrop54.png';
 var icon_3b = 'images/Mdrop54.png';
 var icon_3c = 'images/Sdrop54.png';
 var icon_q = 'images/question.png';
+var icon_dot_red = 'images/Dot_red.png';
+var icon_dot_blue = 'images/Dot_blue.png';
 
 var activeInfoWindow;
 
@@ -51,7 +53,7 @@ function initMap() {
     preserveViewport: true,
     map: map
   });
-    
+
   var kmlSrc3 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Onda+Nara.kml');
   var kmlLayer3 = new google.maps.KmlLayer(kmlSrc3, {
     suppressInfoWindows: true,
@@ -92,6 +94,9 @@ function initMap() {
 
   // クリック地点に河川名表示（未完成）
   //showRiverName();
+  
+  // 河川にドットをプロット
+  showMarkerDot(map);
 
   function showMarker(rowData){
 
@@ -245,6 +250,51 @@ function initMap() {
   }
 }
 
+function showMarkerDot(map){
+    // 各河川地点にドットをプロット
+    var blue = 1;
+    var red = 2;
+    var plotDotPosition = [
+        ['①',35.5384458954,139.6559523974,blue],
+        ['②',35.5338976404,139.6290194931,red],
+        ['③',35.53311924  ,139.6186833599,red],
+        ['④',35.5149987256,139.6186494782,blue],
+        ['⑤',35.5162735672,139.6035429168,blue],
+      //⑥は非表示とする
+      //['⑥',35.5151338347,139.5931227935],
+        ['⑦',35.5139353947,139.5918986139,red],
+        ['⑧',35.5117791666,139.5639822225,red],
+        ['⑨',35.5145827779,139.5510591668,blue]
+    ];
+    
+    for (var i = 0; i < plotDotPosition.length; i++) {
+        var positionDetail = plotDotPosition[i];
+        var markerPos = { lat: parseFloat(positionDetail[1]), lng: parseFloat(positionDetail[2]) };
+        var icon;
+        if(blue == positionDetail[3]){
+            icon = icon_dot_blue;
+        } else {
+            icon = icon_dot_red;
+        }
+        plotDot(markerPos, icon, map);
+    }
+}
+
+function plotDot(markerPos, icon, map){
+    // make marker
+    var marker = new google.maps.Marker({
+        position: markerPos,
+        //icon: icon,
+        icon: new google.maps.MarkerImage(
+            icon,
+            new google.maps.Size(26, 25),
+            new google.maps.Point(0, 0),
+            new google.maps.Point(13, 13)
+            ),
+        map: map
+    });
+}
+
 function addTimeStampToUrl(url){
   return url + "?" + new Date().getTime();
 }
@@ -335,17 +385,17 @@ function makeChart(rowData) {
             suggestedMax: 3,
             stepSize: 1,
             //水マークに変換すると文字化けするので、一旦数値表示とする
-            //                        // 水マークに変換
-            //                        callback: function(value, index, values) {
-            //                            var waterMark = "\u1F64F";
+            //// 水マークに変換
+            //callback: function(value, index, values) {
+            //    var waterMark = "\u1F64F";
             //
-            //                            for (var i = 1; i < value; ++i) {
-            //                                waterMark = waterMark + "\u1F64F"; 
-            //                            }
-            //                            return waterMark;
-            //                        },
-            //                        // 黄色に設定
-            //                        fontColor:  '#F3D51A'
+            //    for (var i = 1; i < value; ++i) {
+            //        waterMark = waterMark + "\u1F64F"; 
+            //    }
+            //    return waterMark;
+            //},
+            //// 黄色に設定
+            //fontColor:  '#F3D51A'
           }
         }]
       },
