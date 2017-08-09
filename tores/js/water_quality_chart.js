@@ -9,7 +9,7 @@ var config = {
               backgroundColor: window.chartColors.blue,
               borderColor: window.chartColors.blue,
               data: [
-                  1,2,2,4,5,3
+                  1,2,2,4,5,4
               ],
               // 塗り潰しはしない
               fill: false,
