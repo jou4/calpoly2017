@@ -44,14 +44,14 @@ function initMap() {
     preserveViewport: true,
     map: map
   });
-  /*
-    var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa.kml');
-    var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
-        suppressInfoWindows: true,
-        preserveViewport: true,
-        map: map
-    });
-    */
+  
+  var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa.kml');
+  var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
+    suppressInfoWindows: true,
+    preserveViewport: true,
+    map: map
+  });
+    
   var kmlSrc3 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Onda+Nara.kml');
   var kmlLayer3 = new google.maps.KmlLayer(kmlSrc3, {
     suppressInfoWindows: true,
@@ -61,20 +61,6 @@ function initMap() {
 
   var kmlSrc4 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Toriyama+Sunada.kml');
   var kmlLayer4 = new google.maps.KmlLayer(kmlSrc4, {
-    suppressInfoWindows: true,
-    preserveViewport: true,
-    map: map
-  });
-
-  var kmlSrc5 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color.kml');
-  var kmlLayer5 = new google.maps.KmlLayer(kmlSrc5, {
-    suppressInfoWindows: true,
-    preserveViewport: true,
-    map: map
-  });
-
-  var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa.kml');
-  var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
     suppressInfoWindows: true,
     preserveViewport: true,
     map: map
