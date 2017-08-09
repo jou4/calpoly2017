@@ -65,6 +65,13 @@ function initMap() {
     preserveViewport: true,
     map: map
   });
+  
+  var kmlSrc5 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Kanagawa_Branch.kml');
+  var kmlLayer5 = new google.maps.KmlLayer(kmlSrc5, {
+    suppressInfoWindows: true,
+    preserveViewport: true,
+    map: map
+  });
 
   // read csv, then initialize map
   readCsv();
