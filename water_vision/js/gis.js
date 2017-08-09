@@ -84,7 +84,7 @@ function initMap() {
   });
 
   // クリック地点に河川名表示（未完成）
-  //showRiverName();
+  showRiverName();
 
   function showMarker(rowData){
 
@@ -190,7 +190,7 @@ function initMap() {
       activeInfoWindow = infoWindow;
     });
 
-  }
+  }//function showMarker(rowData)
 
   function readCsv() {
     var xhr = null; // 使える場合はMicrosoft.XMLHTTP, 使えない場合はXMLHttpRequest
@@ -211,32 +211,59 @@ function initMap() {
       }
     };
     xhr.send();
-  }
+  }//function readCsv()
 
   function showRiverName() {
-    //var latlng = new google.maps.LatLng(35.514580, 139.613447);
-
-
     // open info window when click marker
-    google.maps.event.addListener(kmlLayer2, 'click',function(latlng) {
+    google.maps.event.addListener(kmlLayer2, 'click', function(event) {
+      var latlng = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
+
       if(activeInfoWindow){
         activeInfoWindow.close();
         activeInfoWindow = null;
       }
 
       var iwopts = {
-        content: 'Hello',
-        positon: latlng
+        //暫定で鶴見川2固定値。後で川の数ループに変更
+        content: riverName("2"),
+        position: latlng
       };
       var infoWindow = new google.maps.InfoWindow(iwopts);
 
-      // see https://developers.google.com/maps/documentation/javascript/infowindows?hl=ja
       infoWindow.open(map);
       activeInfoWindow = infoWindow;
-    });
 
-  }
-}
+      // Positioning
+      map.panTo(latlng);
+      
+    });//addListener
+    
+  }//function showRiverName()
+
+}//function initMap()
+
+
+
+function riverName(Layer){
+
+  var riverName = "";
+
+  switch(Layer.substr(-1)){
+    case "2":
+      riverName = "鶴見川"
+      break;
+    case "3":
+      riverName = "XX川"
+      break;
+    case "4":
+      riverName = "yy川"
+      break;
+    default:
+      riverName = "ｚｚ川"
+      break;
+  }//switch
+  return riverName;
+}//function riverName
 
 function addTimeStampToUrl(url){
   return url + "?" + new Date().getTime();
@@ -264,6 +291,7 @@ function showDetailPopUp(id) {
   // see http://getbootstrap.com/javascript/#modals-usage 
   $('#detailModal').modal({});
 }
+
 
 function makeChart(rowData) {
   var config = {
