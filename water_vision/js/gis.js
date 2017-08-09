@@ -38,42 +38,42 @@ function initMap() {
     // Google Map Instance
     var map = new google.maps.Map(document.getElementById("map"), opts);
 
-    var kmlSrc = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Tamagawa.kml');
+    var kmlSrc = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tamagawa.kml');
     var kmlLayer = new google.maps.KmlLayer(kmlSrc, {
         suppressInfoWindows: true,
         preserveViewport: true,
         map: map
     });
 /*
-    var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Tsurumigawa.kml');
+    var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa.kml');
     var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
         suppressInfoWindows: true,
         preserveViewport: true,
         map: map
     });
 */
-    var kmlSrc3 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Onda+Nara.kml');
+    var kmlSrc3 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Onda+Nara.kml');
     var kmlLayer3 = new google.maps.KmlLayer(kmlSrc3, {
         suppressInfoWindows: true,
         preserveViewport: true,
         map: map
     });
 
-    var kmlSrc4 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Toriyama+Sunada.kml');
+    var kmlSrc4 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Toriyama+Sunada.kml');
     var kmlLayer4 = new google.maps.KmlLayer(kmlSrc4, {
         suppressInfoWindows: true,
         preserveViewport: true,
         map: map
     });
 
-    var kmlSrc5 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Tsurumigawa_color.kml');
+    var kmlSrc5 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color.kml');
     var kmlLayer5 = new google.maps.KmlLayer(kmlSrc5, {
         suppressInfoWindows: true,
         preserveViewport: true,
         map: map
     });
 
-    var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/data/Tsurumigawa.kml');
+    var kmlSrc2 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa.kml');
     var kmlLayer2 = new google.maps.KmlLayer(kmlSrc2, {
         suppressInfoWindows: true,
         preserveViewport: true,
