@@ -287,9 +287,9 @@ function plotDot(markerPos, icon, map){
         //icon: icon,
         icon: new google.maps.MarkerImage(
             icon,
-            new google.maps.Size(26, 25),
+            new google.maps.Size(21, 21),
             new google.maps.Point(0, 0),
-            new google.maps.Point(13, 13)
+            new google.maps.Point(11, 11)
             ),
         map: map
     });
