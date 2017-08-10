@@ -289,6 +289,9 @@ function riverName(Layer){
     case "5":
       riverName = "支流"
       break;      
+    case "6":
+      riverName = "鶴見川"
+      break; 
     default:
       riverName = "Unknown River"
       break;
