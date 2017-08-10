@@ -10,6 +10,9 @@ var RIVER = 7;
 var IMPACT = 8;
 var AMOUNT = 9;
 var KMLIDX = 1;
+var INIT_ZOOM = 11;
+var INIT_LAT = 35.518331;
+var INIT_LNG = 139.603347;
 
 // Const of Path for image files
 var icon_0a = 'images/Ldrop0.png';
@@ -34,8 +37,8 @@ function initMap() {
 
   // Options for Google Map
   var opts = {
-    zoom: 13,
-    center: new google.maps.LatLng(35.538480, 139.739544)
+    zoom: INIT_ZOOM,
+    center: new google.maps.LatLng(INIT_LAT, INIT_LNG)
   };
 
   // Google Map Instance
@@ -85,10 +88,10 @@ function initMap() {
   readCsv();
 
   // 中心の移動
-  map.panTo(new google.maps.LatLng(35.514580, 139.613447));
+  map.panTo(new google.maps.LatLng(INIT_LAT, INIT_LNG));
 
   // ズーム
-  map.setZoom(13);
+  map.setZoom(INIT_ZOOM);
 
   // close info window when click map
   map.addListener('click', function() {
