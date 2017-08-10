@@ -10,7 +10,7 @@ var RIVER = 7;
 var IMPACT = 8;
 var AMOUNT = 9;
 var KMLIDX = 1;
-var INIT_ZOOM = 11;
+var INIT_ZOOM = 11.5;
 var INIT_LAT = 35.518331;
 var INIT_LNG = 139.603347;
 
