@@ -106,7 +106,7 @@ function initMap() {
     //if (0 < i) changingKmlLayer[i].setMap(null);
   }
   
-  changingKmlLayer[0].setMap(null)
+  changingKmlLayer[0].setMap(null);
 
 /*
   var kmlSrc6 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color.kml');
