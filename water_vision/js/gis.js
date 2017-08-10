@@ -31,6 +31,7 @@ var icon_q = 'images/question.png';
 var icon_dot_red = 'images/Dot_red.png';
 var icon_dot_blue = 'images/Dot_blue.png';
 
+// スライダーバーで変更する部分の河川ベクトルデータ
 var changingKmlURL = [
   "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color8.kml", // 8月
   "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color7.kml", // 7月
@@ -39,7 +40,41 @@ var changingKmlURL = [
   "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color4.kml", // 4月
   "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color3.kml"  // 3月
 ];
-var changingKmlLayer = [];
+var changingKmlLayer = []; // 河川ベクトルレイヤ
+
+// 河川水質データ箇所
+var riverPlotPosition = [    
+    ['①',35.5145827779,139.5510591668],
+    ['②',35.5117791666,139.5639822225],
+    ['③',35.5139353947,139.5918986139],
+  //④は非表示とする
+    ['④',35.5151338347,139.5931227935],
+    ['⑤',35.5162735672,139.6035429168],
+    ['⑥',35.5149987256,139.6186494782],
+    ['⑦',35.53311924  ,139.6186833599],  
+    ['⑧',35.5338976404,139.6290194931],              
+    ['⑨',35.5384458954,139.6559523974]
+]; 
+
+// 6か月分の河川水質データ（0:青, 1:赤, -1:非表示）
+var changingRiverPlotData = [
+  [0, 1, 1, -1, 0, 0, 1, 1, 0], // 8月
+  [0, 0, 1, -1, 1, 0, 1, 1, 0], // 7月
+  [0, 0, 0, -1, 0, 1, 1, 1, 1], // 6月
+  [1, 0, 0, -1, 0, 0, 1, 1, 0], // 5月
+  [1, 1, 0, -1, 0, 1, 1, 1, 0], // 4月
+  [0, 1, 1, -1, 1, 0, 0, 0, 0]  // 3月
+];
+
+// 河川水質データマーカ初期化
+var riverPlotMarker = [
+  new Array(9),
+  new Array(9),
+  new Array(9),
+  new Array(9),
+  new Array(9),
+  new Array(9)  
+  ];
 
 var activeInfoWindow;
 
@@ -94,7 +129,7 @@ function initMap() {
   });
   showRiverName(KMLIDX++, kmlLayer5);
   
-  for (var i = 0; i < 2; i++) {
+  for (var i = 0; i < 6; i++) {
     var changingKmlSrc = addTimeStampToUrl(changingKmlURL[i]);
     changingKmlLayer[i] = new google.maps.KmlLayer(changingKmlSrc, {
       suppressInfoWindows: true,
@@ -103,20 +138,9 @@ function initMap() {
     });
     showRiverName(KMLIDX, changingKmlLayer[i]);
     
-    //if (0 < i) changingKmlLayer[i].setMap(null);
+    if (0 < i) changingKmlLayer[i].setMap(null);
   }
-  
-  changingKmlLayer[0].setMap(null);
 
-/*
-  var kmlSrc6 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color.kml');
-  var kmlLayer6 = new google.maps.KmlLayer(kmlSrc6, {
-    suppressInfoWindows: true,
-    preserveViewport: true,
-    map: map
-  });
-  showRiverName(KMLIDX++, kmlLayer6);
-*/
   // read csv, then initialize map
   readCsv();
 
@@ -326,52 +350,34 @@ function riverName(Layer){
 
 function showMarkerDot(map){
     // 各河川地点にドットをプロット
-    var blue = 1;
-    var red = 2;
-    /*
-    var plotDotPosition = [
-        ['①',35.5384458954,139.6559523974,blue],
-        ['②',35.5338976404,139.6290194931,red],
-        ['③',35.53311924  ,139.6186833599,red],
-        ['④',35.5149987256,139.6186494782,blue],
-        ['⑤',35.5162735672,139.6035429168,blue],
-      //⑥は非表示とする
-      //['⑥',35.5151338347,139.5931227935],
-        ['⑦',35.5139353947,139.5918986139,red],
-        ['⑧',35.5117791666,139.5639822225,red],
-        ['⑨',35.5145827779,139.5510591668,blue]
-    ];
-    */
-    
-    var plotDotPosition = [    
-        ['①',35.5145827779,139.5510591668,blue],
-        ['②',35.5117791666,139.5639822225,red],
-        ['③',35.5139353947,139.5918986139,red],
-      //④は非表示とする
-      //['④',35.5151338347,139.5931227935],
-        ['⑤',35.5162735672,139.6035429168,blue],
-        ['⑥',35.5149987256,139.6186494782,blue],
-        ['⑦',35.53311924  ,139.6186833599,red],  
-        ['⑧',35.5338976404,139.6290194931,red],              
-        ['⑨',35.5384458954,139.6559523974,blue]
-    ];    
-    
-    for (var i = 0; i < plotDotPosition.length; i++) {
-        var positionDetail = plotDotPosition[i];
-        var markerPos = { lat: parseFloat(positionDetail[1]), lng: parseFloat(positionDetail[2]) };
-        var icon;
-        if(blue == positionDetail[3]){
-            icon = icon_dot_blue;
-        } else {
-            icon = icon_dot_red;
+    var blue = 0;
+    var red = 1;
+
+    for (var i = 0; i < 6; i++) {
+        
+        for (var j=0; j<9; j++) {
+        	var positionDetail = riverPlotPosition[j];
+        	var markerPos = { lat: parseFloat(positionDetail[1]), lng: parseFloat(positionDetail[2]) };
+        
+	        var icon;
+	        if(blue == changingRiverPlotData[i][j]){
+	            icon = icon_dot_blue;
+	        } else if (red == changingRiverPlotData[i][j]) {
+	            icon = icon_dot_red;
+	        }
+	        else
+	        {
+	            continue;
+	        }
+	        	        
+	        plotDot(markerPos, icon, map, i, j);
         }
-        plotDot(markerPos, icon, map);
     }
 }
 
-function plotDot(markerPos, icon, map){
+function plotDot(markerPos, icon, map, i, j){
     // make marker
-    var marker = new google.maps.Marker({
+    riverPlotMarker[i][j] = new google.maps.Marker({
         position: markerPos,
         //icon: icon,
         icon: new google.maps.MarkerImage(
@@ -382,6 +388,8 @@ function plotDot(markerPos, icon, map){
             ),
         map: map
     });
+    
+    if (0 < i) riverPlotMarker[i][j].setVisible(false);
 }
 
 function addTimeStampToUrl(url){
