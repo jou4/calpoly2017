@@ -31,6 +31,16 @@ var icon_q = 'images/question.png';
 var icon_dot_red = 'images/Dot_red.png';
 var icon_dot_blue = 'images/Dot_blue.png';
 
+var changingKmlURL = [
+  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color8.kml", // 8月
+  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color7.kml", // 7月
+  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color6.kml", // 6月
+  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color5.kml", // 5月
+  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color4.kml", // 4月
+  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color3.kml"  // 3月
+];
+var changingKmlLayer = [];
+
 var activeInfoWindow;
 
 function initMap() {
@@ -83,7 +93,22 @@ function initMap() {
     map: map
   });
   showRiverName(KMLIDX++, kmlLayer5);
+  
+  for (var i = 0; i < 2; i++) {
+    var changingKmlSrc = addTimeStampToUrl(changingKmlURL[i]);
+    changingKmlLayer[i] = new google.maps.KmlLayer(changingKmlSrc, {
+      suppressInfoWindows: true,
+      preserveViewport: true,
+      map: map
+    });
+    showRiverName(KMLIDX, changingKmlLayer[i]);
+    
+    //if (0 < i) changingKmlLayer[i].setMap(null);
+  }
+  
+  changingKmlLayer[0].setMap(null);
 
+/*
   var kmlSrc6 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color.kml');
   var kmlLayer6 = new google.maps.KmlLayer(kmlSrc6, {
     suppressInfoWindows: true,
@@ -91,7 +116,7 @@ function initMap() {
     map: map
   });
   showRiverName(KMLIDX++, kmlLayer6);
-
+*/
   // read csv, then initialize map
   readCsv();
 
@@ -303,6 +328,7 @@ function showMarkerDot(map){
     // 各河川地点にドットをプロット
     var blue = 1;
     var red = 2;
+    /*
     var plotDotPosition = [
         ['①',35.5384458954,139.6559523974,blue],
         ['②',35.5338976404,139.6290194931,red],
@@ -315,6 +341,20 @@ function showMarkerDot(map){
         ['⑧',35.5117791666,139.5639822225,red],
         ['⑨',35.5145827779,139.5510591668,blue]
     ];
+    */
+    
+    var plotDotPosition = [    
+        ['①',35.5145827779,139.5510591668,blue],
+        ['②',35.5117791666,139.5639822225,red],
+        ['③',35.5139353947,139.5918986139,red],
+      //④は非表示とする
+      //['④',35.5151338347,139.5931227935],
+        ['⑤',35.5162735672,139.6035429168,blue],
+        ['⑥',35.5149987256,139.6186494782,blue],
+        ['⑦',35.53311924  ,139.6186833599,red],  
+        ['⑧',35.5338976404,139.6290194931,red],              
+        ['⑨',35.5384458954,139.6559523974,blue]
+    ];    
     
     for (var i = 0; i < plotDotPosition.length; i++) {
         var positionDetail = plotDotPosition[i];
