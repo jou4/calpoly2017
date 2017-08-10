@@ -67,8 +67,12 @@
         <div class="starter-template">
 
           <!-- GIS -->
-          <h1 id="title">Water Quality Map</h1>
-          <div id="map" style="width:100%; height:400px"></div>
+          <h1 id="title">Water Quality Map<button type="button" style="position :absolute;right: 200px" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#legend">
+	          ?
+              </button></h1>
+              
+          <!--<a data-toggle="modal" data-target="#legend"><img src="images/face_very bad.png"  width="30%" class="photo2" alt="やばいよ" ></a> -->
+          <div class="row" id="map" style="width:100%; height:400px"></div> 
           <!-- /GIS -->
 
           <!-- Slider -->
@@ -357,6 +361,73 @@
           </div><!-- /.modal-content --> 
         </div><!-- /.modal-dialog --> 
       </div><!-- /.modal fade --> 
+
+
+     <div id="legend" class="modal fade" tabindex="-1" role="dialog" > 
+      <div class="modal-dialog modal-sm" role="document"> 
+        <div class="modal-content"> 
+          <div class="modal-header"> 
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+            <h4 class="modal-title">凡例</h4> 
+          </div> 
+          <div class="modal-body"> 
+
+
+            <!-- 凡例 -->
+        <div class="table-responsive">
+          <table >
+            <tr>
+              <td style="color:#0000ff;font-size:40px" width = "100px"height = "50px"><center>―</center></td>
+              <td><img src="images/face_good.png"  width="30%"class="photo2" alt="安心安全"></td>
+            </tr>
+            <tr>
+              <td style="color:#ffff00;font-size:40px" width = "100px"height = "50px"><center>―</center></td>
+              <td><img src="images/face_bad.png"  width="30%" class="photo2" alt="注意"></td>
+            </tr>
+              <td style="color:#ff0000;font-size:40px" width = "100px"height = "50px"><center>―</center></td>
+              <td><img src="images/face_very bad.png"  width="30%" class="photo2" alt="やばいよ"></td>
+            </tr>
+            <tr>
+              <td width = "100px"height = "50px" align="center"><img src="images/Dot_blue.png"  class="photo2" alt="安心安全" > </td>
+              <td><img src="images/face_good.png"  width="30%" class="photo2" alt="安心安全"></td>
+            </tr>
+            <tr>
+              <td width = "100px"height = "50px" align="center"><img src="images/Dot_red.png"  class="photo2" alt="やばいよ"></td>
+              <td><img src="images/face_very bad.png" width="30%" class="photo2" alt="やばいよ"></td>
+            </tr>
+              <td width = "100px"height = "50px" align="center"><img src="images/Mdrop54.png"  class="photo2" alt="安心安全"> </td>
+              <td style="color:#ffff00;font-size:25px" ><img src="images/face_good.png" width="30%" class="photo2" alt="安心安全">　★★★</td>
+            </tr>
+            <tr>
+              <td width = "100px"height = "50px" align="center"><img src="images/Mdrop32.png"  class="photo2" alt="なかなかやるやん"> </td>
+              <td style="color:#ffff00;font-size:25px"><img src="images/face_good.png" width="30%" class="photo2" alt="安心安全">　★★</td>
+            </tr>
+            <tr>
+              <td width = "100px"height = "50px" align="center"><img src="images/Mdrop1.png"  class="photo2" alt="まあまあだね"> </td>
+              <td style="color:#ffff00;font-size:25px"><img src="images/face_good.png" width="30%" class="photo2" alt="安心安全">　★</td>
+            </tr>
+              <td width = "100px"height = "50px" align="center"><img src="images/Mdrop0.png"  class="photo2" alt="死亡"> </td>
+              <td><img src="images/face_very bad.png" width="30%" class="photo2" alt="やばいよ"></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td width = "50px"height = "50px" align="center"><img src="images/Ldrop54.png"  class="photo2" alt="影響大"> </td>
+              <td width = "50px"height = "50px" align="center"><img src="images/Mdrop54.png"  class="photo2" alt="影響中"> </td>
+              <td width = "50px"height = "50px" align="center"><img src="images/Sdrop54.png"  class="photo2" alt="影響小"> </td>
+              <td>(水域への影響度)</td>
+            </tr>
+          </table>
+        </div>
+
+      </div><!-- /Contents -->
+    </div><!-- /.container -->
+
+
+          </div> 
+        </div><!-- /.modal-content --> 
+      </div><!-- /.modal-dialog --> 
+    </div><!-- /.modal --> 
 
       <footer class="footer">
         <div class="text-muted">
