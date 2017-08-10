@@ -81,6 +81,14 @@ function initMap() {
   });
   showRiverName(KMLIDX++, kmlLayer5);
 
+  var kmlSrc6 = addTimeStampToUrl('http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color.kml');
+  var kmlLayer6 = new google.maps.KmlLayer(kmlSrc6, {
+    suppressInfoWindows: true,
+    preserveViewport: true,
+    map: map
+  });
+  showRiverName(KMLIDX++, kmlLayer6);
+
   // read csv, then initialize map
   readCsv();
 
