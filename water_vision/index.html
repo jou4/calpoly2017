@@ -18,10 +18,16 @@
 
     <link rel="stylesheet" href="css/base.css">
 
+    <!-- Splash: Style Sheet -->
+    <link rel="stylesheet" href="css/splash.css">
+
     <!-- Icons for iPhone & Android to Your Website -->
     <link href="http://jou4.dip.jp/calpoly/water_vision/images/apple-icon-120x120.png" rel="apple-touch-icon" />
     <link href="http://jou4.dip.jp/calpoly/water_vision/images/android-icon-144x144.png" rel="icon" size="144x144" />
 
+    <!-- Slider -->   
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -31,325 +37,448 @@
   </head>
   <body>
 
-    <nav class="header navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
+    <div id="contents">
+      <nav class="header navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <!--
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              </button>
+            -->
+            <a class="navbar-brand" href="index.html?nosplash"></a>
+          </div>
           <!--
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          -->
-          <a class="navbar-brand" href="index.html"></a>
-        </div>
-        <!--
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
+            <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html?nosplash">Home</a></li>
             <li><a href="http://www.kurita.co.jp/">About us</a></li>
-          </ul>
+            </ul>
+            </div>
+          -->
         </div>
-        -->
-      </div>
-    </nav>
+      </nav>
 
-    <div class="container">
-      <!-- Contents -->
-      <div class="starter-template">
+      <div class="container">
+        <!-- Contents -->
+        <div class="starter-template">
 
-        <!-- GIS -->
-        <h1 id="title">Water Quality Map</h1>
-        <div id="map" style="width:100%; height:400px"></div>
-        <!-- /GIS -->
+          <!-- GIS -->
+          <table width="100%">
+          <tr>
+          <td width="99%">
+          <h1 id="title">Water Quality Map</h1>
+          </td>
+          <td  width="1%">
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#legend">
+	          ?
+              </button>
+          </td>
+          </tr>
+          </table>
+          <!--<a data-toggle="modal" data-target="#legend"><img src="images/face_very bad.png"  width="30%" class="photo2" alt="やばいよ" ></a> -->
+          <div class="row" id="map" style="width:100%; height:400px"></div> 
+          <!-- /GIS -->
+
+          <!-- Slider -->
+          <p>
+          <label for="slider-caption">表示月:</label>
+          <span id="slider-caption" style="color:#Black; font-weight:bold;"></span>
+          </p>
+          <div id="slider1"></div>
+        </div><!-- /Contents -->
+      </div><!-- /.container -->
+
+      <!-- modal see http://getbootstrap.com/javascript/#modals-usage --> 
+      <div id="detailModal" class="modal fade" tabindex="-1" role="dialog"> 
+        <div class="modal-dialog" role="document"> 
+          <div class="modal-content"> 
+            <div class="modal-header"> 
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+              <h4 class="modal-title">詳細情報</h4> 
+            </div> 
+            <div class="modal-body"> 
+
+              <!-- 工場データ -->
+              <h1>工場詳細データ</h1>
+              <div class="plant-detail" id="plant-detail">
+                <p><font>工場名: <span id="plant_name"></span></font></p>
+                <p><font>業種: <span id="plant_industry"></span></font></p>
+                <p><font>ＴＥＬ: <span id="plant_tel"></span></font></p>
+                <p><font>排水放流先: <span id="plant_river"></span></font></p>
+                <p><font>影響度: <span id="plant_impact"></span></font></p>
+                <p><font>排水量: <span id="plant_amount"></span></font></p>
+              </div><!-- /工場データ -->
+
+              <!-- Chart -->
+              <h1>排水水質認証グラフ</h1>
+              <div style="width:100%;">
+                <canvas id="canvas"></canvas>
+              </div><!-- /Chart -->
+
+              <!-- Table -->
+              <h1>詳細排水水質</h1>
+              <div class="table-responsive">
+                <button id="prev" class="btn btn-primary btn-lg">　前　月　</button>
+                <button id="next" class="btn btn-primary btn-lg" >　次　月　</button>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th><font size="4"><span id="valueA"></span>月</font></th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <th width="50%">項目名</th>
+                      <th width="30%" colspan="1">測定値</th>
+                      <th width="20%">単位</th>
+                    </tr>
+                  </thead>
+                  <tr>
+                    <td>一般項目</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>　水素ｲｵﾝ濃度（pH）</td>
+                    <td id="valueB"></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>　生物化学的酸素要求量</td>
+                    <td id="valueC"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　化学的酸素要求量</td>
+                    <td id="valueD"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　浮遊物質量</td>
+                    <td id="valueE"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　n-ﾍｷｻﾝ抽出物質<br>　(鉱油類含有量)</td>
+                    <td id="valueF"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　n-ﾍｷｻﾝ抽出物質<br>　(動植物油脂類含有量)</td>
+                    <td id="valueG"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ﾌｪﾉｰﾙ類含有量</td>
+                    <td id="valueH"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　銅含有量</td>
+                    <td id="valueI"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　亜鉛含有量</td>
+                    <td id="valueJ"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　溶解性鉄含有量</td>
+                    <td id="valueK"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　溶解性ﾏﾝｶﾞﾝ含有量</td>
+                    <td id="valueL"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ｸﾛﾑ含有量</td>
+                    <td id="valueM"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　大腸菌群数</td>
+                    <td id="valueN"></td>
+                    <td>個/cm3</td>
+                  </tr>
+                  <tr>
+                    <td>　窒素含有量</td>
+                    <td id="valueO"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　りん含有量</td>
+                    <td id="valueP"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>有害物質に係る基準</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>　ｶﾄﾞﾐｳﾑ及びその化合物</td>
+                    <td id="valueQ"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ｼｱﾝ化合物</td>
+                    <td id="valueR"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　有機燐化合物</td>
+                    <td id="valueS"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　鉛及びその化合物</td>
+                    <td id="valueT"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　六価ｸﾛﾑ化合物</td>
+                    <td id="valueU"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　砒素及びその化合物</td>
+                    <td id="valueV"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　水銀及びｱﾙｷﾙ水銀<br>　その他の水銀化合物</td>
+                    <td id="valueW"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ｱﾙｷﾙ水銀化合物</td>
+                    <td id="valueX"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ﾎﾟﾘ塩化ﾋﾞﾌｪﾆﾙ</td>
+                    <td id="valueY"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ﾄﾘｸﾛﾛｴﾁﾚﾝ</td>
+                    <td id="valueZ"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ﾃﾄﾗｸﾛﾛｴﾁﾚﾝ</td>
+                    <td id="valueAA"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ｼﾞｸﾛﾛﾒﾀﾝ</td>
+                    <td id="valueAB"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　四塩化炭素</td>
+                    <td id="valueAC"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　1,2-ｼﾞｸﾛﾛｴﾀﾝ</td>
+                    <td id="valueAD"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　1,1-ｼﾞｸﾛﾛｴﾁﾚﾝ</td>
+                    <td id="valueAE"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ｼｽ-1,2-ｼﾞｸﾛﾛｴﾁﾚﾝ</td>
+                    <td id="valueAF"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　1,1,1-ﾄﾘｸﾛﾛｴﾀﾝ</td>
+                    <td id="valueAG"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　1,1,2-ﾄﾘｸﾛﾛｴﾀﾝ</td>
+                    <td id="valueAH"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　1,3-ｼﾞｸﾛﾛﾌﾟﾛﾍﾟﾝ</td>
+                    <td id="valueAI"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ﾁｳﾗﾑ</td>
+                    <td id="valueAJ"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ｼﾏｼﾞﾝ</td>
+                    <td id="valueAK"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ﾁｵﾍﾞﾝｶﾙﾌﾞ</td>
+                    <td id="valueAL"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ﾍﾞﾝｾﾞﾝ</td>
+                    <td id="valueAM"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ｾﾚﾝ及びその化合物</td>
+                    <td id="valueAN"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ほう素及びその化合物</td>
+                    <td id="valueAO"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ふっ素及びその化合物</td>
+                    <td id="valueAP"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　ｱﾝﾓﾆｱ、ｱﾝﾓﾆｳﾑ化合物<br>　亜硝酸化合物及び<br>　硝酸化合物</td>
+                    <td id="valueAQ"></td>
+                    <td>mg/L</td>
+                  </tr>
+                  <tr>
+                    <td>　1,4-ｼﾞｵｷｻﾝ</td>
+                    <td id="valueAR"></td>
+                    <td>mg/L</td>
+                  </tr>
+                </table>
+              </div>
+
+            </div><!-- /.modal-body -->
+          </div><!-- /.modal-content --> 
+        </div><!-- /.modal-dialog --> 
+      </div><!-- /.modal fade --> 
+
+
+     <div id="legend" class="modal fade" tabindex="-1" role="dialog" > 
+      <div class="modal-dialog modal-sm" role="document"> 
+        <div class="modal-content"> 
+          <div class="modal-header"> 
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+            <h4 class="modal-title">凡例</h4> 
+          </div> 
+          <div class="modal-body"> 
+
+
+            <!-- 凡例 -->
+        <div class="table-responsive">
+          <table >
+            <tr>
+              <td style="color:#0000ff;font-size:40px" width = "100px"height = "50px"><center>―</center></td>
+              <td><img src="images/face_good.png"  width="30%"class="photo2" alt="安心安全"></td>
+            </tr>
+            <tr>
+              <td style="color:#ffff00;font-size:40px" width = "100px"height = "50px"><center>―</center></td>
+              <td><img src="images/face_bad.png"  width="30%" class="photo2" alt="注意"></td>
+            </tr>
+              <td style="color:#ff0000;font-size:40px" width = "100px"height = "50px"><center>―</center></td>
+              <td><img src="images/face_very bad.png"  width="30%" class="photo2" alt="やばいよ"></td>
+            </tr>
+            <tr>
+              <td width = "100px"height = "50px" align="center"><img src="images/Dot_blue.png"  class="photo2" alt="安心安全" > </td>
+              <td><img src="images/face_good.png"  width="30%" class="photo2" alt="安心安全"></td>
+            </tr>
+            <tr>
+              <td width = "100px"height = "50px" align="center"><img src="images/Dot_red.png"  class="photo2" alt="やばいよ"></td>
+              <td><img src="images/face_very bad.png" width="30%" class="photo2" alt="やばいよ"></td>
+            </tr>
+              <td width = "100px"height = "50px" align="center"><img src="images/Mdrop54.png"  class="photo2" alt="安心安全"> </td>
+              <td style="color:#ffff00;font-size:25px" ><img src="images/face_good.png" width="30%" class="photo2" alt="安心安全">　★★★</td>
+            </tr>
+            <tr>
+              <td width = "100px"height = "50px" align="center"><img src="images/Mdrop32.png"  class="photo2" alt="なかなかやるやん"> </td>
+              <td style="color:#ffff00;font-size:25px"><img src="images/face_good.png" width="30%" class="photo2" alt="安心安全">　★★</td>
+            </tr>
+            <tr>
+              <td width = "100px"height = "50px" align="center"><img src="images/Mdrop1.png"  class="photo2" alt="まあまあだね"> </td>
+              <td style="color:#ffff00;font-size:25px"><img src="images/face_good.png" width="30%" class="photo2" alt="安心安全">　★</td>
+            </tr>
+              <td width = "100px"height = "50px" align="center"><img src="images/Mdrop0.png"  class="photo2" alt="死亡"> </td>
+              <td><img src="images/face_very bad.png" width="30%" class="photo2" alt="やばいよ"></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td width = "50px"height = "50px" align="center"><img src="images/Ldrop54.png"  class="photo2" alt="影響大"> </td>
+              <td width = "50px"height = "50px" align="center"><img src="images/Mdrop54.png"  class="photo2" alt="影響中"> </td>
+              <td width = "50px"height = "50px" align="center"><img src="images/Sdrop54.png"  class="photo2" alt="影響小"> </td>
+              <td>(水域への影響度)</td>
+            </tr>
+          </table>
+        </div>
 
       </div><!-- /Contents -->
     </div><!-- /.container -->
 
-    <!-- modal see http://getbootstrap.com/javascript/#modals-usage --> 
-    <div id="detailModal" class="modal fade" tabindex="-1" role="dialog"> 
-      <div class="modal-dialog" role="document"> 
-        <div class="modal-content"> 
-          <div class="modal-header"> 
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
-            <h4 class="modal-title">詳細情報</h4> 
+
           </div> 
-          <div class="modal-body"> 
-
-            <!-- 工場データ -->
-            <h1>工場詳細データ</h1>
-            <div class="plant-detail" id="plant-detail">
-              <p><font>工場名: <span id="plant_name"></span></font></p>
-              <p><font>業種: <span id="plant_industry"></span></font></p>
-              <p><font>ＴＥＬ: <span id="plant_tel"></span></font></p>
-              <p><font>排水放流先: <span id="plant_river"></span></font></p>
-              <p><font>影響度: <span id="plant_impact"></span></font></p>
-              <p><font>排水量: <span id="plant_amount"></span></font></p>
-            </div><!-- /工場データ -->
-
-            <!-- Chart -->
-            <h1>排水水質認証グラフ</h1>
-            <div style="width:100%;">
-              <canvas id="canvas"></canvas>
-            </div><!-- /Chart -->
-
-            <!-- Table -->
-            <h1>詳細排水水質</h1>
-            <div class="table-responsive">
-              <button id="prev" class="btn btn-primary btn-lg">　前　月　</button>
-              <button id="next" class="btn btn-primary btn-lg" >　次　月　</button>
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th><font size="4"><span id="valueA"></span>月</font></th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                  <tr>
-                    <th width="50%">項目名</th>
-                    <th width="30%" colspan="1">測定値</th>
-                    <th width="20%">単位</th>
-                  </tr>
-                </thead>
-                <tr>
-                  <td>一般項目</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>　水素ｲｵﾝ濃度（pH）</td>
-                  <td id="valueB"></td>
-                  <td>pH</td>
-                </tr>
-                <tr>
-                  <td>　生物化学的酸素要求量</td>
-                  <td id="valueC"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　化学的酸素要求量</td>
-                  <td id="valueD"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　浮遊物質量</td>
-                  <td id="valueE"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　n-ﾍｷｻﾝ抽出物質<br>　(鉱油類含有量)</td>
-                  <td id="valueF"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　n-ﾍｷｻﾝ抽出物質<br>　(動植物油脂類含有量)</td>
-                  <td id="valueG"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ﾌｪﾉｰﾙ類含有量</td>
-                  <td id="valueH"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　銅含有量</td>
-                  <td id="valueI"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　亜鉛含有量</td>
-                  <td id="valueJ"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　溶解性鉄含有量</td>
-                  <td id="valueK"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　溶解性ﾏﾝｶﾞﾝ含有量</td>
-                  <td id="valueL"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ｸﾛﾑ含有量</td>
-                  <td id="valueM"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　大腸菌群数</td>
-                  <td id="valueN"></td>
-                  <td>個/cm3</td>
-                </tr>
-                <tr>
-                  <td>　窒素含有量</td>
-                  <td id="valueO"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　りん含有量</td>
-                  <td id="valueP"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>有害物質に係る基準</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>　ｶﾄﾞﾐｳﾑ及びその化合物</td>
-                  <td id="valueQ"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ｼｱﾝ化合物</td>
-                  <td id="valueR"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　有機燐化合物</td>
-                  <td id="valueS"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　鉛及びその化合物</td>
-                  <td id="valueT"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　六価ｸﾛﾑ化合物</td>
-                  <td id="valueU"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　砒素及びその化合物</td>
-                  <td id="valueV"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　水銀及びｱﾙｷﾙ水銀<br>　その他の水銀化合物</td>
-                  <td id="valueW"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ﾎﾟﾘ塩化ﾋﾞﾌｪﾆﾙ</td>
-                  <td id="valueX"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ﾄﾘｸﾛﾛｴﾁﾚﾝ</td>
-                  <td id="valueY"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ﾃﾄﾗｸﾛﾛｴﾁﾚﾝ</td>
-                  <td id="valueZ"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ｼﾞｸﾛﾛﾒﾀﾝ</td>
-                  <td id="valueAA"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　四塩化炭素</td>
-                  <td id="valueAB"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　1,2-ｼﾞｸﾛﾛｴﾀﾝ</td>
-                  <td id="valueAC"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　1,1-ｼﾞｸﾛﾛｴﾁﾚﾝ</td>
-                  <td id="valueAD"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ｼｽ-1,2-ｼﾞｸﾛﾛｴﾁﾚﾝ</td>
-                  <td id="valueAE"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　1,1,1-ﾄﾘｸﾛﾛｴﾀﾝ</td>
-                  <td id="valueAF"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　1,1,2-ﾄﾘｸﾛﾛｴﾀﾝ</td>
-                  <td id="valueAG"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　1,3-ｼﾞｸﾛﾛﾌﾟﾛﾍﾟﾝ</td>
-                  <td id="valueAH"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ﾁｳﾗﾑ</td>
-                  <td id="valueAI"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ｼﾏｼﾞﾝ</td>
-                  <td id="valueAJ"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ﾁｵﾍﾞﾝｶﾙﾌﾞ</td>
-                  <td id="valueAK"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ﾍﾞﾝｾﾞﾝ</td>
-                  <td id="valueAL"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ｾﾚﾝ及びその化合物</td>
-                  <td id="valueAM"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ほう素及びその化合物</td>
-                  <td id="valueAN"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ふっ素及びその化合物</td>
-                  <td id="valueAO"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　ｱﾝﾓﾆｱ、ｱﾝﾓﾆｳﾑ化合物<br>　亜硝酸化合物及び<br>　硝酸化合物</td>
-                  <td id="valueAP"></td>
-                  <td>mg/L</td>
-                </tr>
-                <tr>
-                  <td>　1,4-ｼﾞｵｷｻﾝ</td>
-                  <td id="valueAQ"></td>
-                  <td>mg/L</td>
-                </tr>
-              </table>
-            </div>
-            
-          </div><!-- /.modal-body -->
         </div><!-- /.modal-content --> 
       </div><!-- /.modal-dialog --> 
-    </div><!-- /.modal fade --> 
+    </div><!-- /.modal --> 
 
-    <footer class="footer">
-      <div class="text-muted">
-        <div>Copyright (R) 2017 Kurita Water Industries Ltd. All rights reserved</div>
+      <footer class="footer">
+        <div class="text-muted">
+          <div>Copyright (R) 2017 Kurita Water Industries Ltd. All rights reserved</div>
+        </div>
+      </footer>
+
+    </div>
+
+    <!-- Splash: HTML -->
+    <div id="splash" class="splash">
+      <div class="logo_container">
+        <img id="splash_movie" class="splash_movie" src="css/kurita_image_movie.gif" />
+        <img id="splash_logo" class="splash_logo" src="css/kurita_logo.png" />
       </div>
-    </footer>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script>
+      $( function(){
+        $("#slider1").slider({
+          range: "max",
+          min: 3,
+          max: 8,
+          value: 8,
+          step: 1,
+          slide: function(event, ui){
+            $("#slider-caption").text(ui.value);
+          }
+        });
+        
+        $("#slider-caption").text($("#slider1").slider("value"));
+      });
+    </script>
+    
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Splash: JavaScript -->
+    <script src="js/splash.js"></script>
+
     <!-- Chart -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" crossorigin="anonymous"></script>

@@ -17,8 +17,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/base.css">
-    
+
     <link rel="stylesheet" href="css/index.css">
+
+    <!-- Splash: Style Sheet -->
+    <link rel="stylesheet" href="css/splash.css">
 
     <!-- Icons for iPhone & Android to Your Website -->
     <link href="http://jou4.dip.jp/calpoly/tores/images/apple-icon-120x120.png" rel="apple-touch-icon" />
@@ -33,38 +36,40 @@
   </head>
   <body>
 
-  <nav class="header navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html"></a>
-      </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="index.html">Home</a></li>
-          <li><a href="detail.html">Chart</a></li>
-          <li><a href="http://www.kurita.co.jp/">About us</a></li>
-        </ul>
-      </div><!--/.nav-collapse -->
-    </div>
-  </nav>
+    <div id="contents">
+      <nav class="header navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html?nosplash"></a>
+          </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="index.html?nosplash">Home</a></li>
+              <li><a href="detail.html">Chart</a></li>
+              <li><a href="http://www.kurita.co.jp/">About us</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
 
-  <div class="container">
-    <!-- Contents -->
-    <div class="starter-template">
+      <div class="container">
+        <!-- Contents -->
+        <div class="starter-template">
 
-      <!-- grid -->
-      <h1>生産情報</h1>
-      <div class="row">
-           <div class="col-xs-6 col-lg-6 ">
+          <!-- grid -->
+          <h1>生産情報</h1>
+          <div class="row">
+            <div class="col-xs-6 col-lg-6 ">
               <p><Center><font class="title_font">生産者</font></Center></p>
               <p><Center><img src="images/Producer.jpg" class="photo1" alt="生産者の顔写真が載っています"></Center></p>
               <p><Center><font class="txt1">Koichiro Isshiki, PhD.</font></Center></p>
+<<<<<<< HEAD
            </div>
            <div class="col-xs-6 col-lg-6">
                 <div class="row">
@@ -98,18 +103,66 @@
            </div>
       </div>
       <!-- /grid -->
+=======
+            </div>
+            <div class="col-xs-6 col-lg-3">
+              <br></br>
+              <div class="row">
+                <div class="col-xs-12 col-lg-12 ">
+                  <p><font class="title_font">生産地</font></p>
+                  <p><font class="txt1">Mission Viejo, CA</font></p>
+                  <p><font class="title_font">収穫日</font></p>
+                  <p><font class="txt1">2017年8月3日</font></p>
 
-    </div><!-- /Contents -->
-  </div><!-- /.container -->
-  <footer class="footer">
-      <div class="text-muted">
-        <div>Copyright (R) 2017 Kurita Water Industries Ltd. All rights reserved</div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 col-lg-2" vertical-align="bottom"><a href="detail.html"><img src="images/water.jpeg"  class="photo2" alt="水の画像が載っています"></a></div>
+                <div class="col-xs-9 col-lg-10">
+                  <div class="star-rating">
+                    <div class="star-rating-front" style="width: 80%">★★★★★</div>
+                    <div class="star-rating-back">★★★★★</div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-3 col-lg-2"><img src="images/soil.jpeg" class="photo2" alt="土の画像が載っています"></div>
+                <div class="col-xs-9 col-lg-10">
+                  <div class="star-rating">
+                    <div class="star-rating-front" style="width: 72%">★★★★★</div>
+                    <div class="star-rating-back">★★★★★</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /grid -->
+
+        </div><!-- /Contents -->
+      </div><!-- /.container -->
+
+      <footer class="footer">
+        <div class="text-muted">
+          <div>Copyright (R) 2017 Kurita Water Industries Ltd. All rights reserved</div>
+        </div>
+      </footer>
+    </div>
+>>>>>>> 347188496fee99d1332e1861ec7936858b7c9693
+
+    <!-- Splash: HTML -->
+    <div id="splash" class="splash">
+      <div class="logo_container">
+        <img id="splash_movie" class="splash_movie" src="css/kurita_image_movie.gif" />
+        <img id="splash_logo" class="splash_logo" src="css/kurita_logo.png" />
       </div>
-  </footer>
+    </div>
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Splash: JavaScript -->
+    <script src="js/splash.js"></script>
   </body>
 </html>
