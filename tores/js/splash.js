@@ -16,7 +16,7 @@ $(function(){
   // start to remove splash after 1 second
   setTimeout(function(){
     $logo.animate({
-      width: 640
+      width: 320
     }, 500, function(){});
     $splash.animate({
       opacity: 0
