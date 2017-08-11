@@ -398,12 +398,12 @@ function plotDot(markerPos, icon, map, i, j){
         activeInfoWindow = null;
       }
       
-      // 赤丸=0、青丸=3の情報をチャート側にセットする
+      // 赤丸=0、青丸=2の情報をチャート側にセットする
       var thisMonthLevel;
       if(icon == icon_dot_red){
           thisMonthLevel = 0;
       } else {
-          thisMonthLevel = 3;
+          thisMonthLevel = 2;
       }
       
       // make chart
@@ -437,7 +437,7 @@ function showDetailPopUp(id) {
   // make chart
   // bugfix: https://github.com/chartjs/Chart.js/issues/4622
   setTimeout(function(){
-    makeChart(rowData);
+    makeIndustryChart(rowData);
   }, 200);
   // show popup
   // see http://getbootstrap.com/javascript/#modals-usage 
@@ -445,7 +445,7 @@ function showDetailPopUp(id) {
 }
 
 
-function makeChart(rowData) {
+function makeIndustryChart(rowData) {
   var config = {
     type: 'line',
     data: {
@@ -590,14 +590,14 @@ function makeRiverChart(thisMonthLevel) {
             display: false,
           },
           ticks: {
-            //0～5の6段階を想定
+            //0～3の4段階を想定
             suggestedMin: 0,
-            suggestedMax: 5,
+            suggestedMax: 3,
             stepSize: 1,
             // "×"もしくは"★"に変換
             callback: function(value, index, values) {
                 if(value == 0){
-                    return "Ｘ";
+                    return "×";
                 }
             
                 var star = "★";
