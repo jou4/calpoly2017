@@ -528,7 +528,10 @@ function makeIndustryChart(rowData) {
       // 凡例の非表示
       legend: {
         display: false
-      }
+      },
+      // 各ポイントでイベントを拾わないための逃げ処理
+      events: [
+      ]
     }
   };
   var ctx = document.getElementById("canvas").getContext("2d");
@@ -618,7 +621,10 @@ function makeRiverChart(thisMonthLevel) {
       // 凡例の非表示
       legend: {
         display: false
-      }
+      },
+      // 各ポイントでイベントを拾わないための逃げ処理
+      events: [
+      ]
     }
   };
   var ctx = document.getElementById("canvas2").getContext("2d");
