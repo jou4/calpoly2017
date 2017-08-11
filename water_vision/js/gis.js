@@ -390,6 +390,31 @@ function plotDot(markerPos, icon, map, i, j){
     });
     
     if (0 < i) riverPlotMarker[i][j].setVisible(false);
+    
+    // open info window when click marker
+    riverPlotMarker[i][j].addListener('click', function() {
+      if(activeInfoWindow){
+        activeInfoWindow.close();
+        activeInfoWindow = null;
+      }
+      
+      // 赤丸=0、青丸=3の情報をチャート側にセットする
+      var thisMonthLevel;
+      if(icon == icon_dot_red){
+          thisMonthLevel = 0;
+      } else {
+          thisMonthLevel = 3;
+      }
+      
+      // make chart
+      // bugfix: https://github.com/chartjs/Chart.js/issues/4622
+      setTimeout(function(){
+        makeRiverChart(thisMonthLevel);
+      }, 200);
+      // show popup
+      // see http://getbootstrap.com/javascript/#modals-usage 
+      $('#riverDetailModal').modal({});
+    });
 }
 
 function addTimeStampToUrl(url){
@@ -507,3 +532,92 @@ function makeChart(rowData) {
   window.myLine = new Chart(ctx, config);
 }
 
+function makeRiverChart(thisMonthLevel) {
+  var config = {
+    type: 'line',
+    data: {
+      labels: ["３月", "４月", "５月", "６月", "７月", "８月"],
+      datasets: [
+        {
+          label: "水質",
+          backgroundColor: window.chartColors.blue,
+          borderColor: window.chartColors.blue,
+          data: [
+            1,0,2,3,2,thisMonthLevel
+          ],
+          // 塗り潰しはしない
+          fill: false,
+          // 曲線は用いない
+          lineTension: 0
+        }, {
+          label: "境界線",
+          backgroundColor: window.chartColors.red,
+          borderColor: window.chartColors.red,
+          data: [0.5,0.5,0.5,0.5,0.5,0.5],
+          fill: false,
+          pointRadius : 0,
+          pointHitRadius : 0
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+
+      // チャート名称を表示したい場合
+      //title: {
+      //    display: true,
+      //    text:'河川水質認証グラフ'
+      //},
+      tooltips: {
+        enabled: false 
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true
+      },
+      scales: {
+        xAxes: [{
+          display: true,
+          scaleLabel: {
+            // 横軸の単位は非表示とする
+            display: false,
+            labelString: "月"
+          }
+        }],
+        yAxes: [{
+          display: true,
+          scaleLabel: {
+            display: false,
+          },
+          ticks: {
+            //0～5の6段階を想定
+            suggestedMin: 0,
+            suggestedMax: 5,
+            stepSize: 1,
+            // "×"もしくは"★"に変換
+            callback: function(value, index, values) {
+                if(value == 0){
+                    return "Ｘ";
+                }
+            
+                var star = "★";
+            
+                for (var i = 1; i < value; ++i) {
+                    star = star + "★"; 
+                }
+                return star;
+            },
+            // 黄色に設定
+            fontColor:  '#F3D51A'
+          }
+        }]
+      },
+      // 凡例の非表示
+      legend: {
+        display: false
+      }
+    }
+  };
+  var ctx = document.getElementById("canvas2").getContext("2d");
+  window.myLine = new Chart(ctx, config);
+}
