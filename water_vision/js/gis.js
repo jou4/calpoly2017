@@ -398,12 +398,15 @@ function plotDot(markerPos, icon, map, i, j){
         activeInfoWindow = null;
       }
       
-      // 赤丸=0、青丸=2の情報をチャート側にセットする
+      // 赤丸=0、青丸=1～3の乱数の情報をチャート側にセットする
       var thisMonthLevel;
       if(icon == icon_dot_red){
           thisMonthLevel = 0;
       } else {
-          thisMonthLevel = 2;
+          var min = 1 ;
+          var max = 3 ;
+          var randFromOneToThree = Math.floor(Math.random() * (max + 1 - min)) + min;
+          thisMonthLevel = randFromOneToThree;
       }
       
       // make chart
