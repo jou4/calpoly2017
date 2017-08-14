@@ -445,13 +445,13 @@ function plotDot(markerPos, icon, map, i, j){
         activeInfoWindow = null;
       }
       
-      // 赤丸=0、青丸=1～3の乱数の情報をチャート側にセットする
+      // 赤丸=0、青丸=1～5の乱数の情報をチャート側にセットする
       var thisMonthLevel;
       if(icon == icon_dot_red){
           thisMonthLevel = 0;
       } else {
           var min = 1 ;
-          var max = 3 ;
+          var max = 5 ;
           var randFromOneToThree = Math.floor(Math.random() * (max + 1 - min)) + min;
           thisMonthLevel = randFromOneToThree;
       }
@@ -643,14 +643,14 @@ function makeRiverChart(thisMonthLevel) {
             display: false,
           },
           ticks: {
-            //0～3の4段階を想定
+            //0～5の4段階を想定
             suggestedMin: 0,
-            suggestedMax: 3,
+            suggestedMax: 5,
             stepSize: 1,
-            // "×"もしくは"★"に変換
+            // "Ｘ"もしくは"★"に変換
             callback: function(value, index, values) {
                 if(value == 0){
-                    return "×";
+                    return "Ｘ";
                 }
             
                 var star = "★";
