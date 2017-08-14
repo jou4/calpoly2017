@@ -314,6 +314,53 @@ function initMap() {
     
   }//function showRiverName()
 
+  function changekmllayer(event, ui) {
+  	switch(ui.value) {
+  		case "3":
+  			changingKmlLayer[i] = changingKmlURL[0]
+  			break;
+  		case "4":
+  			changingKmlLayer[i] = changingKmlURL[1]
+  			break;
+  		case "5":
+  			changingKmlLayer[i] = changingKmlURL[2]
+  			break;
+  		case "6":
+  			changingKmlLayer[i] = changingKmlURL[3]
+  			break;
+  		case "7":
+  			changingKmlLayer[i] = changingKmlURL[4]
+  			break;
+  		case "8":
+  			changingKmlLayer[i] = changingKmlURL[5]
+  			break;
+  		default:
+  		changingKmlLayer[i] = "Unknown KML file"
+  		break;
+  }//switch
+  return changingKmlLayer[i];
+}//function changingkmlLayer
+$( function(){
+  $("#slider1").slider({
+    range: "max",
+    min: 3,
+    max: 8,
+    value: 8,
+    step: 1,
+    slide: function(event, ui){
+      $("#slider-caption").text(ui.value);
+    },
+    change: function(event, ui) {
+    	console.log(ui.value);
+   		changekmllayer(event, ui);
+    }
+  });
+
+  $("#slider-caption").text($("#slider1").slider("value"));
+});
+
+
+    
 }//function initMap()
 
 
