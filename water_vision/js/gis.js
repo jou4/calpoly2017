@@ -58,23 +58,43 @@ var riverPlotPosition = [
 
 // 6か月分の河川水質データ（0:青, 1:赤, -1:非表示）
 var changingRiverPlotData = [
-  [0, 1, 1, -1, 0, 0, 1, 1, 0], // 8月
-  [0, 0, 1, -1, 1, 0, 1, 1, 0], // 7月
-  [0, 0, 0, -1, 0, 1, 1, 1, 1], // 6月
-  [1, 0, 0, -1, 0, 0, 1, 1, 0], // 5月
-  [1, 1, 0, -1, 0, 1, 1, 1, 0], // 4月
-  [0, 1, 1, -1, 1, 0, 0, 0, 0]  // 3月
+  [0, 1, 1, -1, 0, 0, 1, 1, 0], 
+  [0, 0, 1, -1, 1, 0, 1, 1, 0], 
+  [0, 0, 0, -1, 0, 1, 1, 1, 1], 
+  [1, 0, 0, -1, 0, 0, 1, 1, 0], 
+  [1, 1, 0, -1, 0, 1, 1, 1, 0], 
+  [0, 1, 1, -1, 1, 0, 0, 0, 0]  
 ];
 
 // 河川水質データマーカ初期化
 var riverPlotMarker = [
-  new Array(9),
-  new Array(9),
-  new Array(9),
-  new Array(9),
-  new Array(9),
-  new Array(9)  
+  new Array(9), // 8月
+  new Array(9), // 7月
+  new Array(9), // 6月
+  new Array(9), // 5月
+  new Array(9), // 4月
+  new Array(9)  // 3月
   ];
+
+// 工場排水データファイル
+var wastewaterCsvFile = [
+  "data/kojo_data8.csv", // 8月
+  "data/kojo_data7.csv", // 7月
+  "data/kojo_data6.csv", // 6月
+  "data/kojo_data5.csv", // 5月
+  "data/kojo_data4.csv", // 4月
+  "data/kojo_data3.csv"  // 3月
+];
+
+// 工場排水データマーカ初期化
+var wastewaterMarker = [
+  new Array(26), // 8月
+  new Array(26), // 7月
+  new Array(26), // 6月
+  new Array(26), // 5月
+  new Array(26), // 4月
+  new Array(26)  // 3月
+];
 
 var activeInfoWindow;
 
@@ -142,7 +162,11 @@ function initMap() {
   }
 
   // read csv, then initialize map
-  readCsv();
+  for (var i=0; i<6; i++)
+  {
+    var path = wastewaterCsvFile[i]; // 読み込む外部ファイル  
+    readCsv(path, i);
+  }
 
   // 中心の移動
   map.panTo(new google.maps.LatLng(INIT_LAT, INIT_LNG));
@@ -161,6 +185,7 @@ function initMap() {
   // 河川にドットをプロット
   showMarkerDot(map);
 
+/*
   function showMarker(rowData){
 
     var markerPos = { lat: parseFloat( rowData[LAT] ), lng: parseFloat( rowData[LNG] ) };
@@ -287,6 +312,140 @@ function initMap() {
     };
     xhr.send();
   }//function readCsv()
+  */
+
+  function readCsv(path, i) {
+  
+    //var path = wastewaterCsvFile[i]; // 読み込む外部ファイル
+    var xhr = null; // 使える場合はMicrosoft.XMLHTTP, 使えない場合はXMLHttpRequest
+    try { xhr = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) { xhr = new XMLHttpRequest(); }
+    
+    xhr.open("GET", path, true);
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState == 4) {
+        var data = xhr.responseText; // 外部ファイルの内容
+        var tmp = data.split("\n");
+        for (var j=0; j < tmp.length; j++){
+          if(tmp[j]){
+            var rowData = tmp[j].split(',');
+            csvData[rowData[ID]] = rowData;
+            showMarker(rowData, i, j);
+          }
+        }
+      }
+    };
+    xhr.send();
+  
+  } //function readCsv()
+  
+  function showMarker(rowData, i, j){
+
+    var markerPos = { lat: parseFloat( rowData[LAT] ), lng: parseFloat( rowData[LNG] ) };
+
+    var icon;
+    switch(rowData[IMPACT]){
+      case "A":
+        switch(parseInt(rowData[WATER_QUALITY])){
+          case 0:
+            icon = icon_0a;
+            break;
+          case 1:
+            icon = icon_1a;
+            break;
+          case 2:
+            icon = icon_2a;
+            break;
+          case 3:
+            icon = icon_3a;
+            break;
+          default:
+            console.log("unexpected WATER_QUALITY: " + rowData[WATER_QUALITY]);
+            icon = icon_0a;
+            break;
+        }
+        break;
+      case "B":
+        switch(parseInt(rowData[WATER_QUALITY])){
+          case 0:
+            icon = icon_0b;
+            break;
+          case 1:
+            icon = icon_1b;
+            break;
+          case 2:
+            icon = icon_2b;
+            break;
+          case 3:
+            icon = icon_3b;
+            break;
+          default:
+            console.log("unexpected WATER_QUALITY: " + rowData[WATER_QUALITY]);
+            icon = icon_0b;
+            break;
+        }
+        break;
+      case "C":
+        switch(parseInt(rowData[WATER_QUALITY])){
+          case 0:
+            icon = icon_0c;
+            break;
+          case 1:
+            icon = icon_1c;
+            break;
+          case 2:
+            icon = icon_2c;
+            break;
+          case 3:
+            icon = icon_3c;
+            break;
+          default:
+            console.log("unexpected WATER_QUALITY: " + rowData[WATER_QUALITY]);
+            icon = icon_0c;
+            break;
+        }
+        break;
+      case "Q":
+        icon = icon_q;
+        break;
+      default:
+        console.log("unexpected IMPACT: " + rowData[IMPACT]);
+        break;
+    }
+
+    // make marker
+    wastewaterMarker[i][j] = new google.maps.Marker({
+      position: markerPos,
+      icon: icon,
+      map: map
+    });    
+
+    // 初回は8月(i==0)のみ表示
+    if (i != 0) wastewaterMarker[i][j].setVisible(false);
+
+    // make contents html in info window
+    var $canvas = $("<div/>");
+    var $moreInfoLink = $("<a/>").attr("href", "javascript: showDetailPopUp('" + rowData[ID] + "');").text("more..");
+    $canvas.append( $("<div/>").text(rowData[PLANT]) );
+    if(rowData[IMPACT] != 'Q'){
+      $canvas.append( $("<div/>").append($moreInfoLink) );
+    }
+    // make info window
+    var infoWindow = new google.maps.InfoWindow({
+      content: $canvas.html()
+    });
+
+    // open info window when click marker
+    wastewaterMarker[i][j].addListener('click', function() {
+      if(activeInfoWindow){
+        activeInfoWindow.close();
+        activeInfoWindow = null;
+      }
+      // see https://developers.google.com/maps/documentation/javascript/infowindows?hl=ja
+      infoWindow.open(map, wastewaterMarker[i][j]);
+      activeInfoWindow = infoWindow;
+    });
+
+  }//function showMarker(rowData)
 
   function showRiverName(KmlLayerID, varKmlLayer) {
     // open info window when click marker
