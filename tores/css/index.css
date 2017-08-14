@@ -31,6 +31,14 @@ width:auto;
 height : 4vh;
 vertical-align:bottom;
 }
+.photo3{
+background-position: center center;
+background-repeat: no-repeat;
+background-size: 20%;
+position: relative;
+width:auto;
+height : 20vh;
+}
 .title_font{
 color: #404040;
 font-weight: bold;

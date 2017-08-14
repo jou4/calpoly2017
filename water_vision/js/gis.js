@@ -51,8 +51,8 @@ var riverPlotPosition = [
     ['④',35.5151338347,139.5931227935],
     ['⑤',35.5162735672,139.6035429168],
     ['⑥',35.5149987256,139.6186494782],
-    ['⑦',35.53311924  ,139.6186833599],  
-    ['⑧',35.5338976404,139.6290194931],              
+    ['⑦',35.53311924  ,139.6186833599],
+    ['⑧',35.5338976404,139.6290194931],
     ['⑨',35.5384458954,139.6559523974]
 ]; 
 
@@ -74,7 +74,7 @@ var riverPlotMarker = [
   new Array(9), // 5月
   new Array(9), // 4月
   new Array(9)  // 3月
-  ];
+];
 
 // 工場排水データファイル
 var wastewaterCsvFile = [
@@ -549,6 +549,34 @@ function plotDot(markerPos, icon, map, i, j){
     });
     
     if (0 < i) riverPlotMarker[i][j].setVisible(false);
+    
+    // open info window when click marker
+    riverPlotMarker[i][j].addListener('click', function() {
+      if(activeInfoWindow){
+        activeInfoWindow.close();
+        activeInfoWindow = null;
+      }
+      
+      // 赤丸=0、青丸=1～5の乱数の情報をチャート側にセットする
+      var thisMonthLevel;
+      if(icon == icon_dot_red){
+          thisMonthLevel = 0;
+      } else {
+          var min = 1 ;
+          var max = 5 ;
+          var randFromOneToThree = Math.floor(Math.random() * (max + 1 - min)) + min;
+          thisMonthLevel = randFromOneToThree;
+      }
+      
+      // make chart
+      // bugfix: https://github.com/chartjs/Chart.js/issues/4622
+      setTimeout(function(){
+        makeRiverChart(thisMonthLevel);
+      }, 200);
+      // show popup
+      // see http://getbootstrap.com/javascript/#modals-usage 
+      $('#riverDetailModal').modal({});
+    });
 }
 
 function addTimeStampToUrl(url){
@@ -571,7 +599,7 @@ function showDetailPopUp(id) {
   // make chart
   // bugfix: https://github.com/chartjs/Chart.js/issues/4622
   setTimeout(function(){
-    makeChart(rowData);
+    makeIndustryChart(rowData);
   }, 200);
   // show popup
   // see http://getbootstrap.com/javascript/#modals-usage 
@@ -579,7 +607,7 @@ function showDetailPopUp(id) {
 }
 
 
-function makeChart(rowData) {
+function makeIndustryChart(rowData) {
   var config = {
     type: 'line',
     data: {
@@ -659,10 +687,105 @@ function makeChart(rowData) {
       // 凡例の非表示
       legend: {
         display: false
-      }
+      },
+      // 各ポイントでイベントを拾わないための逃げ処理
+      events: [
+      ]
     }
   };
   var ctx = document.getElementById("canvas").getContext("2d");
   window.myLine = new Chart(ctx, config);
 }
 
+function makeRiverChart(thisMonthLevel) {
+  var config = {
+    type: 'line',
+    data: {
+      labels: ["３月", "４月", "５月", "６月", "７月", "８月"],
+      datasets: [
+        {
+          label: "水質",
+          backgroundColor: window.chartColors.blue,
+          borderColor: window.chartColors.blue,
+          data: [
+            1,0,2,3,2,thisMonthLevel
+          ],
+          // 塗り潰しはしない
+          fill: false,
+          // 曲線は用いない
+          lineTension: 0
+        }, {
+          label: "境界線",
+          backgroundColor: window.chartColors.red,
+          borderColor: window.chartColors.red,
+          data: [0.5,0.5,0.5,0.5,0.5,0.5],
+          fill: false,
+          pointRadius : 0,
+          pointHitRadius : 0
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+
+      // チャート名称を表示したい場合
+      //title: {
+      //    display: true,
+      //    text:'河川水質認証グラフ'
+      //},
+      tooltips: {
+        enabled: false 
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true
+      },
+      scales: {
+        xAxes: [{
+          display: true,
+          scaleLabel: {
+            // 横軸の単位は非表示とする
+            display: false,
+            labelString: "月"
+          }
+        }],
+        yAxes: [{
+          display: true,
+          scaleLabel: {
+            display: false,
+          },
+          ticks: {
+            //0～5の4段階を想定
+            suggestedMin: 0,
+            suggestedMax: 5,
+            stepSize: 1,
+            // "Ｘ"もしくは"★"に変換
+            callback: function(value, index, values) {
+                if(value == 0){
+                    return "Ｘ";
+                }
+            
+                var star = "★";
+            
+                for (var i = 1; i < value; ++i) {
+                    star = star + "★"; 
+                }
+                return star;
+            },
+            // 黄色に設定
+            fontColor:  '#F3D51A'
+          }
+        }]
+      },
+      // 凡例の非表示
+      legend: {
+        display: false
+      },
+      // 各ポイントでイベントを拾わないための逃げ処理
+      events: [
+      ]
+    }
+  };
+  var ctx = document.getElementById("canvas2").getContext("2d");
+  window.myLine = new Chart(ctx, config);
+}

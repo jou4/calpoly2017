@@ -22,12 +22,12 @@ $(function(){
   setTimeout(function(){
     $logo.animate({
       width: 320
-    }, 500, function(){});
+    }, 1000, function(){});
     $splash.animate({
       opacity: 0
-    }, 500, function(){
+    }, 1000, function(){
       $splash.css("display", "none");
     });
-  }, 1000);
+  }, 2000);
 
 });
