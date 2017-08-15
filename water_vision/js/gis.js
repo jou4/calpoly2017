@@ -47,7 +47,6 @@ var riverPlotPosition = [
     ['①',35.5145827779,139.5510591668],
     ['②',35.5117791666,139.5639822225],
     ['③',35.5139353947,139.5918986139],
-  //④は非表示とする
     ['④',35.5151338347,139.5931227935],
     ['⑤',35.5162735672,139.6035429168],
     ['⑥',35.5149987256,139.6186494782],
@@ -604,7 +603,7 @@ function plotDot(markerPos, icon, map, i, j){
         activeInfoWindow = null;
       }
       
-      // 赤丸=0、青丸=1～5の乱数の情報をチャート側にセットする
+      // 赤丸=0、青丸=1～5(乱数)の情報をチャート側にセットする
       var thisMonthLevel;
       if(icon == icon_dot_red){
           thisMonthLevel = 0;
@@ -820,7 +819,7 @@ function makeRiverChart(thisMonthLevel) {
                 return star;
             },
             // 黄色に設定
-            fontColor:  '#F3D51A'
+            fontColor: '#F3D51A'
           }
         }]
       },
