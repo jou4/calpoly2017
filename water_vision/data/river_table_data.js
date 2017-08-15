@@ -11,112 +11,112 @@ $(function(){
 
   var index = 5;
 
-  var $valueA = $("#valueA");
-  var $valueB = $("#valueB");
-  var $valueC = $("#valueC");
-  var $valueD = $("#valueD");
-  var $valueE = $("#valueE");
-  var $valueF = $("#valueF");
-  var $valueG = $("#valueG");
-  var $valueH = $("#valueH");
-  var $valueI = $("#valueI");
-  var $valueJ = $("#valueJ");
-  var $valueK = $("#valueK");
-  var $valueL = $("#valueL");
-  var $valueM = $("#valueM");
-  var $valueN = $("#valueN");
-  var $valueO = $("#valueO");
-  var $valueP = $("#valueP");
-  var $valueQ = $("#valueQ");
-  var $valueR = $("#valueR");
-  var $valueS = $("#valueS");
-  var $valueT = $("#valueT");
-  var $valueU = $("#valueU");
-  var $valueV = $("#valueV");
-  var $valueW = $("#valueW");
-  var $valueX = $("#valueX");
-  var $valueY = $("#valueY");
-  var $valueZ = $("#valueZ");
-  var $valueAA = $("#valueAA");
-  var $valueAB = $("#valueAB");
-  var $valueAC = $("#valueAC");
-  var $valueAD = $("#valueAD");
-  var $valueAE = $("#valueAE");
-  var $valueAF = $("#valueAF");
-  var $valueAG = $("#valueAG");
-  var $valueAH = $("#valueAH");
-  var $valueAI = $("#valueAI");
-  var $valueAJ = $("#valueAJ");
-  var $valueAK = $("#valueAK");
-  var $valueAL = $("#valueAL");
-  var $valueAM = $("#valueAM");
+  var $vA = $("#vA");
+  var $vB = $("#vB");
+  var $vC = $("#vC");
+  var $vD = $("#vD");
+  var $vE = $("#vE");
+  var $vF = $("#vF");
+  var $vG = $("#vG");
+  var $vH = $("#vH");
+  var $vI = $("#vI");
+  var $vJ = $("#vJ");
+  var $vK = $("#vK");
+  var $vL = $("#vL");
+  var $vM = $("#vM");
+  var $vN = $("#vN");
+  var $vO = $("#vO");
+  var $vP = $("#vP");
+  var $vQ = $("#vQ");
+  var $vR = $("#vR");
+  var $vS = $("#vS");
+  var $vT = $("#vT");
+  var $vU = $("#vU");
+  var $vV = $("#vV");
+  var $vW = $("#vW");
+  var $vX = $("#vX");
+  var $vY = $("#vY");
+  var $vZ = $("#vZ");
+  var $vAA = $("#vAA");
+  var $vAB = $("#vAB");
+  var $vAC = $("#vAC");
+  var $vAD = $("#vAD");
+  var $vAE = $("#vAE");
+  var $vAF = $("#vAF");
+  var $vAG = $("#vAG");
+  var $vAH = $("#vAH");
+  var $vAI = $("#vAI");
+  var $vAJ = $("#vAJ");
+  var $vAK = $("#vAK");
+  var $vAL = $("#vAL");
+  var $vAM = $("#vAM");
 
 
-  var $prev = $("#prev");
-  var $next = $("#next");
+  var $prev2 = $("#prev2");
+  var $next2 = $("#next2");
 
   function showData(row){
-    $valueA.text(row["a"]);
-    $valueB.text(row["b"]);
-    $valueC.text(row["c"]);
-    $valueD.text(row["d"]);
-    $valueE.text(row["e"]);
-    $valueF.text(row["f"]);
-    $valueG.text(row["g"]);
-    $valueH.text(row["h"]);
-    $valueI.text(row["i"]);
-    $valueJ.text(row["j"]);
-    $valueK.text(row["k"]);
-    $valueL.text(row["l"]);
-    $valueM.text(row["m"]);
-    $valueN.text(row["n"]);
-    $valueO.text(row["o"]);
-    $valueP.text(row["p"]);
-    $valueQ.text(row["q"]);
-    $valueR.text(row["r"]);
-    $valueS.text(row["s"]);
-    $valueT.text(row["t"]);
-    $valueU.text(row["u"]);
-    $valueV.text(row["v"]);
-    $valueW.text(row["w"]);
-    $valueX.text(row["x"]);
-    $valueY.text(row["y"]);
-    $valueZ.text(row["z"]);
-    $valueAA.text(row["aa"]);
-    $valueAB.text(row["ab"]);
-    $valueAC.text(row["ac"]);
-    $valueAD.text(row["ad"]);
-    $valueAE.text(row["ae"]);
-    $valueAF.text(row["af"]);
-    $valueAG.text(row["ag"]);
-    $valueAH.text(row["ah"]);
-    $valueAI.text(row["ai"]);
-    $valueAJ.text(row["aj"]);
-    $valueAK.text(row["ak"]);
-    $valueAL.text(row["al"]);
-    $valueAM.text(row["am"]);
+    $vA.text(row["a"]);
+    $vB.text(row["b"]);
+    $vC.text(row["c"]);
+    $vD.text(row["d"]);
+    $vE.text(row["e"]);
+    $vF.text(row["f"]);
+    $vG.text(row["g"]);
+    $vH.text(row["h"]);
+    $vI.text(row["i"]);
+    $vJ.text(row["j"]);
+    $vK.text(row["k"]);
+    $vL.text(row["l"]);
+    $vM.text(row["m"]);
+    $vN.text(row["n"]);
+    $vO.text(row["o"]);
+    $vP.text(row["p"]);
+    $vQ.text(row["q"]);
+    $vR.text(row["r"]);
+    $vS.text(row["s"]);
+    $vT.text(row["t"]);
+    $vU.text(row["u"]);
+    $vV.text(row["v"]);
+    $vW.text(row["w"]);
+    $vX.text(row["x"]);
+    $vY.text(row["y"]);
+    $vZ.text(row["z"]);
+    $vAA.text(row["aa"]);
+    $vAB.text(row["ab"]);
+    $vAC.text(row["ac"]);
+    $vAD.text(row["ad"]);
+    $vAE.text(row["ae"]);
+    $vAF.text(row["af"]);
+    $vAG.text(row["ag"]);
+    $vAH.text(row["ah"]);
+    $vAI.text(row["ai"]);
+    $vAJ.text(row["aj"]);
+    $vAK.text(row["ak"]);
+    $vAL.text(row["al"]);
+    $vAM.text(row["am"]);
   }
 
   function toggleLink(index){
     if(index == 0){
-      $prev.prop("disabled", true);
+      $prev2.prop("disabled", true);
     }else{
-      $prev.prop("disabled", false);
+      $prev2.prop("disabled", false);
     }
     if(index == data.length-1){
-      $next.prop("disabled", true);
+      $next2.prop("disabled", true);
     }else{
-      $next.prop("disabled", false);
+      $next2.prop("disabled", false);
     }
   }
 
-  $prev.on("click", function(e){
+  $prev2.on("click", function(e){
     index--;
     showData(data[index]);
     toggleLink(index);
   });
 
-  $next.on("click", function(e){
+  $next2.on("click", function(e){
     index++;
     showData(data[index]);
     toggleLink(index);
