@@ -20,25 +20,25 @@
   height: 100%;
 }
 
-#splash .splash_logo {
+#splash .logo {
   position: absolute;
+  width: 320px;
+  height: 261px;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   margin: auto;
-  width: 160px;
 }
 
 #splash .splash_movie {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  display: block;
   margin: auto;
 }
 
-#tr .border_bottom {
-  border-bottom-style: solid;
+#splash .splash_logo {
+  display: block;
+  width: 160px;
+  margin: auto;
+  margin-top: 10px;
 }
