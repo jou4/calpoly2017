@@ -654,6 +654,7 @@ function makeIndustryChart(monthWaterQuality) {
 }
 
 function makeRiverChart(positionIndex) {
+
   var config = {
     type: 'line',
     data: {
