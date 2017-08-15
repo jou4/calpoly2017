@@ -33,12 +33,12 @@ var icon_dot_blue = 'images/Dot_blue.png';
 
 // スライダーバーで変更する部分の河川ベクトルデータ
 var changingKmlURL = [
-  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color8.kml", // 8月
-  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color7.kml", // 7月
-  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color6.kml", // 6月
-  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color5.kml", // 5月
-  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color4.kml", // 4月
-  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color3.kml"  // 3月
+  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color8.kml", // 8月 0
+  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color7.kml", // 7月 1
+  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color6.kml", // 6月 2
+  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color5.kml", // 5月 3
+  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color4.kml", // 4月 4
+  "http://jou4.dip.jp/calpoly/water_vision/data/Tsurumigawa_color3.kml"  // 3月 5
 ];
 var changingKmlLayer = []; // 河川ベクトルレイヤ
 
@@ -48,7 +48,7 @@ var riverPlotPosition = [
     ['②',35.5117791666,139.5639822225],
     ['③',35.5139353947,139.5918986139],
   //④は非表示とする
-    ['④',35.5151338347,139.5931227935],
+  //['④',35.5151338347,139.5931227935],
     ['⑤',35.5162735672,139.6035429168],
     ['⑥',35.5149987256,139.6186494782],
     ['⑦',35.53311924  ,139.6186833599],
@@ -58,22 +58,22 @@ var riverPlotPosition = [
 
 // 6か月分の河川水質データ（0:青, 1:赤, -1:非表示）
 var changingRiverPlotData = [
-  [0, 1, 1, -1, 0, 0, 1, 1, 0], 
-  [0, 0, 1, -1, 1, 0, 1, 1, 0], 
-  [0, 0, 0, -1, 0, 1, 1, 1, 1], 
-  [1, 0, 0, -1, 0, 0, 1, 1, 0], 
-  [1, 1, 0, -1, 0, 1, 1, 1, 0], 
-  [0, 1, 1, -1, 1, 0, 0, 0, 0]  
+  [0, 1, 1, 0, 0, 1, 1, 0], 
+  [0, 0, 1, 1, 0, 1, 1, 0], 
+  [0, 0, 0, 0, 1, 1, 1, 1], 
+  [1, 0, 0, 0, 0, 1, 1, 0], 
+  [1, 1, 0, 0, 1, 1, 1, 0], 
+  [0, 1, 1, 1, 0, 0, 0, 0]  
 ];
 
 // 河川水質データマーカ初期化
 var riverPlotMarker = [
-  new Array(9), // 8月
-  new Array(9), // 7月
-  new Array(9), // 6月
-  new Array(9), // 5月
-  new Array(9), // 4月
-  new Array(9)  // 3月
+  new Array(8), // 8月
+  new Array(8), // 7月
+  new Array(8), // 6月
+  new Array(8), // 5月
+  new Array(8), // 4月
+  new Array(8)  // 3月
 ];
 
 // 工場排水データファイル
@@ -474,31 +474,57 @@ function initMap() {
   }//function showRiverName()
 
   function changekmllayer(event, ui) {
-  	switch(ui.value) {
-  		case "3":
-  			changingKmlLayer[i] = changingKmlURL[0]
-  			break;
-  		case "4":
-  			changingKmlLayer[i] = changingKmlURL[1]
-  			break;
-  		case "5":
-  			changingKmlLayer[i] = changingKmlURL[2]
-  			break;
-  		case "6":
-  			changingKmlLayer[i] = changingKmlURL[3]
-  			break;
-  		case "7":
-  			changingKmlLayer[i] = changingKmlURL[4]
-  			break;
-  		case "8":
-  			changingKmlLayer[i] = changingKmlURL[5]
-  			break;
-  		default:
-  		changingKmlLayer[i] = "Unknown KML file"
-  		break;
-  }//switch
-  return changingKmlLayer[i];
-}//function changingkmlLayer
+  
+    // 3: dispIndex=5
+    // 4: dispIndex=4
+    // 5: dispIndex=3
+    // 6: dispIndex=2
+    // 7: dispIndex=1
+    // 8: dispIndex=0
+    
+    var dispIndex = 8 - ui.value;
+    if (dispIndex < 0 || 5 < dispIndex) return;
+    
+    for (var i=0; i<6; i++)
+    {
+      if (i == dispIndex)
+      {
+        // KMLレイヤ表示
+        changingKmlLayer[i].setMap(map);
+        
+        // 水滴（工場）表示
+        for (var j=0; j<26; j++)
+        {
+          wastewaterMarker[i][j].setVisible(true);
+        }
+        
+        // 河川水質表示
+        for (var j=0; j<8; j++)
+        {
+          riverPlotMarker[i][j].setVisible(true);
+        }        
+      }
+      else
+      {
+        // KMLレイヤ非表示
+        changingKmlLayer[i].setMap(null);
+        
+        // 水滴（工場）非表示
+        for (var j=0; j<26; j++)
+        {
+          wastewaterMarker[i][j].setVisible(false);
+        }
+        
+        // 河川水質非表示
+        for (var j=0; j<8; j++)
+        {
+          riverPlotMarker[i][j].setVisible(false);
+        }
+      }
+    }
+  }//function changingkmlLayer
+
+
 $( function(){
   $("#slider1").slider({
     range: "max",
@@ -561,7 +587,7 @@ function showMarkerDot(map){
 
     for (var i = 0; i < 6; i++) {
         
-        for (var j=0; j<9; j++) {
+        for (var j=0; j<8; j++) {
         	var positionDetail = riverPlotPosition[j];
         	var markerPos = { lat: parseFloat(positionDetail[1]), lng: parseFloat(positionDetail[2]) };
         
