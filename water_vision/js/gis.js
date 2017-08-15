@@ -56,14 +56,14 @@ var riverPlotPosition = [
     ['⑨',35.5384458954,139.6559523974]
 ]; 
 
-// 6か月分の河川水質データ（0:青, 1:赤, -1:非表示）
+// 6か月分の河川水質データ（0:赤, 1～5:青）
 var changingRiverPlotData = [
-  [0, 1, 1, 0, 0, 1, 1, 0], 
-  [0, 0, 1, 1, 0, 1, 1, 0], 
-  [0, 0, 0, 0, 1, 1, 1, 1], 
-  [1, 0, 0, 0, 0, 1, 1, 0], 
-  [1, 1, 0, 0, 1, 1, 1, 0], 
-  [0, 1, 1, 1, 0, 0, 0, 0]  
+  [2, 0, 0, 3, 5, 0, 0, 2], 
+  [4, 3, 0, 0, 2, 0, 0, 3], 
+  [5, 5, 4, 2, 0, 0, 0, 0], 
+  [0, 3, 4, 5, 4, 0, 0, 1], 
+  [0, 0, 3, 3, 0, 0, 0, 4], 
+  [3, 0, 0, 0, 1, 2, 4, 5]  
 ];
 
 // 河川水質データマーカ初期化
@@ -582,8 +582,7 @@ function riverName(Layer){
 
 function showMarkerDot(map){
     // 各河川地点にドットをプロット
-    var blue = 0;
-    var red = 1;
+    var red = 0;
 
     for (var i = 0; i < 6; i++) {
         
@@ -592,14 +591,10 @@ function showMarkerDot(map){
         	var markerPos = { lat: parseFloat(positionDetail[1]), lng: parseFloat(positionDetail[2]) };
         
 	        var icon;
-	        if(blue == changingRiverPlotData[i][j]){
-	            icon = icon_dot_blue;
-	        } else if (red == changingRiverPlotData[i][j]) {
+	        if(red == changingRiverPlotData[i][j]){
 	            icon = icon_dot_red;
-	        }
-	        else
-	        {
-	            continue;
+	        } else {
+	            icon = icon_dot_blue;
 	        }
 	        	        
 	        plotDot(markerPos, icon, map, i, j);
@@ -611,7 +606,6 @@ function plotDot(markerPos, icon, map, i, j){
     // make marker
     riverPlotMarker[i][j] = new google.maps.Marker({
         position: markerPos,
-        //icon: icon,
         icon: new google.maps.MarkerImage(
             icon,
             new google.maps.Size(15, 15),
@@ -630,21 +624,10 @@ function plotDot(markerPos, icon, map, i, j){
         activeInfoWindow = null;
       }
       
-      // 赤丸=0、青丸=1～5(乱数)の情報をチャート側にセットする
-      var thisMonthLevel;
-      if(icon == icon_dot_red){
-          thisMonthLevel = 0;
-      } else {
-          var min = 1 ;
-          var max = 5 ;
-          var randFromOneToThree = Math.floor(Math.random() * (max + 1 - min)) + min;
-          thisMonthLevel = randFromOneToThree;
-      }
-      
       // make chart
       // bugfix: https://github.com/chartjs/Chart.js/issues/4622
       setTimeout(function(){
-        makeRiverChart(thisMonthLevel);
+        makeRiverChart(j); // 河川水質箇所jの６か月間水質グラフを表示する
       }, 200);
       // show popup
       // see http://getbootstrap.com/javascript/#modals-usage 
@@ -770,7 +753,7 @@ function makeIndustryChart(rowData) {
   window.myLine = new Chart(ctx, config);
 }
 
-function makeRiverChart(thisMonthLevel) {
+function makeRiverChart(positionIndex) {
   var config = {
     type: 'line',
     data: {
@@ -781,7 +764,12 @@ function makeRiverChart(thisMonthLevel) {
           backgroundColor: window.chartColors.blue,
           borderColor: window.chartColors.blue,
           data: [
-            1,0,2,3,2,thisMonthLevel
+            changingRiverPlotData[5][positionIndex], // 3月水質レベル
+            changingRiverPlotData[4][positionIndex], // 4月
+            changingRiverPlotData[3][positionIndex], // ：
+            changingRiverPlotData[2][positionIndex],
+            changingRiverPlotData[1][positionIndex],
+            changingRiverPlotData[0][positionIndex]
           ],
           // 塗り潰しはしない
           fill: false,
