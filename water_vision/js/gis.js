@@ -630,7 +630,7 @@ function plotDot(markerPos, icon, map, i, j){
         activeInfoWindow = null;
       }
       
-      // 赤丸=0、青丸=1～5の乱数の情報をチャート側にセットする
+      // 赤丸=0、青丸=1～5(乱数)の情報をチャート側にセットする
       var thisMonthLevel;
       if(icon == icon_dot_red){
           thisMonthLevel = 0;
@@ -846,7 +846,7 @@ function makeRiverChart(thisMonthLevel) {
                 return star;
             },
             // 黄色に設定
-            fontColor:  '#F3D51A'
+            fontColor: '#F3D51A'
           }
         }]
       },
