@@ -185,9 +185,8 @@ function initMap() {
   // 河川にドットをプロット
   showMarkerDot(map);
 
-  function readCsv(path, i) {
+  function readCsv(path, monthIndex) {
   
-    //var path = wastewaterCsvFile[i]; // 読み込む外部ファイル
     var xhr = null; // 使える場合はMicrosoft.XMLHTTP, 使えない場合はXMLHttpRequest
     try { xhr = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) { xhr = new XMLHttpRequest(); }
     
@@ -196,11 +195,11 @@ function initMap() {
       if(xhr.readyState == 4) {
         var data = xhr.responseText; // 外部ファイルの内容
         var tmp = data.split("\n");
-        for (var j=0; j < tmp.length; j++){
+        for (var j=0; j < tmp.length; j++){ // 工場の数だけ繰り返し
           if(tmp[j]){
             var rowData = tmp[j].split(',');
             csvData[rowData[ID]] = rowData;
-            showMarker(rowData, i, j);
+            showMarker(rowData, monthIndex, j);
           }
         }
       }
@@ -209,7 +208,7 @@ function initMap() {
   
   } //function readCsv()
   
-  function showMarker(rowData, i, j){
+  function showMarker(rowData, monthIndex, positionIndex){
 
     var markerPos = { lat: parseFloat( rowData[LAT] ), lng: parseFloat( rowData[LNG] ) };
 
@@ -284,14 +283,14 @@ function initMap() {
     }
 
     // make marker
-    wastewaterMarker[i][j] = new google.maps.Marker({
+    wastewaterMarker[monthIndex][positionIndex] = new google.maps.Marker({
       position: markerPos,
       icon: icon,
       map: map
     });    
 
-    // 初回は8月(i==0)のみ表示
-    if (i != 0) wastewaterMarker[i][j].setVisible(false);
+    // 初回は8月(monthIndex==0)のみ表示
+    if (monthIndex != 0) wastewaterMarker[monthIndex][positionIndex].setVisible(false);
 
     // make contents html in info window
     var $canvas = $("<div/>");
@@ -306,7 +305,7 @@ function initMap() {
     });
 
     // open info window when click marker
-    wastewaterMarker[i][j].addListener('click', function() {
+    wastewaterMarker[monthIndex][positionIndex].addListener('click', function() {
       if(activeInfoWindow){
         activeInfoWindow.close();
         activeInfoWindow = null;
@@ -346,19 +345,19 @@ function initMap() {
 
   function changekmllayer(event, ui) {
   
-    // 3: dispIndex=5
-    // 4: dispIndex=4
-    // 5: dispIndex=3
-    // 6: dispIndex=2
-    // 7: dispIndex=1
-    // 8: dispIndex=0
+    // 3: dispMonthIndex=5
+    // 4: dispMonthIndex=4
+    // 5: dispMonthIndex=3
+    // 6: dispMonthIndex=2
+    // 7: dispMonthIndex=1
+    // 8: dispMonthIndex=0
     
-    var dispIndex = 8 - ui.value;
-    if (dispIndex < 0 || 5 < dispIndex) return;
+    var dispMonthIndex = 8 - ui.value;
+    if (dispMonthIndex < 0 || 5 < dispMonthIndex) return;
     
     for (var i=0; i<6; i++)
     {
-      if (i == dispIndex)
+      if (i == dispMonthIndex)
       {
         // KMLレイヤ表示
         changingKmlLayer[i].setMap(map);
@@ -457,7 +456,7 @@ function showMarkerDot(map){
 
     for (var i = 0; i < 6; i++) {
         
-        for (var j=0; j<8; j++) {
+        for (var j = 0; j < 8; j++) {
         	var positionDetail = riverPlotPosition[j];
         	var markerPos = { lat: parseFloat(positionDetail[1]), lng: parseFloat(positionDetail[2]) };
         
@@ -473,9 +472,9 @@ function showMarkerDot(map){
     }
 }
 
-function plotDot(markerPos, icon, map, i, j){
+function plotDot(markerPos, icon, map, monthIndex, positionIndex){
     // make marker
-    riverPlotMarker[i][j] = new google.maps.Marker({
+    riverPlotMarker[monthIndex][positionIndex] = new google.maps.Marker({
         position: markerPos,
         icon: new google.maps.MarkerImage(
             icon,
@@ -486,10 +485,11 @@ function plotDot(markerPos, icon, map, i, j){
         map: map
     });
     
-    if (0 < i) riverPlotMarker[i][j].setVisible(false);
+    // 初期状態では８月のみ表示、他は非表示
+    if (0 < monthIndex) riverPlotMarker[monthIndex][positionIndex].setVisible(false);
     
     // open info window when click marker
-    riverPlotMarker[i][j].addListener('click', function() {
+    riverPlotMarker[monthIndex][positionIndex].addListener('click', function() {
       if(activeInfoWindow){
         activeInfoWindow.close();
         activeInfoWindow = null;
@@ -498,7 +498,7 @@ function plotDot(markerPos, icon, map, i, j){
       // make chart
       // bugfix: https://github.com/chartjs/Chart.js/issues/4622
       setTimeout(function(){
-        makeRiverChart(j); // 河川水質箇所jの６か月間水質グラフを表示する
+        makeRiverChart(positionIndex); // 河川水質箇所jの６か月間水質グラフを表示する
       }, 200);
       // show popup
       // see http://getbootstrap.com/javascript/#modals-usage 
