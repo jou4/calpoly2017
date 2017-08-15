@@ -15,21 +15,21 @@ var INIT_LAT = 35.518331;
 var INIT_LNG = 139.603347;
 
 // Const of Path for image files
-var icon_0a = 'images/Ldrop0.png';
-var icon_0b = 'images/Mdrop0.png';
-var icon_0c = 'images/Sdrop0.png';
-var icon_1a = 'images/Ldrop1.png';
-var icon_1b = 'images/Mdrop1.png';
-var icon_1c = 'images/Sdrop1.png';
-var icon_2a = 'images/Ldrop32.png';
-var icon_2b = 'images/Mdrop32.png';
-var icon_2c = 'images/Sdrop32.png';
-var icon_3a = 'images/Ldrop54.png';
-var icon_3b = 'images/Mdrop54.png';
-var icon_3c = 'images/Sdrop54.png';
-var icon_q = 'images/question.png';
-var icon_dot_red = 'images/Dot_red.png';
-var icon_dot_blue = 'images/Dot_blue.png';
+var icon_0a = 'http://jou4.dip.jp/calpoly/water_vision/images/Ldrop0.png';
+var icon_0b = 'http://jou4.dip.jp/calpoly/water_vision/images/Mdrop0.png';
+var icon_0c = 'http://jou4.dip.jp/calpoly/water_vision/images/Sdrop0.png';
+var icon_1a = 'http://jou4.dip.jp/calpoly/water_vision/images/Ldrop1.png';
+var icon_1b = 'http://jou4.dip.jp/calpoly/water_vision/images/Mdrop1.png';
+var icon_1c = 'http://jou4.dip.jp/calpoly/water_vision/images/Sdrop1.png';
+var icon_2a = 'http://jou4.dip.jp/calpoly/water_vision/images/Ldrop32.png';
+var icon_2b = 'http://jou4.dip.jp/calpoly/water_vision/images/Mdrop32.png';
+var icon_2c = 'http://jou4.dip.jp/calpoly/water_vision/images/Sdrop32.png';
+var icon_3a = 'http://jou4.dip.jp/calpoly/water_vision/images/Ldrop54.png';
+var icon_3b = 'http://jou4.dip.jp/calpoly/water_vision/images/Mdrop54.png';
+var icon_3c = 'http://jou4.dip.jp/calpoly/water_vision/images/Sdrop54.png';
+var icon_q = 'http://jou4.dip.jp/calpoly/water_vision/images/question.png';
+var icon_dot_red = 'http://jou4.dip.jp/calpoly/water_vision/images/Dot_red.png';
+var icon_dot_blue = 'http://jou4.dip.jp/calpoly/water_vision/images/Dot_blue.png';
 
 // スライダーバーで変更する部分の河川ベクトルデータ
 var changingKmlURL = [
