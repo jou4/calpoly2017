@@ -569,12 +569,12 @@ function makeIndustryChart(monthWaterQuality) {
           backgroundColor: window.chartColors.blue,
           borderColor: window.chartColors.blue,
           data: [
-            monthWaterQuality[5],
-            monthWaterQuality[4],
-            monthWaterQuality[3],
-            monthWaterQuality[2],
-            monthWaterQuality[1],
             monthWaterQuality[0],
+            monthWaterQuality[1],
+            monthWaterQuality[2],
+            monthWaterQuality[3],
+            monthWaterQuality[4],
+            monthWaterQuality[5],
           ],
           // 塗り潰しはしない
           fill: false,
@@ -654,6 +654,7 @@ function makeIndustryChart(monthWaterQuality) {
 }
 
 function makeRiverChart(positionIndex) {
+
   var config = {
     type: 'line',
     data: {
