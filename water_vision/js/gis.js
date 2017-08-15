@@ -58,12 +58,12 @@ var riverPlotPosition = [
 
 // 6か月分の河川水質データ（0:赤, 1～5:青）
 var changingRiverPlotData = [
-  [2, 0, 0, 3, 5, 0, 0, 2], 
-  [4, 3, 0, 0, 2, 0, 0, 3], 
-  [5, 5, 4, 2, 0, 0, 0, 0], 
-  [0, 3, 4, 5, 4, 0, 0, 1], 
-  [0, 0, 3, 3, 0, 0, 0, 4], 
-  [3, 0, 0, 0, 1, 2, 4, 5]  
+  [2, 0, 0, 3, 5, 0, 0, 2], // 8月
+  [4, 3, 0, 0, 2, 0, 0, 3], // 7月
+  [5, 5, 4, 2, 0, 0, 0, 0], // 6月
+  [0, 3, 4, 5, 4, 0, 0, 1], // 5月
+  [0, 0, 3, 3, 0, 0, 0, 4], // 4月
+  [3, 0, 0, 0, 1, 2, 4, 5]  // 3月
 ];
 
 // 河川水質データマーカ初期化
@@ -88,6 +88,15 @@ var wastewaterCsvFile = [
 
 // 工場排水データマーカ初期化
 var wastewaterMarker = [
+  new Array(26), // 8月
+  new Array(26), // 7月
+  new Array(26), // 6月
+  new Array(26), // 5月
+  new Array(26), // 4月
+  new Array(26)  // 3月
+];
+
+var csvData = [
   new Array(26), // 8月
   new Array(26), // 7月
   new Array(26), // 6月
@@ -198,7 +207,7 @@ function initMap() {
         for (var j=0; j < tmp.length; j++){ // 工場の数だけ繰り返し
           if(tmp[j]){
             var rowData = tmp[j].split(',');
-            csvData[rowData[ID]] = rowData;
+            csvData[monthIndex][rowData[ID]] = rowData;
             showMarker(rowData, monthIndex, j);
           }
         }
@@ -311,7 +320,7 @@ function initMap() {
         activeInfoWindow = null;
       }
       // see https://developers.google.com/maps/documentation/javascript/infowindows?hl=ja
-      infoWindow.open(map, wastewaterMarker[i][j]);
+      infoWindow.open(map, wastewaterMarker[monthIndex][positionIndex]);
       activeInfoWindow = infoWindow;
     });
 
@@ -510,23 +519,38 @@ function addTimeStampToUrl(url){
   return url + "?" + new Date().getTime();
 }
 
-var csvData = {};
+//var csvData = {};
 
 function showDetailPopUp(id) {
-  var rowData = csvData[id];
-  console.log(rowData);
+  var rowData8 = csvData[5][id]; // 基本データは８月のものを使う
+  console.log(rowData8);
+
+  var rowData7 = csvData[4][id];
+  var rowData6 = csvData[3][id];
+  var rowData5 = csvData[2][id];
+  var rowData4 = csvData[1][id];
+  var rowData3 = csvData[0][id];
+
+  var monthWaterQuality = [
+    rowData8[WATER_QUALITY],
+    rowData7[WATER_QUALITY],
+    rowData6[WATER_QUALITY],
+    rowData5[WATER_QUALITY],
+    rowData4[WATER_QUALITY],
+    rowData3[WATER_QUALITY]
+  ];
 
   // set detail info
-  $("#plant_name").text(rowData[PLANT]);
-  $("#plant_industry").text(rowData[INDUSTRY]);
-  $("#plant_tel").text(rowData[TEL]);
-  $("#plant_river").text(rowData[RIVER]);
-  $("#plant_impact").text(rowData[IMPACT]);
-  $("#plant_amount").text((rowData[AMOUNT].replace(/^(-?\d+)(\d{3})/, "$1,$2")) + "\u33a5/日");
+  $("#plant_name").text(rowData8[PLANT]);
+  $("#plant_industry").text(rowData8[INDUSTRY]);
+  $("#plant_tel").text(rowData8[TEL]);
+  $("#plant_river").text(rowData8[RIVER]);
+  $("#plant_impact").text(rowData8[IMPACT]);
+  $("#plant_amount").text((rowData8[AMOUNT].replace(/^(-?\d+)(\d{3})/, "$1,$2")) + "\u33a5/日");
   // make chart
   // bugfix: https://github.com/chartjs/Chart.js/issues/4622
   setTimeout(function(){
-    makeIndustryChart(rowData);
+    makeIndustryChart(monthWaterQuality);
   }, 200);
   // show popup
   // see http://getbootstrap.com/javascript/#modals-usage 
@@ -534,7 +558,7 @@ function showDetailPopUp(id) {
 }
 
 
-function makeIndustryChart(rowData) {
+function makeIndustryChart(monthWaterQuality) {
   var config = {
     type: 'line',
     data: {
@@ -545,7 +569,12 @@ function makeIndustryChart(rowData) {
           backgroundColor: window.chartColors.blue,
           borderColor: window.chartColors.blue,
           data: [
-            1,0,2,3,2,rowData[WATER_QUALITY]
+            monthWaterQuality[5],
+            monthWaterQuality[4],
+            monthWaterQuality[3],
+            monthWaterQuality[2],
+            monthWaterQuality[1],
+            monthWaterQuality[0],
           ],
           // 塗り潰しはしない
           fill: false,
