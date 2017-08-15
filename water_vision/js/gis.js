@@ -624,19 +624,7 @@ function makeIndustryChart(monthWaterQuality) {
             //0～3の4段階を想定
             suggestedMin: 0,
             suggestedMax: 3,
-            stepSize: 1,
-            //水マークに変換すると文字化けするので、一旦数値表示とする
-            //// 水マークに変換
-            //callback: function(value, index, values) {
-            //    var waterMark = "\u1F64F";
-            //
-            //    for (var i = 1; i < value; ++i) {
-            //        waterMark = waterMark + "\u1F64F"; 
-            //    }
-            //    return waterMark;
-            //},
-            //// 黄色に設定
-            //fontColor:  '#F3D51A'
+            stepSize: 1
           }
         }]
       },
@@ -717,25 +705,10 @@ function makeRiverChart(positionIndex) {
             display: false,
           },
           ticks: {
-            //0～5の4段階を想定
+            //0～5の6段階を想定
             suggestedMin: 0,
             suggestedMax: 5,
-            stepSize: 1,
-            // "Ｘ"もしくは"★"に変換
-            callback: function(value, index, values) {
-                if(value == 0){
-                    return "Ｘ";
-                }
-            
-                var star = "★";
-            
-                for (var i = 1; i < value; ++i) {
-                    star = star + "★"; 
-                }
-                return star;
-            },
-            // 黄色に設定
-            fontColor: '#F3D51A'
+            stepSize: 1
           }
         }]
       },
